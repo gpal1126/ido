@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+  function submit(){
+    var file = $('#thumbnail').prop("files")[0];
+    var title = $('#title').val();
+    var fd = new FormData();
+      fd.append("thumbnail", file);
+      fd.append("title", title);
+
+      $.ajax({
+      url: '/upload/builder_thumbnail',
+      data: fd,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data){
+        console.log(data);
+        if(data == 'fail'){
+           console.log('잘못된 입력'); 
+        }else{
+          location.href = "/upload/builder_contents?contentsId="+data+"";
+        }
+      }
+    });
+  }  
+</script>
+<style type="text/css">
+  #thumbnail_preview img{ 
+  width: 300px;
+  height: 300px; 
+}
+</style>
+</head>
+<body>
+<label>제목 : </label><input type="text" id="title" style="width:300px; height:50px; font-size:large">
+<br><br>
+<p>썸네일 이미지 [ 크기 300*300 ]</p>
+<input type="file" id="thumbnail" name="thumbnail">
+<div id="thumbnail_preview">
+    <img src="../../images/K-021.png"  class="img-responsive" onclick="document.all.image.click();">
+    <input type="file" file-model="myFile" id="image" style="display:none" />
+    <button onclick="submit()">진행</button>
+</div>
+<script>
+$(document).ready(function(){
+  var i = 0;
+$('#thumbnail').on('change', function() { // 빌더가 하나씩 생성될때마다 name값을 +1씩 해줌.
+      var file = $('#thumbnail').prop("files")[0];
+      blobURL = window.URL.createObjectURL(file);
+      $('#thumbnail_preview img').attr('src', blobURL);
+  });
+});
+</script>
+</body>
+</html>

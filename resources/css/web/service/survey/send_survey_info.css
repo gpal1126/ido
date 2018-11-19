@@ -1,0 +1,189 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 15%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 14%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+/* 선거투표 링크 container */
+.link_container{
+	text-align: center;
+	clear: both;
+}
+
+/* 선거투표 링크 title */
+.vote_link_title{
+	font-weight: bold;	
+	font-size: 14pt;
+}
+
+/* 선거투표 링크 sub title */
+.vote_link_sub_title{
+	font-size: 12pt;
+	color: #919090;
+}
+
+/* 선거투표 링크 */
+.vote_link a{
+	font-size: 10pt;
+	text-decoration: none;
+	color: #07478E;
+}
+
+.file_title{
+	font-size: 10pt;
+	font-weight: bold;
+	letter-spacing: -1px;
+	color: #919090;
+	text-align: center;
+	margin: 0 0 1% 0;
+}
+
+/* 파일업로드 btn */
+.file_btn{
+	background-color: #07478E;
+	width: 30%;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	color: #fff;
+	font-weight: bold;
+	border-radius: 20px;
+	margin: 0 auto;
+}
+
+/* 파일업로드명 */
+.file_name{
+	text-align: center;
+}
+
+/* 보내기 container */
+.send_container{
+	margin: 0 0 0 5%;	
+}
+
+/* 문자 icon */
+.msg_icon {
+	background: url(/img/service/election/msg_icon.png) no-repeat;
+	width: 20px;
+	height: 14px;
+	float: left;
+}
+
+/* 카톡 icon */
+.kakao_icon {
+	background: url(/img/service/election/kakao_icon.png) no-repeat;
+	width: 21px;
+	height: 18px;
+	margin: 3% 0  0 0;
+	float: left;
+}
+
+/* 메일 icon */
+.mail_icon {
+	background: url(/img/service/election/email_icon.png) no-repeat;
+	width: 19px;
+	height: 19px;
+	margin: 3% 0  0 0;
+	float: left;
+}
+
+/* 문자보내기 txt */
+.send_container .msg_txt{
+	float: left;
+	line-height: 18px;
+	color: #706F6F;
+	font-weight: bold;
+	margin: 0 0 3% 5%;
+}
+
+/* 카톡보내기 txt */
+.send_container .kakao_txt{
+	float: left;
+	line-height: 18px;
+	color: #706F6F;
+	font-weight: bold;
+	margin: 3% 0 3% 5%;
+}
+
+/* 메일보내기 txt */
+.send_container .mail_txt{
+	float: left;
+	line-height: 18px;
+	color: #706F6F;
+	font-weight: bold;
+	margin: 3% 0 0% 5%;
+}
+
+/* hr 라인 */
+.hr_line {
+	background: url(/img/service/election/gray_line.png) no-repeat;
+	width: 90%;
+	height: 1px;
+	margin: 7% 0 0 0;
+	clear: both;
+}
+
+/* contents */
+
+/* footer */
+.footer{
+	width: 100%;
+	height: auto;
+}
+

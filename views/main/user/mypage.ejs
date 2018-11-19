@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+
+
+<title>아이두</title>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="IDO" />
+<meta name="description" content="IDO" />
+<meta name="author" content="IDO.COM" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel='stylesheet' type='text/css'> 
+<!-- http://ionicons.com/ --> 
+<link rel="stylesheet" type="text/css" href="/css/web/main/common1.css" />
+<link rel="stylesheet" href="/css/web/main/layout1024.css" media="screen and (max-width:1024px)">
+<link rel="stylesheet" href="/css/web/main/mobile.css" media="screen and (max-width:600px)">
+
+<script type="text/javascript" src="/js/getUrlParameter.js"></script>
+<script type="text/javascript" src="/js/web/main/common/common.js"></script> 
+<script type="text/javascript" src="/js/web/main/common/jquery.blockUI.js"></script> 
+
+<script type="text/javascript">
+  var userId = getUrlParameter('userId');
+  $.ajax({
+    url :'/user/join_surveyList?userId='+userId,
+    success:function(data){
+      console.log(data.length);
+      $('.countNm').append(data.length)
+      for(i in data){
+        $('.mycontent').append('<a href="설문으로 이동">'+
+                                '<div class="mcontentWrap">'+
+                                  '<div class="photo"><img src="'+data[i].SURVEY_THUMBNAIL+'" alt="" /></div>'+
+                                  '<div class="titleDate">'+
+                                  '<p class="mytitle">'+data[i].SURVEY_TITLE+'</p>'+
+                                  '<p class="mydate">2016.04.23 18:00</p>'+
+                                 '</div>'+
+                                '</div>'+
+                               '</a>');
+        console.log(data[i].SURVEY_TITLE)
+      }
+    }
+  })
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var userId = getUrlParameter('userId');
+	$('#nickname').after('<a href="/user/mypageEdit?userId='+userId+'" class="editlink">프로필편집</a>');
+})
+</script>
+</head>
+<body>
+
+
+<div id="wrap"> 
+
+        <!-- menu_nav --> 
+  <div id="menu_nav">
+    <span class="close_bt">
+      <a href="#" class="menu_close" id="closemm">메뉴닫기</a>
+    </span> 
+
+    <!-- 우측 메뉴바 클릭시 --> 
+    <p class="userTx"><img src="/img/logo.png" alt="logo" /></p>  
+    <p class="titleTx">로그인</p> 
+    
+    <form action="/login" method="post"> 
+      <input placeholder="e-mail을 입력해주세요." type="email" name="userid" id="userid">
+      <input placeholder="패스워드를 입력해주세요." type="password" name="password" id="password">
+
+      <% if(user == undefined || user == '') { %>
+        <a href="/auth/facebook" class="facebook_log padding-fix" id="facebook">Facebook Login</a>
+        <ul class="login">
+          <li><button class="login_btn" type="submit" id="login"></button></li>
+          <li class="padding-fix"> <a href="#" class="join_ido_btn" id="joinOpen"></a> </li> 
+        </ul>
+        <p class="findpw"><img src="img/main_findpw_icon.png" alt=""/> <a href="#">아이디/비밀번호 찾기</a> </p> 
+      <% }else {%>
+        <% if(typeof user == 'object') {%>
+            <% if(typeof user.emails == 'string'){ %>
+                <%= user.emails %> <!-- 로컬 로그인시 -->
+                <script type="text/javascript">
+                  $('#userid').css('display', 'none');
+                  $('#login').css('display', 'none');
+                  $('#password').css('display', 'none');
+                </script>
+            <% }else{%>
+              <a href="/logout"><%= user.emails[0].value %></a> <!-- facebook 로그인시 -> 이메일값 있을 때 -->
+                <script type="text/javascript">
+                  $('#userid').css('display', 'none');
+                  $('#password').css('display', 'none');
+                  $('#login').css('display', 'none');
+                </script>
+            <% } %>
+        <% }else{ %>
+          <a href="/auth/facebook" class="btn btn-fb" id="facebook">Facebook Login</a>
+        <% } %>
+    <ul class="login">
+          <li><a class="logout_btn" href="/logout" id="logout"></a></li>
+        </ul>
+      <% } %>      
+    </form>
+    <p class="askadmin"> 
+    <a href="#" class="asklink"> 제휴문의</a> 
+    <a href="/upload/builder_list" class="asklink"> 파트너 오피스</a> 
+    <br />
+    <a href="#" class="asklink">Q_A</a> </p> 
+  </div>
+  <!-- //menu_nav -->    
+
+
+  <!-- header --> 
+  <section id="header"> 
+    <nav style="height: 75px"> 
+      <a href="/"><h1 style="color: white; font-size: 50px; padding-top: 10px; font-weight: bold;">i DO</h1></a> 
+      <!-- 돋보기_검색바(util_search) -->
+      <div class="util_search">
+        <div class="search_btLeft"><a href="#" class="searchOpen" id="openSearch">검색열기 </a></div>  
+        <div class="search_div"><input placeholder="검색어를 입력하세요"></div> 
+      </div> 
+      <!-- //util_search --> 
+
+      <!-- 실시간 인기순위(util_menu) -->
+     
+
+
+
+
+      <div class="util_menu"> 
+      <!-- 여기부터 -->
+      <div class="rank"> 
+       <div id="r_content">
+        <dl id="rank-list">
+        <dt>실시간 급상승 검색어</dt>
+        <dd>
+        <ol>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">5 순위</a></li>
+        <li><a href="#">6 순위</a></li>
+        <li><a href="#">7 순위</a></li>
+        <li><a href="#">8 순위</a></li>
+        <li><a href="#">9 순위</a></li>
+        <li><a href="#">10 순위</a></li>
+        </ol>
+        </dd>
+        </dl>
+        </div>
+        <
+      <!-- //menu --> 
+      </div> 
+      </div>
+      <!-- 여기 부분 까지 -->
+      <!-- 실시간 인기순위(util_menu) -->
+    </nav> 
+    <div id="mask"></div> 
+  </section> 
+  <!-- //header --> 
+ 
+
+
+
+       <section id="mptopWrap"> 
+
+                <h1>MYPAGE</h1> 
+
+                <div class="profileWrap">
+
+                  <div class="profilephoto"><img src="<%= user.profileImg %>" alt="테스트이미지" /> </div> 
+            
+                </div> 
+                <!-- //profileWrap --> 
+
+                <p id="nickname"><%= user.nickname %></p>
+          
+               
+
+ 
+               <div class="countBox"> 
+ 
+                   <ul>
+                    <li>참여한 설문<p class="countNm"></p></li> 
+                    <li>구독중<p class="countNm">3</p></li> 
+                   </ul> 
+
+               </div>
+               <!-- //countBox --> 
+
+
+
+
+       </section> 
+        <!-- //mptopWrap --> 
+ 
+
+
+       <section id="mpcontentWrap"> 
+
+                 <div class="mycontent"> 
+                       <h2> 참여한 설문 리스트 </h2> 
+                 </div> 
+                 <!-- //mycontent --> 
+
+
+       </section> 
+       <!-- //mpcontentWrap --> 
+
+
+<style type="text/css">
+  body {
+font-size: 12px;
+background: #FFF;
+color: #164672;
+margin: 0;
+}
+
+#r_content {
+width: 70%;
+position: absolute;
+top: 14px;
+left: 90px;
+background: #4e92bf;
+}
+
+#rank-list a {
+color: #FFF;
+text-decoration: none;
+}
+
+#rank-list a:hover {
+text-decoration: underline;
+}
+
+#rank-list {
+overflow: hidden;
+width: 160px;
+height: 20px;
+margin: 0;
+}
+
+#rank-list dt {
+display: none;
+}
+
+#rank-list dd {
+position: relative;
+margin: 0;
+}
+
+#rank-list ol {
+position: absolute;
+top: 0;
+left: 0;
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+#rank-list li {
+height: 20px;
+line-height: 20px;
+}
+</style>
+<script type="text/javascript">
+$(function() {
+var count = $('#rank-list li').length;
+var height = $('#rank-list li').height();
+
+function step(index) {
+$('#rank-list ol').delay(1500).animate({
+top: -height * index,
+}, 500, function() {
+step((index + 1) % count);
+});
+}
+
+step(1);
+});
+</script>
+
+
+ </div> 
+ <!-- wrap --> 
+
+ </body> 

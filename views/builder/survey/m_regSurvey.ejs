@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" >
+  <meta name="description" content="A basic demo of Cropper.">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <meta name="keywords" content="HTML, CSS, JS, JavaScript, image cropping, cropper, cropperjs, cropper.js, front-end, web development">
+  <meta name="author" content="Fengyuan Chen">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="/css/web/builder/survey/m_regSurvey_320.css" media="screen and (min-width:320px) and (max-width:371px)">
+  <link rel="stylesheet" href="/css/web/builder/survey/m_regSurvey.css" media="screen and (min-width:371px) and (max-width:440px)">
+  <link rel="stylesheet" href="/css/web/builder/survey/m_regSurvey_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"> <!-- ipad -->
+  <script src="/js/web/builder/survey/m_regSurvey.js"></script>
+  <script type="text/javascript" src="/js/getUrlParameter.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+     
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <title>아이두</title>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.second_cat_container').css('display','none');
+      $('.wrap').css('display','none');
+      $('.wrap2').css('display','');
+      $('.side_button_container').css('display','none');
+      //카테고리 버튼
+      $('.category').click(function(){
+          $('.wrap').css('display','');
+          $('.wrap2').css('display','none');
+          $('.side_button_container').css('display','');
+      })
+      //X버튼 클릭시
+      $('.cat_close').click(function(){
+          $('.wrap').css('display','none');
+          $('.wrap2').css('display','');
+          $('.side_button_container').css('display','none');
+      })
+      $('.second_cat_container').on('click','.second_category_div', function(){
+    	$('.cat1').empty();
+        $('.list').css('display','none');
+        $('.wrap').css('display','none');
+        $('.second_cat_container').css('display','none');
+        $('.wrap2').css('display','');
+        $('.second_category_div').css('display','none');
+        $('#category2').val($(this).children('span').attr('id').split('_')[0]); //대분류 카테고리
+        
+        var category1 = $('#category1').val();
+        var category2 = $(this).children('span').attr('id').split('_')[0]
+        switch(category1){
+	        case 'fashion' :
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico1.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">패션/뷰티</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'food':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico2.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">음식/여행</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'hobby':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico3.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">취미/게임</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'life':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico4.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">생활/쇼핑</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'edu':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico5.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">정치/교육</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'digital':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico6.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">디지털/가전</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'car':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico7.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">자동차/교통</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'media':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico8.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">방송/연예</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+	        case 'sports':
+	        	$('.cat1').append('<img src="/img/mobile/builder/survey/reg_survey/category_button/cate_ico9.png" style="float:left"><div style="float:left; padding-left:6px; padding-top:4px;">스포츠/건강</div>')
+	        	$('.cat1').append('<div style="float:left; padding-left:100px; padding-top:4px; color:#555555; font-weight:bold;">'+category2+'</div>')
+				break;
+        }
+        	$('.catTxt').empty();
+        	
+        	var fd = new FormData();
+           	
+            var category = $('#category1').val() +'_'+ $('#category2').val(); //대분류와 중분류 카테고리 합쳐서
+            console.log(category1);
+            console.log($(this).children('span').attr('id').split('_')[1])
+            var partnerId = getUrlParameter('partnerId');
+           
+            if($('#category1').val() == 'undefined' || $('#category1').val() == ''){
+            	alert('카테고리는 필수 입력사항입니다.');
+            }else{
+          	  	fd.append('category', category);
+                fd.append("title", '');
+                fd.append('partnerId', partnerId);
+                fd.append('contentsChk', 1);
+         	  		$.ajax({
+  	                url: '/upload/builder_thumbnail',
+  	                  data: fd,
+  	                  processData: false,
+  	                  contentType: false,
+  	                  type: 'POST',
+  	                  success: function(data){
+  	                      if(data == 'fail'){
+  	                        console.log('잘못된 입력'); 
+  	                      }else{
+  		                     	console.log(data.surveyId[0].surveyId);
+  		                      	location.href = "/m_survey/reg_survey_type?contentsId="+data.contentsId+"&partnerId="+partnerId+"&surveyId="+data.surveyId[0].surveyId;
+  	                      }//end if
+  	                  }//end success
+                  }); // ajax 끝
+            }
+      })
+      // 다음 버튼 클릭시
+    })
+    	
+    </script>
+</head>
+<body>
+<div class="wrap">
+</div>
+<div class="side_button_container">
+  <div class="cat_close"><img src="/images/builder/survey/mobile/close_bt.png"></div>
+  <div class="cat_left">
+    <div class="category_button" onclick="selectCategory(1, '패션/뷰티')"><img src="/images/main/category/mobile/cate_icon01.png"></div>
+    <div class="category_button" onclick="selectCategory(2, '음식/여행')"><img src="/images/main/category/mobile/cate_icon02.png"></div>
+    <div class="category_button" onclick="selectCategory(3, '취미/게임')"><img src="/images/main/category/mobile/cate_icon03.png"></div>
+    <div class="category_button" onclick="selectCategory(4, '생활/쇼핑')"><img src="/images/main/category/mobile/cate_icon04.png"></div>
+    <div class="category_button" onclick="selectCategory(5, '정치/교육')"><img src="/images/main/category/mobile/cate_icon05.png"></div>
+    <div class="category_button" onclick="selectCategory(6, '디지털/가전')"><img src="/images/main/category/mobile/cate_icon06.png"></div>
+  </div>
+  <div class="cat_right">
+    <div class="category_button" onclick="selectCategory(7, '자동차/교통')"><img src="/images/main/category/mobile/cate_icon07.png"></div>
+    <div class="category_button" onclick="selectCategory(8, '방송/연예')"><img src="/images/main/category/mobile/cate_icon08.png"></div>  
+    <div class="category_button" onclick="selectCategory(9, '스포츠/건강')"><img src="/images/main/category/mobile/cate_icon09.png"></div>
+    <div class="category_button" onclick="selectCategory(10, '유저/이슈')"><img src="/images/main/category/mobile/cate_icon10.png"></div>
+    <div class="category_button" onclick="selectCategory(11, '유저/이슈')"><img src="/images/main/category/mobile/cate_icon11.png"></div>
+    <div class="category_button" onclick="selectCategory(12, '유저/이슈')"><img src="/images/main/category/mobile/cate_icon12.png"></div>
+  </div>
+</div>
+<div class="second_cat_container">
+	<div class="second_cat_container_header"></div>
+	<div class="header_line"><img src="/img/mobile/builder/survey/reg_survey/cate_div_topline.png" style="vertical-align: top;"></div>
+</div>
+<div class=wrap2>
+<div class="header">
+    <div class="left" style="left: 13px;"><img src="/images/builder/survey/mobile/arrow_back.png" style="width: 15px; height: 26px;"></div>
+    <div style="left: 44%; top: 18px;"><img src="/images/builder/survey/mobile/make_top_pic.png" style="width: 53px; height: 45px;"></div>
+    <div style="right: 13px;"><!-- <img src="/images/builder/survey/mobile/close_bt.png" style="width: 27px; height: 26px;"> --></div>
+</div>
+<div class="second_header" style="text-align: center;">
+  <div><img src="/images/builder/survey/mobile/ldo_make_toptt.png"></div>
+  <br>
+  <!-- <div><img src="/images/builder/survey/mobile/ldo_make_title.png"></div> -->
+  <div><img src="/images/common/builder/m_survey/ido_make_title.png"></div>
+</div>
+<br><br>
+
+
+
+<div class="select_category_container" style="padding-left: 11px;">
+	<img src="/img/mobile/builder/survey/reg_survey/category_tit.png" style="float: left;">
+	<div class="explain_txt" >*선택하신 대분류>중분류가 표시됩니다.</div>
+  	<div class="category" style="width: 70%; height: 15px;"></div>
+</div>
+<br>
+<div class="category_box category" style="position: relative;">
+	<img src="/img/mobile/builder/survey/reg_survey/cate_textbox.png" style="width: 94%; padding-left: 2%;">
+	<div class="catTxt">카테고리 선택하기</div>
+	<div class="cat1"></div>
+	<div class="cat2"></div>
+</div>
+
+
+<br><br>
+
+<br><br>
+<!-- <div class="footer">
+  <img class="next_btn" id="nextBtn" src="/images/builder/survey/mobile/1step_next_bt.png" style="width: 95%; padding-left: 2%;">
+</div> -->
+</div><!-- wrap2 -->
+
+<style type="text/css">
+  .category_button_container img{
+    float: left;
+    width: 70px;
+    height: 70px;
+    padding-left: 5%;
+    padding-top: 15px;
+  }
+</style>
+
+<input type="hidden" id="category1">
+<input type="hidden" id="category2">
+
+<script type="text/javascript">
+$('.left').click(function(){
+	location.href="/upload/m_builder_list";
+})
+</script>
+
+</body>
+</html>

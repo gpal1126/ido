@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS</title>
+	<meta charset="UTF-8">
+	<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/web/main/common/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/web/main/common1.css" />
+
+
+<script src="js/web/common/jquery-ui.js"></script>
+<script type="text/javascript" src="js/web/common/jquery-modal/jquery.modal.js"></script>
+<script type="text/javascript" src="js/web/common/jquery.blockUI.js"></script> 
+<link rel="stylesheet" href="css/web/common/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="js/web/common/jquery-modal/jquery.modal.css" />
+
+
+<script type="text/javascript" src="js/web/common/base64.js"></script>
+
+<script type="text/javascript" src="js/web/main/admin/admin.js"></script> <!-- 해당 js  -->
+<script type="text/javascript">
+  $(function () {
+
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function () {
+        $("ul.tabs li").removeClass("active").css("color", "#333");
+        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+        $(this).addClass("active").css("color", "#f9f9fb");
+        $(".tab_content").hide()
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).fadeIn()
+    });
+});
+</script>
+<style type="text/css">
+  ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-family:"dotum";
+    font-size:12px;
+}
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:170px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: normal;
+    background: #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #4e92c1;
+    border-bottom: 2px solid #f9f9fb;
+}
+.tab_container {
+    border: 1px solid #eee;
+    clear: both;
+    float: left;
+    width: 1100px;
+    background: #FFFFFF;
+    margin-top: 9px;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 17px;
+    display: none;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+;
+ #admin_container {
+    width: 249px;
+    height: auto;
+    top: 100px;
+    position: relative;
+}
+
+tbody[id*=admin_tb]{
+  font-size: 12px;
+  font-weight: normal;
+}
+
+tbody[id*=admin_tb] tr{
+  height: 30px;
+}
+</style>
+</head>
+<body>
+
+<div id="admin_container" style="width: auto; height: auto; margin: 100px 0 0 20%">
+    <ul class="tabs">
+        <li class="active" rel="tab1">파트너유저 신청현황</li>
+        <li rel="tab2">파트너유저 현황</li>
+        <li rel="tab3">컨텐츠 신청현황</li>
+    </ul>
+    <div class="tab_container">
+        <div id="tab1" class="tab_content">
+            <table class="table table-striped custab">
+                      <tr style="border-bottom: 2px solid #4292c1; height: 40px;">
+                      <th class="text-center"><input type="checkbox" id="checkAll"></th>
+                        <th class="text-center">파트너ID</th>
+                        <th class="text-center">유저E-mail</th>
+                        <th class="text-center">구비서류 현황</th>
+                        <th class="text-center">상태</th>
+                        <th class="text-center">신청일</th>
+                    </tr>
+                <tbody id="admin_tb_1">
+                  
+                </tbody>
+            </table>
+        </div>
+        <!-- #tab1 -->
+        <div id="tab2" class="tab_content">
+          <table class="table table-striped custab">
+           
+                  <tr style="border-bottom: 2px solid #4292c1; height: 40px;">
+                    <th class="text-center"><input type="checkbox" id="checkAll"></th>
+                      <th class="text-center">파트너ID</th>
+                      <th class="text-center">유저E-mail</th>
+                      <th class="text-center">유저 상세정보</th>
+                      <th class="text-center">신청일</th>
+                  </tr>
+            
+              <tbody id="admin_tb_2"></tbody>
+          </table>
+        </div>
+        <!-- #tab2 -->
+        <div id="tab3" class="tab_content">
+          <table class="table table-striped custab">
+           
+                  <tr style="border-bottom: 2px solid #4292c1; height: 40px;">
+                    <th class="text-center"><input type="checkbox" id="checkAll"></th>
+                      <th class="text-center">컨텐츠 ID</th>
+                      <th class="text-center">파트너아이디</th>
+                      <th class="text-center">컨텐츠 제목</th>
+                      <th class="text-center">신청일</th>
+                      <th class="text-center">컨텐츠현황</th>
+                  </tr>
+           
+              <tbody id="contents_tb_1"></tbody>
+          </table>
+        </div>
+        <!-- #tab3 -->
+    </div>
+    <!-- .tab_container -->
+</div>
+<!-- #container -->
+</body>
+</html>

@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+
+html, body {height: 100%; margin: 0; padding: 0;}
+*{font-family: Malgun Gothic,맑은고딕,돋움,윤고딕,Dotum,verdana,sans-seif;}
+/*
+h1{font-size:30px;text-align:left;letter-spacing:-1px;}
+ */
+/* 로그인폼*/
+.wrap { position: relative; height: 50%; }
+.footer{width: 100%; height: 10%; background-color: #fff}
+
+#login_wrap {width:100%;}
+#login_wrap .title_box1 {float:left;}
+#login_wrap .title_box2 {vertical-align:middle; line-height:50px; text-align:right;}
+
+
+#login_wrap .conbox .rightbox {width:100%;float:left;height:auto;}
+#login_wrap .conbox .rightbox ul {width:80%; list-style:none; margin-left: 10%;} 
+#login_wrap .conbox .rightbox ul li.mt7{margin-top:7px;} 
+#login_wrap .conbox .rightbox ul li input{padding-left:60px;margin:color:#336699;width:350px;height:44px;border:1px solid #dddddd;} 
+#login_wrap .conbox .rightbox ul li input.deco_box{color:#336699;width:100%;height:44px;border:1px solid #dddddd;background:url('/images/common/main/user/partner/password_ico.png') no-repeat;} 
+
+#login_wrap .conbox .rightbox .find_pwd_btn{ position:absolute; right: 10%; margin-top:3%; font-family: 나눔바른고딕, NanumBarunGothic; color:#1C4B75; font-weight:bold; font-size: 1em; text-decoration:underline; } 
+
+#login_wrap .conbox .rightbox .mt30 {margin-top:30px;}
+#login_wrap .conbox .rightbox .login_2bt {width:100%;margin:0 0 0 0px; margin-top: 10%;}
+#login_wrap .conbox .rightbox .login_2bt ul {margin-top:26px;}
+#login_wrap .conbox .rightbox .login_2bt ul li.mt15{margin-top:15px;}
+#login_wrap .conbox .rightbox .login_2bt ul li.txtrt{text-align:right;}
+
+/* 페이스북 btn */
+.facebook_bt img{
+	/* background:url('/images/common/main/user/partner/facebook_login.png') repeat 0 0; */
+	width: 100%;
+	height: 44px;
+}
+/* 로그인 btn */ 
+.login_bt img{
+	/* background:url('/images/common/main/user/partner/login_bt.png') repeat 0 0; */
+	width: 100%;
+	height: 50px;
+}

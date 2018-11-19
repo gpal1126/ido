@@ -1,0 +1,166 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 19%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 14%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+.contents .vote_question{
+	text-align: center;
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+/* 후보 프로필 */
+.candidate_profile {
+	/* margin: 5% 0 0 19%; */
+	margin: 0 auto;
+}
+
+/* 후보자 기호 blue bar */
+.blue_bar {
+	/* background: url(/img/service/election/blue_bar.png) no-repeat; */
+	width: 80%;
+	height: 40px;
+	background: #06468E;
+	border-radius: 50px;
+	margin: 5% 0 0 7%;
+	text-align: center;
+	font-size: 15pt;
+	font-weight: bold;
+	color: #fff;
+	line-height: 40px;
+}
+
+/* radio btn */
+.radio_btn{
+	visibility: hidden;
+	position: absolute;
+}
+
+/* 체크된 radio btn img */
+input[type="radio"]:checked + label{
+	opacity: 0.4;
+}
+
+/* 후보 프로필 img */
+.profile_img{
+	margin: 0 0 0 19%;
+	width: 203px;
+	height: 203px;
+	-webkit-border-radius: 50%; 
+}
+
+/* 후보자 성명 */
+.candidate_name{
+	margin: 0 0 0 39%;
+	font: 15pt '나눔바른고딕';
+	color: #706F6F;
+	font-weight: bold;
+}
+
+/* answer div*/
+.answer_div{
+	margin: 0 0 0 5%;
+}
+
+.answer_title {
+	font: 11pt '나눔바른고딕';
+	color: #706F6F;
+	font-weight: bold;
+}
+
+/* answer textarea */
+.answer {
+	margin: 3% 0 0 0;
+	width: 90%;
+    height: 80px;
+    border-color: #cacaca;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #f7f7f7;
+}
+
+/* 글자수 제한 */
+.chcount{
+	float: right;
+	margin-right: 10%;
+}
+
+/* 버튼 컨테이너 */
+.btn_container{
+	margin: 0 0 10% 0;
+}
+
+/* 투표하기 btn */
+.vote_election{
+	width: 40%;
+	height: 60px;
+	background: #06468E;
+	color: #fff;
+	font-weight: bold;	
+	text-align: center;
+	line-height: 60px;
+	margin: 0 auto;
+}
+
+
+/* contents */
+
+

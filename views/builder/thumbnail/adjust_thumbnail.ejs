@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="js/web/common/crop.js"></script>
+<script src="js/web/common/jquery.base64.js"></script>
+<script src="js/getUrlParameter.js"></script>
+<link rel="stylesheet" href="css/web/common/crop.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<script type="text/javascript">
+function submit(i){
+	//컨텐츠 유무 (1.설문만 2.컨텐츠+설문)
+    var contentsChk = $('input[name="contentsChk"]:checked').val();	
+	
+	//대분류는 기본 default를 패션/뷰티로 잡았으므로 중분류를 기준으로 값을 입력하지 않았으면 경고창을 띄운다.
+    if(typeof $('select[name=sub_category] option:selected').val() == 'undefined'){
+    	alert('카테고리는 필수 입력사항입니다.');
+    }else if(contentsChk == ''){
+       	alert('등록타입 분류 필수 체크사항입니다.');
+    }else {
+    	//var file = $('#importIMG').prop("files")[0];
+      	var title = $('#title').val();
+      	var thumbnailContents = $('#thumbnailContents').val();	//썸네일 컨텐츠
+      	var category = $('#cat1 option:selected').val() +'_'+ $('select[name=sub_category] option:selected').val(); //대분류와 중분류 카테고리 합쳐서 서버로 보냄.
+      	var partnerId = getUrlParameter('partnerId');
+      	var contentsId = getUrlParameter('contents_id');
+   		var image_type = $('input[name="image_type"]:checked').val();
+		
+   		/* 
+      	if(i==1 || i==2){
+       		var image_type = $('input[name="image_type"]:checked').val();
+      	}else if(i==3){
+      		var image_type = '';
+      	} 
+   		*/
+      	console.log(image_type)
+      	console.log(contentsId)
+      	
+      	if(contentsChk==2){
+      		if(title ==''){
+            	alert('제목과 썸네일 이미지는 필수 입력사항입니다.');
+            	return false;
+          	}else if(thumbnailContents == ''){
+          		alert('컨텐츠는 필수 입력사항입니다.');
+          		return false;
+          	}//end if
+      	}//end if
+      	
+       	var fd = new FormData();
+       	fd.append('category', category);
+        fd.append('contentsChk', contentsChk);
+        fd.append('partnerId', partnerId);
+        fd.append('contentsId',contentsId);
+       	
+       	if(contentsChk==2){
+	        fd.append("title", title);
+	        fd.append("thumbnailContents", thumbnailContents.replace(/\n/g, '<br>'));
+	        fd.append('imageType', image_type);
+       	}//end if
+       	
+       	if(i == 1){
+       	  	fd.append("thumbnail", foo.crop(410,224,'png').string);  
+       	}else if(i ==2){
+        	fd.append("thumbnail", foo.crop(410,520,'png').string);  
+       	}else if(i == 3){
+       		
+       	}
+       	
+        $.ajax({
+        	url: '/upload/update_builder_thumbnail', //여기까지 완료함
+          	data: fd,
+          	processData: false,
+          	contentType: false,
+          	type: 'POST',
+          	success: function(data){
+		      	console.log(data);
+		        if(data == 'fail'){
+		        	console.log('잘못된 입력'); 
+	        	}else{
+		            location.href = "/upload/update_builder_contents?contentsId="+contentsId+"";
+		        }//end if
+		    }//end success
+        }); // ajax 끝
+  	}//end if
+}  
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var user_category = $('input[name=user_category]').attr('id').split('_');
+    var first_classification = user_category[0]; //파트너가 이전에 저장해 두었던 대분류 카테고리
+    var second_classification = user_category[1];
+    
+    console.log(first_classification +' - ' + second_classification);
+
+    $('select[id*=sub_category_]').each(function(index) { //모든 서브카테고리 숨기기.
+    	var cat_id = $(this).attr('id');
+      	$('#'+cat_id).hide();
+    });
+    $("#cat1").val(first_classification); //파트너가 이전에 저장해 두었던 대분류 카테고리 선택해둠.
+    $('#sub_category_'+first_classification+'').val(second_classification); //파트너가 이전에 저장해 두었던 중분류 카테고리 선택해둠.
+    $('#sub_category_'+first_classification+'').show();
+
+    $("#cat1").click(function(){ //대분류 카테고리 클릭시 -> 중분류 카테고리 바뀌는 function
+      	$('select[id*=sub_category_]').each(function(index) { //모든 중분류의 값들을 확인하기 위한 function
+       		var cat_id = $(this).attr('id');
+        	$('#'+cat_id).hide();
+      	});
+      	var category = $('#cat1').val();
+      	$('#sub_category_'+category).show();
+    });
+    
+    /* 컨텐츠 등록 타입 1.설문만 2.컨텐츠+설문 */ 
+	var contentsChk = "<%=data.CONTENTS_CHK%>";
+	console.log('contentsChk::'+contentsChk);
+	if(contentsChk == 1){
+		$('#contentsChk1').attr('checked', true);
+	 	$('.conts_form').css('display', 'none');  
+		$('#next4').css('display', '');
+		$('.footer').css('height', 'auto');
+	}else if(contentsChk == 2){
+	 	$('#contentsChk2').attr('checked', true);
+	 	$('.conts_form').css('display', '');  
+		$('#next4').css('display', 'none');
+		$('.footer').css('height', '800px');
+	}//end if
+    $('input[name=contentsChk]').click(function(){
+    	var contentsChk = $('input[name="contentsChk"]:checked').val();
+  	  	console.log('contentsChk ::'+contentsChk );
+  	  	if(contentsChk==1){ //설문만 클릭시
+  			$('.conts_form').css('display', 'none');  
+  			$('#next4').css('display', '');
+  			$('.footer').css('height', 'auto');
+  	  	}else if(contentsChk == 2){ //컨텐츠+설문 클릭시
+  			$('.conts_form').css('display', '');  
+  			$('#next4').css('display', 'none');
+  			$('.footer').css('height', '800px');
+  	  	}//end if
+    });
+	
+	/*** 글자수 제한 ***/
+   	$('.chcount').each(function() {
+    	// count 정보 및 count 정보와 관련된 textarea/input 요소를 찾아내서 변수에 저장한다.
+       	var $count = $('.chcounttx', this);
+       	var $input = $('#thumbnailContents');
+       	// .text()가 문자열을 반환하기에 이 문자를 숫자로 만들기 위해 1을 곱한다.
+       	var maximumCount = $count.text() * 1;
+       	// update 함수는 keyup, paste, input 이벤트에서 호출한다.
+       	var update = function() {
+        	var before = $count.text() * 1;
+           	var now = maximumCount - $input.val().length;
+           	// 사용자가 입력한 값이 제한 값을 초과하는지를 검사한다.
+           	if (now < 0) {
+            	var str = $input.val();
+               	alert('글자 입력수가 초과하였습니다.');
+               	$input.val(str.substr(0, maximumCount));
+               	now = 0;
+           	}
+           	// 필요한 경우 DOM을 수정한다.
+           	if (before != now) {
+            	$count.text(now);
+           	}
+       	};
+       	// input, keyup, paste 이벤트와 update 함수를 바인드한다
+       	$input.bind('input keyup paste', function() {
+        	setTimeout(update, 0)
+       	});
+       	update();
+	});
+ 	/*** 글자수 제한 ***/
+ 	
+ 	/* 이미지 타입 */
+   	var imageType = "<%=data.IMAGE_TYPE %>";
+	console.log('imageType::'+imageType);
+	if(imageType == 'type1'){
+		$('#imageType1').attr('checked', true);
+	}else if(imageType == 'type2'){
+		$('#imageType2').attr('checked', true);
+	}else if(imageType == 'type3'){
+		$('#imageType3').attr('checked', true);
+	}//if
+});
+  
+  
+</script>
+
+</head>
+<body>
+<section class="header">
+  <nav style="height: 150px; background-image: url('img/contents_top_title.gif'); background-repeat: no-repeat; background-position: center;"></nav>
+  <hr style="width: 98%">
+  <div style="height: 44px;"></div>
+</section>
+<section class="contents">
+<div class="categoryImg" style="background-image: url('img/category_text1.gif'); background-repeat: no-repeat; height:20px; width:172px; margin-left: 10px;"></div>
+<div style="height: 33px;"></div>
+</section>
+<div class="product_cate">
+  <div class="cate_block" style="float:left; padding-right: 30px; margin-left: 10px;">
+    <div class="textC" style="width:173px; height: 35px; border-right: solid; border-color: #d7d7d7; border-width: 1px; background-image: url('img/category_title01.gif');"></div>
+        <select size="9" style="width:173px;" id="cat1">
+          <option value="fashion" selected="true">패션/뷰티</option>
+          <option value="food">음식/여행</option>
+          <option value="hobby">취미/게임</option>
+          <option value="life">생활/쇼핑</option>
+          <option value="edu">정치/교육</option>
+          <option value="digital">디지털/가전</option>
+          <option value="car">자동차/교통</option>
+          <option value="media">방송/연예</option>
+          <option value="sports">스포츠/건강</option> 
+        </select>
+  </div>
+  <div style="float: left; padding-left: 18px; margin-top: 10px; background-image: url('img/category_arrow.gif'); width:12px; height: 35px; background-repeat: no-repeat;"></div>
+  <div class="cate_block" style="float:left; padding-left: 15px;">
+    <div class="textC" style="width:173px; height: 35px;  background-image: url('img/category_title2.gif'); border-right: solid; border-color: #d7d7d7; border-width: 1px;"></div>
+      <select size="9" style="width:173px;" id="sub_category_fashion" name="sub_category">
+          <option value="bag">가방</option>
+          <option value="nail">네일아트</option>
+          <option value="diet">다이어트</option>
+          <option value="makeup">메이크업</option>
+          <option value="tattoo">문신/타투</option>
+          <option value="bodyProducts">바디용품</option>
+          <option value="bodyProducts">보습용품</option>
+          <option value="top">상의</option>
+          <option value="showerProducts">샤워용품</option>
+          <option value="shoes">신발</option>
+          <option value="outer">아우터</option>
+          <option value="outdoor">아웃도어</option>
+          <option value="petBeauty">애견미용</option>
+          <option value="accessary">액세서리</option>
+          <option value="underwear">언더웨어</option>
+          <option value="codi">코디</option>
+          <option value="training">트레이닝</option>
+          <option value="bottom">하의</option>
+          <option value="perfume">향수</option>
+          <option value="hairProducts">헤어용품</option>
+          <option value="cosmetics">화장품</option>
+          <option value="fashionEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_food" name="sub_category">
+          <option value="foreignFood">각 나라별 음식</option>
+          <option value="touristAttraction">관광명소</option>
+          <option value="domesticTrip">국내여행</option>
+          <option value="recipe">레시피</option>
+          <option value="tasteAttraction">맛집</option>
+          <option value="bakery">베이커리</option>
+          <option value="slowfood">슬로우푸드</option>
+          <option value="travelAgency">여행사</option>
+          <option value="readyTrip">여행준비</option>
+          <option value="dish">요리</option>
+          <option value="seasonFood">제철음식</option>
+          <option value="alcohols">주류</option>
+          <option value="cameraAttraction">촬영명소</option>
+          <option value="camping">캠핑</option>
+          <option value="cruz">크루즈</option>
+          <option value="tip">팁</option>
+          <option value="fastfood">패스트푸드</option>
+          <option value="convenienceStore">편의점</option>
+          <option value="overseasTrip">해외여행</option>
+          <option value="foodEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_hobby" name="sub_category">
+          <option value="pcGame">PC/패키지게임</option>
+          <option value="rc">RC</option>
+          <option value="book">도서</option>
+          <option value="lego">레고</option>
+          <option value="mobileGame">모바일게임</option>
+          <option value="boardGame">보드게임</option>
+          <option value="photo">사진</option>
+          <option value="animation">애니</option>
+          <option value="musical">연극/뮤지컬</option>
+          <option value="movie">영화</option>
+          <option value="online_game">온라인게임</option>
+          <option value="yoga">요가</option>
+          <option value="webtoon">웹툰</option>
+          <option value="music">음악</option>
+          <option value="internetBroadcastic">인터넷방송</option>
+          <option value="dance">춤</option>
+          <option value="consoleGame">콘솔게임</option>
+          <option value="tip">팁</option>
+          <option value="plaModel">프라모델</option>
+          <option value="figure">피규어</option>
+          <option value="hobbyEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_life" name="sub_category">
+          <option value="furniture">가구/인테리어</option>
+          <option value="economic">경제</option>
+          <option value="weather">날씨</option>
+          <option value="digital">디지털/가전</option>
+          <option value="pet">반려동물</option>
+          <option value="property,">부동산</option>
+          <option value="health">생활/건강</option>
+          <option value="sports">스포츠/레저</option>
+          <option value="foods">식품</option>
+          <option value="ideaProducts">아이디어 상품</option>
+          <option value="relationship">연애</option>
+          <option value="clothes">의류</option>
+          <option value="neighborhood">이웃</option>
+          <option value="merchandise">잡화</option>
+          <option value="birth">출산/육아</option>
+          <option value="cafe">카페</option>
+          <option value="buyForeign">해외직구</option>
+          <option value="homeshopping">홈쇼핑</option>
+          <option value="cosmetic">화장품/미용</option>
+          <option value="lifeEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_edu" name="sub_category">
+          <option value="notification">고시</option>
+          <option value="northKorea">남북관계</option>
+          <option value="conservatism">보수</option>
+          <option value="election">선거</option>
+          <option value="test">수능</option>
+          <option value="languageStudy">어학연수</option>
+          <option value="history">역사</option>
+          <option value="english">영어</option>
+          <option value="foreignLanguage">외국어</option>
+          <option value="certification">자격증</option>
+          <option value="policy">정책</option>
+          <option value="progress">진보</option>
+          <option value="blueHouse">청와대</option>
+          <option value="programming">프로그래밍</option>
+          <option value="eduEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_digital" name="sub_category">
+          <option value="pcComponent">PC 주요부품</option>
+          <option value="healthAppliances">건강/뷰티가전</option>
+          <option value="seasonAppliances">계절가전</option>
+          <option value="digitalAppliances">디지털 완제품</option>
+          <option value="camera">디지털 카메라</option>
+          <option value="multiMedia">멀티미디어/네트워크</option>
+          <option value="lifeAppliances">생활가전</option>
+          <option value="software">소모품/소프트웨어</option>
+          <option value="smartphone">스마트폰</option>
+          <option value="mp3">이어폰/MP3</option>
+          <option value="livingAppliances">주방가전</option>
+          <option value="livingThings">주방용품</option>
+          <option value="etcAppliances">주변기기</option>
+          <option value="camcoder">캠코더</option>
+          <option value="tablet">태블릿</option>
+          <option value="projector">프로젝터</option>
+          <option value="digitalEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_car" name="sub_category">
+          <option value="kCar">국산차</option>
+          <option value="publicTransit">대중교통</option>
+          <option value="drive">드라이브</option>
+          <option value="ship">선박</option>
+          <option value="fCar">수입차</option>
+          <option value="bike">오토바이</option>
+          <option value="carComponent">자동차용품</option>
+          <option value="bicycle">자전거</option>
+          <option value="uCar">중고차</option>
+          <option value="tuning">튜닝</option>
+          <option value="airplane">항공</option>
+          <option value="carEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_media" name="sub_category">
+          <option value="singer">가수</option>
+          <option value="drama">드라마</option>
+          <option value="actor">배우</option>
+          <option value="currentEvent">시사/다큐</option>
+          <option value="entertainment">연예</option>
+          <option value="artisticTalents">예능</option>
+          <option value="comedian">코미디언</option>
+          <option value="issuePerson">화제의인물</option>
+          <option value="entertainmentEtc">기타</option>
+      </select>
+      <select size="9" style="width:173px;" id="sub_category_sports" name="sub_category">
+          <option value="eSports">E-스포츠</option>
+          <option value="healthFood">건강식품</option>
+          <option value="golf">골프</option>
+          <option value="kBaseball">국내야구</option>
+          <option value="kFootball">국내축구</option>
+          <option value="basketball">농구/배구</option>
+          <option value="general">일반</option>
+          <option value="fBaseball">해외야구</option>
+          <option value="fFootball">해외축구</option>
+          <option value="healthcare">헬스케어</option>
+          <option value="sportsEtc">기타</option>
+      </select>
+  </div>
+</div>
+<div style="height: 33px; clear: both;"></div>
+<section class="footer" style="background-color: #f9f9f9; height: 800px;">
+	<div style="height: 29px;"></div>
+	<!-- 컨텐츠 유무 분류 (1.설문만 2.컨텐츠+설문) -->
+  	<div class="type" style="height: 40px; width: 108px; background-image: url('img/text02.gif'); background-repeat: no-repeat; margin-left: 10px; margin-top:11px; float: left;"></div>
+  	<div class="type" style="height: 40px; width: 341px; margin-left:15px; float: left; background-color: white; border: solid; border-width: 1px; border-color: #d7d7d7">
+      <input type="radio" id="contentsChk1" name="contentsChk" value="1" style="margin-top:12px;">설문만
+      <input type="radio" id="contentsChk2" name="contentsChk" value="2" style="margin-top:12px;">컨텐츠+설문
+  	</div>
+  	<!-- //컨텐츠 유무 분류 -->
+  	<div style="height: 50px; clear: both;"></div>
+  	
+  	<!-- 컨텐츠 부분 -->
+  	<div class="conts_form" style="display: none;">  
+		<!-- 제목 -->
+	  	<div class="title" style="height: 40px; width: 47px; background-image: url('img/text01.gif'); background-repeat: no-repeat; margin-left: 10px; margin-top:4px; float: left;"></div>
+	  	<div class="title" style="height: 40px; width: 47px; margin-left:15px; float: left;">
+	    	<input type="text" id="title" style="width:400px; height: auto; font-size:large; border-width: 1px; border-color: #d7d7d7" value="<%= data.TITLE %>">
+	  	</div>
+		<!-- //제목 -->
+		<div style="height: 29px; clear: both;"></div>
+		
+		<!-- 썸네일 컨텐츠 -->
+		<div class="thumbnailContents" style="height: 40px; width: 60px; background-image: url('img/thumb_contents.gif'); background-repeat: no-repeat; margin-left: 10px; margin-top:4px; float: left;"></div>
+		<div class="thumbnailContents" style="height: 40px; width: 390px; margin-left:15px; float: left;">
+		  	<textarea id="thumbnailContents" style="width:385px; height: 50px; font-size:large; border-width: 1px; border-color: #d7d7d7"></textarea>
+			<div class="chcount" style="float: right;"> <span class="chcounttx">50</span>/ 50</div> 
+		</div>
+		<!-- //썸네일 컨텐츠 -->
+		<div style="height: 70px; clear: both;"></div>
+		
+		<!-- 등록타입 분류 -->
+	  	<div class="type" style="height: 40px; width: 108px; background-image: url('img/text02.gif'); background-repeat: no-repeat; margin-left: 10px; margin-top:11px; float: left;"></div>
+	  	<div class="type" style="height: 40px; width: 341px; margin-left:15px; float: left; background-color: white; border: solid; border-width: 1px; border-color: #d7d7d7">
+	    	<input type="radio" id="imageType1" name="image_type" value="type1" style="margin-top:12px;">타입1
+	      	<input type="radio" id="imageType2" name="image_type" value="type2" style="margin-top:12px;">타입2
+	  	</div>
+	  	<!-- //등록타입 분류 -->
+	  	<div style="height: 80px; clear: both;"></div>
+	  		
+	  	<!-- 썸네일 이미지 -->
+		<div class="thumbnail" style="height: 40px; width: 108px; background-image: url('img/text03.gif'); background-repeat: no-repeat; margin-left: 10px; margin-top:4px; float: left;"></div>
+			<div class="300" id="thumbnail_preview1" style="display:none; width: 410px; height: 224px; float: left; margin-left: 15px; background-color: white">
+		    <img src=""  onclick="foo.import();" style="padding-top: 17%; margin-left: 35%">
+		    <input type="file" accept="image/*;capture=camera" name="uploadFile" id="image1" style="display: none;"/>
+		</div>
+		  
+		<div id="thumbnail_preview2" class="415" id="thumbnail_preview1" style="display:none; width: 410px; height: 520px; float: left; margin-left: 15px; background-color: white">
+			<img src=""  onclick="foo.import();" style="width: 300px; padding-top: 50%; margin-left: 35%;">
+		    <input type="file" accept="image/*;capture=camera" name="uploadFile" id="image2" style="display: none;"/>
+		</div> 
+		  
+		<!-- //썸네일 이미지 -->	
+		<div id="thumbnail_preview">
+		    <img src="/<%= data.THUMBNAIL_IMAGE_PATH %>" class="img-responsive"  style="margin-left: 15px;">
+		    <!-- <input type="file" file-model="myFile" id="image" style="display:none" /> -->
+		    <!-- <button onclick="submit(<%= data.CONTENTS_ID%>)">다음</button> -->
+		</div>
+	</div>
+	<!-- //컨텐츠 부분 -->
+	<input id="<%= data.CATEGORY %>" style="display:none" name="user_category">
+</section>
+
+<div onclick="submit(1)" id="next1" name="next"  style="display:none; background-image: url('/img/category_netxtbt.gif'); background-repeat: no-repeat; width: 80px; height: 33px; margin-left: 40%"></div>
+<div onclick="submit(2)" id="next2" name="next"  style="display:none; background-image: url('/img/category_netxtbt.gif'); background-repeat: no-repeat; width: 80px; height: 33px; margin-left: 40%"></div>
+<div onclick="submit(3)" id="next3" name="next"  style="background-image: url('/img/category_netxtbt.gif'); background-repeat: no-repeat; width: 80px; height: 33px; margin-left: 40%"></div>
+
+<script>
+
+var thumbnailContents = '<%=data.THUMBNAIL_CONTENTS%>';
+console.log('thumbnailContents:::'+thumbnailContents);
+thumbnailContents = thumbnailContents.replace('&lt;br&gt;', '\n');
+console.log('thumbnailContents 줄바꿈:::'+thumbnailContents);
+$('#thumbnailContents').val(thumbnailContents);
+
+$(document).ready(function(){
+  var i = 0;
+  var image_type_click=0;
+  
+
+$('input[name=image_type]').click(function(){
+  var type = $('input[name="image_type"]:checked').val();
+  var imageId= $(this).val()
+  var id = imageId.split('type')[1];
+  image_type_click++;
+
+
+  console.log(image_type_click)
+  if(image_type_click == 1){
+    if(type == 'type1'){
+      console.log('1')
+      $('div[id=thumbnail_preview1] img').attr('src', '/img/category_camera.png');
+      $('div[id=thumbnail_preview1] img').css('width', 90);
+      $('div[id=thumbnail_preview]').remove();
+      image_type_click = 0;
+      $('#next1').css('display','');
+      $('#next2').css('display','none');
+      $('#next3').css('display','none');
+      $('.thumbnail').css('display', '');
+      $('.300').css('display', '');
+      $('.415').css('display', 'none');
+      $('#thumbnail_preview2').after('<div class="default" style="padding-left:15px;"></div>');
+      $('.default1').remove();
+      foo.init({
+      // element to load the cropper into
+      container: '.default',
+   
+      // image to load, accepts base64 string
+      image: 'test.jpg',
+   
+      // aspect ratio
+
+      width: 410,
+      height: 224,
+   
+      // prevent image from leaking outside of container. boolean
+      mask: true,
+   
+      // input[range] attributes
+      zoom: {
+   
+        // slider step change
+        steps: 0.01,
+   
+        // minimum and maximum zoom
+        min: 1,
+        max: 5
+   
+      }
+    });
+    $('.default').css('display', 'none');
+  }else{
+      console.log('2')
+      $('div[id=thumbnail_preview2] img').attr('src', '/img/category_camera.png');
+      $('div[id=thumbnail_preview2] img').css('width', 90);
+      $('div[id=thumbnail_preview]').remove();
+      image_type_click = 0;
+      $('#next2').css('display','');
+      $('#next1').css('display','none');
+      $('#next3').css('display','none');
+      $('.thumbnail').css('display', '');
+      $('.300').css('display', 'none');
+      $('.415').css('display', '');
+      $('#thumbnail_preview2').after('<div class="default1" style="padding-left:15px;"></div>');
+      $('.default').remove();
+      foo.init({
+      // element to load the cropper into
+      container: '.default1',
+   
+      // image to load, accepts base64 string
+      image: 'test.jpg',
+   
+      // aspect ratio
+
+      width: 410,
+      height: 520,
+   
+      // prevent image from leaking outside of container. boolean
+      mask: true,
+   
+      // input[range] attributes
+      zoom: {
+   
+        // slider step change
+        steps: 0.01,
+   
+        // minimum and maximum zoom
+        min: 1,
+        max: 5
+   
+      }
+      });
+      $('.default1').css('display', 'none');
+    }
+  }
+  });
+}); 
+</script>
+<script>
+  var foo = new CROP();
+</script>
+</body>
+</html>

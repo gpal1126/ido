@@ -1,0 +1,40 @@
+<script>
+$(document).ready(function(){
+  $('#reg_email').text($('#u_mail').val());
+  $('#reg_nickName').text($('#u_nickName').val());
+
+  $('#startIdo').click(function(){
+    location.href="/";
+  })
+})
+</script>
+<section id="join">
+  <a href="#" class="joinClose" name="joinoff">창닫기</a>
+  <img src="img/logo.png" alt="로고" alt="" />
+  <p class="jointitleTX"> 회원가입 <span class="title-sub"> 참여형 설문조사 서비스 아이두에 오신것을 환영합니다. </span></p> 
+  
+  <ul class="step">
+    <li> <span class="stepNm">STEP 01</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">약관동의</span></li>  
+    <li> <span class="stepNm">STEP 02</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">정보입력</span></li>
+    <li> <span class="stepNm">STEP 03</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">프로필입력</span></li>
+    <li> <span class="stepNm On">가입완료 </span></span></li> 
+  </ul> 
+
+
+  <article class="final"> 
+    <img src="img/join_final_pic.png" alt="" />
+    <p class="finalTxx">가입이 완료되었습니다.</p> 
+  </article>
+  <!-- //final --> 
+  <div class="finalinfo"> 
+    <span class="box">이메일</span> <span class="boxcon" id="reg_email"></span>  
+    <p><span class="box">닉네임</span> <span class="boxcon" id="reg_nickName"></span></p> 
+  </div> 
+  <div class="detailwrap"> 
+    <button onclick="menuClick('view/main/join/join_step05.html');">상세정보 입력하기 </button>   
+  </div> 
+
+  <nav>
+    <button class="next padding-fix" id="startIdo">IDO 시작하기</button> 
+  </nav> 
+</section> 

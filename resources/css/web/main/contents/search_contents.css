@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+#wrap{
+	position: relative;
+}
+
+#wrap .search_section{
+	position: absolute; top:200px; margin: 0 50%;
+}
+
+.search_section .search_div{
+	margin: 0 -50%; border:1px solid #eee; width:1000px; height:100px;
+}
+
+.search_div .search_input{
+	border:2px solid #164672; width:500px; height: 40px; margin:30px 0 0 200px; float:left;
+}
+
+.search_div .search_btn{
+	background:url('/images/common/main/contents/search_btn.png'); width: 100px; height: 40px; float: left; margin: 30px 0 0 0; cursor: pointer;
+}
+
+.search_section .contents_div{
+	margin: 0 -50%; border:1px solid #eee; width:1000px; height:230px;
+}
+
+.contents_div .contents_img_div img{
+	width: 250px; height: 180px; padding:25px 0 25px 30px; float:left; position:relative;
+}
+
+.contents_div .right_contents{
+	float:left; margin: 25px 0 0 30px;
+}
+
+.right_contents > span{
+	display: block;
+}
+
+.right_contents .partner img{
+	width:50px; height:50px;
+	-webkit-border-radius: 50%;
+}
+
+.right_contents .partner .partner_nickname{
+	margin-left: 10px;
+}
+
+.right_contents .title{
+	margin: 30px 0 0 0; font-size:1.2em; font-weigth:bold;
+}
+
+.right_contents .contents{
+	 margin: 10px 0 0 0; font-size:0.9em;
+}
+
+.right_contents .date{
+	margin: 35px 0 0 0; font-size:0.9em;
+}
+
+.contents_div .bottom_contents{
+	text-align: right; margin: 190px 30px 0 0;
+}
+

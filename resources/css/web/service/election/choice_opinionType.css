@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 15%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 13%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+.select_answer_container{
+	width : 80%;
+	height:auto;
+	padding-left: 15%;
+}
+
+#select_text img{
+	width : 170px;
+}
+
+#opinion_leader img{
+	width : 200px;
+}
+
+#manager_address_book img{
+	width : 200px;
+}

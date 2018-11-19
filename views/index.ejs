@@ -1,0 +1,200 @@
+<html ng-app="mainApp">
+<head>
+<meta charset="UTF-8">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/ng-file-upload-shim.min.js"></script>
+<script type="text/javascript" src="js/ng-file-upload.min.js"></script>
+<!-- 
+<% if(typeof user == 'object') {%>
+<% }else if(typeof user=='string'){ %> 
+<script>
+    alert('<%= user %>');
+</script>
+<% }%>
+<script type="text/javascript"> //회원가입 부분
+var myApp = angular.module('mainApp', ['mainApp.directives']);
+    angular.module('mainApp.directives', [])
+    .directive('pwCheck', [function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            var firstPassword = '#' + attrs.pwCheck;
+            elem.add(firstPassword).on('keyup', function () {
+                scope.$apply(function () {
+                    ctrl.$setValidity('pwmatch', elem.val() === $(firstPassword).val());
+                });
+            });
+        }
+    }
+}]);
+
+myApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+myApp.service('fileUpload', ['$http', function ($http, $route) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+            $route.reload();
+        })
+        .error(function(){
+        });
+    }
+}]);
+
+myApp.controller('defaultCtrl', ['$scope', '$http', 'fileUpload', '$window', function($scope, $http, fileUpload, $window){
+        $scope.click = function(){
+            var mail = $('#email').val();
+            $http({
+                method: 'GET', //방식
+                url: '/check_id/email', /* 통신할 URL */
+                params: { /* 서버로 보내질 Key/Value값 */
+                   "email" : mail
+                }
+            }).success(function(data, status, headers, config) { //ajax 통신 성공시 서버에서 fail을 날려준다.
+                if( data == "fail" ) { //fail이 뜨면 사용불가 메일처리
+                    $window.alert("사용불가능한 이메일 입니다.");
+                }
+                else { //ajax 통신 성공시 서버에서 success를 날려준다.
+                    $window.alert("사용 가능한 이메일 입니다."); 
+                    $scope.submit = function(){ //사용가능 메일이라고 뜨면, submit 처리 가능.
+                        var file = $scope.myFile; //파일 
+                        var email = $scope.email; //이메일값
+                        var password = $scope.pw1; //패스워드
+                        var nickName = $scope.nickName; 
+                        var sex = $('input[name="sex"]').val(); //성별
+                       
+                        var uploadUrl = "/sign_in?email="+email+"&password="+password+"&sex="+sex+"&nickName="+nickName;
+                        fileUpload.uploadFileToUrl(file, uploadUrl); //URL과 파일을 담아서 보냄. 위에 service부분 확인
+                    }
+                }
+            });
+        } //click function 끝
+
+        //이메일 중복확인 안되어 있을시.
+        $scope.submit = function(){
+            alert('이메일 중복확인 해주세요.');
+        }
+
+        //닉네임 검사하는 화면
+        $scope.nick_click = function(){
+            var nickName = $('#nickName').val();
+            $http({
+                method: 'GET', //방식
+                url: '/check_id/nickName', /* 통신할 URL */
+                params: { /* 서버로 보내질 Key/Value값 */
+                   "nickName" : nickName
+                }
+            }).success(function(data, status, headers, config) { //ajax 통신 성공시 서버에서 fail을 날려준다.
+                if( data == "fail" ) { //fail이 뜨면 사용불가 메일처리
+                    $window.alert("사용불가능한 닉네임 입니다.");
+                }
+                else if( data =="success") { //ajax 통신 성공시 서버에서 success를 날려준다.
+                    $window.alert("사용 가능한 닉네임 입니다."); 
+                }
+            });
+        } //nick_click function 끝
+    }]); //Controller 끝
+
+
+</script>
+<style type="text/css">
+    span.summary.ng-invalid { color:red; font-weight:bold;}
+    span.summary.ng-valid { color:green;}
+    div.error { color : red; }
+    .msg-error {
+    color:#F00;
+    font-size:14px;
+    }
+</style>
+</head>
+<body ng-controller="defaultCtrl">
+    <form action="/login" method="post">
+        <input type="text" name="userid" id="userid">
+        <input type="password" name="password" id="password">
+    <button type="submit" id="login">Click</button>
+    </form>
+    <% if(user == undefined || user == '') { %><a href="/auth/facebook" class="btn btn-fb" id="facebook">Facebook Login</a>
+    <% }else {%>
+        <% if(typeof user == 'object') {%>
+            <% if(typeof user.emails == 'string'){ %>
+                <a href="/logout"><%= user.emails %></a> 로컬 로그인시
+                <script type="text/javascript">
+                    $('#userid').css('display', 'none');
+                    $('#password').css('display', 'none');
+                    $('#login').css('display', 'none');
+                </script>
+            <% }else{%>
+                <a href="/logout"><%= user.emails[0].value %></a> facebook 로그인시 -> 이메일값 있을 때
+            <% } %>
+        <% }else{ %>
+            <a href="/auth/facebook" class="btn btn-fb" id="facebook">Facebook Login</a>
+        <% } %>
+    <% } %>
+    
+
+   
+    <form name="myForm" enctype="multipart/form-data" ng-submit="submit()">
+        E-mail : <input type="email" id="email" name="email" required ng-model="email"> <div ng-click="click()"><button>Click</button></div><br>
+        <div class="error" ng-show="myForm.email.$invalid && myForm.email.$dirty">
+            <span ng-show="myForm.email.$error.email">유효한 E-mail정보를 입력해주세요.</span>
+            <span ng-show="myForm.email.$error.required">이메일을 입력해주세요.</span>
+        </div>
+        Password : <input type="password" id="pw1" name="pw1" ng-model="pw1" required> <br>
+        Password 확인 : <input type="password" id="pw2" name="pw2" ng-model="pw2" pw-check="pw1" required><br>
+        <div class="msg-block" ng-show="myForm.$error">
+          <span class="msg-error" ng-show="myForm.pw2.$error.pwmatch">
+            패스워드가 일치하지 않습니다.
+          </span>
+        </div>
+
+        닉네임<input type="text" name="nickName" ng-model="nickName" required>
+        <br>
+
+        <label for="sex">성별</label>
+        <input type="radio" name="sex" id="male" value="m" ng-model="male" ng-checked="true"/>남자
+        <input type="radio" name="sex" id="female" value="f" ng-model="female">여자
+        <br>
+        <div id="image_preview" style="height:auto;">
+            <img src="../../images/K-021.png"  class="img-responsive" name="pat_image" id="pat_image" onclick="document.all.image.click();">
+            <input type="file" file-model="myFile" id="image" style="display:none" />
+        </div>
+        <input type="submit" name="submit" id="submit" value="Submit" ng-disabled="myForm.$invalid"> 등록</button> 
+    </form>
+<script>
+    $('#image').on('change', function() {
+    file = $('#image').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+    $('#image_preview img').attr('src', blobURL);
+    $('#image_preview').slideDown(); //업로드한 이미지 미리보기 
+});
+</script> -->
+
+<button id="partner_page">파트너 유저 신청</button>
+<script type="text/javascript">
+    $('#partner_page').click(function(){
+        window.open('/user/register_partner', "_blank");  
+    })
+</script>
+</body>
+</html>

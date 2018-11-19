@@ -1,0 +1,565 @@
+/******** 설문 시작하기 *********/
+/* 설문시작하기 구분선 img */
+.slash_line {
+	background:url('/images/common/main/contents/slash_line.png') no-repeat;
+	width: 493px;
+	height: 5px;
+	margin: 0 auto 40px auto;
+}
+
+/* 설문시작하기 banner */
+.survey_banner {
+	background:url('/images/common/main/contents/start_research.png') no-repeat;
+	width: 493px;
+	height: 75px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 3;
+}
+
+/* 화살표 img */
+.btn_arrow {
+	background:url('/images/common/main/contents/botton_arrow.png') no-repeat;
+	width: 17px;
+	height: 9px;
+	margin: 0 auto;
+	position: relative;
+    margin-left: 240px;
+    z-index: 2;
+}
+
+/* 대질문 썸네일 div */
+.surveyThumbDiv {
+	position: relative;
+	z-index: 1;
+	top: -10px;
+	height: 330px;
+}
+
+/* black bg */
+.black_bg {
+	background:url('/images/common/main/contents/black_bg.png');
+	width: 492px;
+	height: 353px;
+	position: relative;
+	z-index: 3;
+	margin: 0 auto;
+}
+
+/* 대질문 이미지 */
+.surveyThumbnailImg {
+	width: 493px;
+	height: auto;
+	position: relative;
+	top: -353px;
+}
+
+/* 대질문 타이틀 div */
+.surveyTitleDiv {
+	position: relative;
+	top: -200px;
+	z-index: 4;
+	margin-left: 70px;
+	color: #fff;
+	font-size: 2em;
+	cursor: pointer;
+}
+
+/* 대질문 타이틀 txt */
+.survey_title {
+	float: left;
+	font-size: 30px;
+	letter-spacing: 3px;
+}
+
+/* 설문조사 시작하기 화살표 img */
+.more_arrow {
+	background:url('/images/common/main/contents/more_arrow.png') no-repeat;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	z-index: 4;
+	margin-top: 5px;
+	float: left;
+}
+
+/******** 설문 시작하기 *********/
+
+
+
+/* 선택 */
+.surveyDiv{
+	width: 670px; /* 변경 전 850px */
+	padding-left: 135px;
+}
+.surveyTypeDiv{
+	height: 38px;
+}
+
+
+.surveyTitleDiv{
+	overflow:hidden;  
+	text-align: center;
+}
+.titleSpan{
+   display:inline-block;
+   /* margin:10px 10px 0 0;
+   padding:5px 10px */
+   margin: 27px 0 16px 0;
+   font-size: 1.2em;
+   font-weight:700;
+}
+
+.surveySecondTitleDiv{
+	overflow:hidden;  
+	text-align: center;
+	margin: 27px 0 16px 0;	/* 07-12 추가 */
+}
+.second_titleSpan{
+   display:inline-block;
+   margin:0 10px 0 0;
+   padding:5px 10px
+}
+
+/* 순위형/선택형 답변 컨텐츠 */
+.contsContainer div[class*=contsDiv]{
+	float: left;
+}
+
+.contsContainer{
+	width: 670px;
+	height: 350px;
+}
+
+/*최종 결과화면*/
+.btnLine{
+	display:inline-block;
+	margin:10px 10px 0 0;
+	background-image: url("/images/common/main/result_survey/blue_linebar.gif");
+	background-repeat: no-repeat center;
+	width:30px; 
+	height:2px;
+}
+
+.surveyResult{
+	width :540px;
+	height: auto;
+	padding-left: 230px;
+}
+.top_container{
+	padding-left: 14px;
+}
+.line_bar{
+	background-image: url("/images/common/main/result_survey/img01.gif");
+	background-repeat: no-repeat;
+	width: 501px;
+	height: 101px;
+}
+.hrBar{
+	background-image: url("/images/common/main/result_survey/line_img.gif");
+	background-repeat: no-repeat;
+	width: 540px;
+	height: 1px;	
+}
+
+/* 중간 div 묶음*/
+.top_container{
+	height: auto;
+}
+
+/* 순위형 bar img */
+.rank_type_img{
+	background-image: url("/images/common/main/result_survey/type_bar_rank.png");
+	background-repeat: no-repeat;
+	width: 539px;
+	height: 50px;
+}
+
+/* 선택형 bar img */
+.select_type_img{
+	background-image: url("/images/common/main/result_survey/type_bar_select.png");
+	background-repeat: no-repeat;
+	width: 539px;
+	height: 50px;
+}
+
+.secondTitleContainer{
+	height: 60px;
+	margin-top: 20px;
+}
+
+.secondTitleBtn{
+	background-image: url("/images/common/main/result_survey/q_bt03.gif");
+	background-repeat: no-repeat;
+	float: left;
+	width: 41px;
+	height: 40px;	
+}
+.secondTitle{
+	float: left;
+	line-height: 43px;
+	padding-left: 10px;
+}
+
+
+.dotteBar{
+	background-image: url("/images/common/main/result_survey/dotted_img.gif");
+	background-repeat: no-repeat;
+	width: 540px;
+	height: 1px;
+}
+
+/*Bottom*/
+.bottm_container{
+	width: 510px;
+	height: 280px;
+	padding-left: 30px;
+}
+.rank1Btn{
+	background-image: url("/images/common/main/result_survey/1_bt.gif");
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 30px;
+	height: 29px;
+}
+.rank2Btn{
+	background-image: url("/images/common/main/result_survey/2_bt.gif");
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 30px;
+	height: 29px;
+}
+.rank1{
+	float: left;
+	width: 255px;
+}
+.rank2{
+	width: 255px;
+	float: left;
+}
+
+
+/*************** 공통 css ****************/
+/** 공통 유저 참여 화면 css **/
+.blue_line{
+	background:url('/images/common/main/result_survey/blue_linebar.png') no-repeat;
+	width: 30px;
+	height: 2px;
+	margin: 0 auto;
+}
+
+/* 완료 버튼 이미지 */
+.nextBtn {
+	background:url('/images/common/main/result_survey/next_bt.png') no-repeat;
+	width: 65px;
+	height: 30px;
+	margin-left:850px;
+}
+
+.finishBtn {
+	background:url('/images/common/main/result_survey/finish_bt.png') no-repeat;
+	width: 65px;
+	height: 30px;
+	margin-left:850px;
+}
+
+/** 공통 설문 결과 화면 css **/
+/* 설문 완료 img */
+.rst_top_img {
+	background:url('/images/common/main/result_survey/top_img01.png') no-repeat;
+	width: 506px;
+	height: 101px;
+	border: none;
+	margin: 0 auto;
+}
+
+/* line bar img */
+.line_bar_img{
+	background:url('/images/common/main/result_survey/line_img.png') no-repeat;
+	width: 540px;
+	height: 1px;
+	margin: 24px 0 0 0;
+}
+
+/* 중질문 question img */
+.second_title_img{
+	float: left;	
+	background:url('/images/common/main/result_survey/q_bt.png') no-repeat;
+	width: 40px;
+	height: 40px;
+	margin: 24px 0 0 0;
+}
+
+/* dotted bar img */
+.dot_bar_img{
+	background:url('/images/common/main/result_survey/dotted_img.png') no-repeat;
+	width: 540px;
+	height: 1px;
+	margin: 19px 0 0 0;
+}
+
+/* 유형 타입 컨테이너 사이 띄우기 */
+.result_container > div{
+	margin: 50px 0;
+}
+
+/*************** 공통 css ****************/
+
+
+/***************** 순위형 css *********************/
+/* 순위형 유저 참여 화면 css */
+.type_rank {
+	background:url('/images/common/main/result_survey/type_rank.png') no-repeat;
+	width: 670px;
+	height: 40px;
+	margin-top: 20px;
+}
+
+.contsContainer .contsTxtDiv {
+	text-align: center;
+	padding: 10px 0;
+}
+/***************** 순위형 css *********************/
+
+
+/***************** 별점형 css *********************/
+/* 별점형 유저 참여 화면 css */
+.type_star {
+	background:url('/images/common/main/result_survey/type_star.png') no-repeat;
+	width: 670px;
+	height: 40px;
+	margin-top: 20px;
+}
+
+/* 별점형 중질문 이미지 */
+.secSvyTitleDiv {
+	margin: 32px 0;
+}
+
+/* 별점형 답변 div */
+.starContainer .contsDiv {
+	padding: 3px 0;
+}
+
+.starContainer .contsDiv .contsTxtDiv{
+	float: left;
+	width: 265px;
+	height: 35px;
+	line-height: 35px;
+    text-align: center;
+    border: 1px solid #E5E5E5;
+    background: #F9F9F9;
+    font-weight: bold;
+    color: #848282;
+    cursor: pointer;
+}
+
+.starContainer .contsDiv .starDiv{
+	width: 395px;
+	height: 35px;
+	line-height: 32px;
+    text-align: center;
+    margin-left: 275px;
+    border: 1px solid #E5E5E5;
+    cursor: pointer;
+}
+
+
+/* 별점형 결과 화면 css */
+/* 별점형 div */
+.star_container {
+	height: 600px;
+}
+
+/* 별점형 img */
+.star_container .star_type_img{
+	background:url('/images/common/main/result_survey/type_bar_star.png') no-repeat;
+	width: 539px;
+	height: 50px;
+	margin: 25px 0 0 0;
+}
+
+/* 중질문 div */
+.star_container .second_title_txt{
+	line-height: 40px;	
+	padding: 25px 0 0 50px;
+    color: #7B7C7C;
+    font-weight: bold;
+}
+
+/* 중질문 img */
+.star_container .second_title_imgPath{
+	width: 300px;
+	height: auto;
+	margin: 24px 0;
+	padding-left: 120px;
+}
+
+/* 답변 txt */
+.star_container .rst_conts_txt{
+	float: left;
+	width: 235px;
+	height: 35px;
+	line-height: 35px;
+    text-align: center;
+    background-color: #F3F3F3;
+    margin: 4px;
+    color: #6D7377;
+    font-weight: bold;
+}
+
+/* 답변 별점평균 */
+.star_container .rst_avg_star{
+	float: left;
+	width: 295px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+	margin: 3px 0;
+	border: solid 1px #F3F3F3;
+}
+/***************** 별점형 css *********************/
+
+
+/***************** 이중택일형 css *********************/
+/** 이중택일형 유저 참여 화면 css **/
+.type_choice {
+	background:url('/images/common/main/result_survey/type_choice.png') no-repeat;
+	width: 670px;
+	height: 40px;
+	margin-top: 20px;
+}
+
+/* 답변개수 txt div */
+.svyReplyLengDiv {
+	margin: 18px 0 0 95px;
+	height: 20px;
+	line-height:20px; 
+}
+
+/* 답변 개수 txt */
+.svyReplyLengSpan {
+	padding-left: 10px; 	
+}
+
+/* 이중택일 답변개수 아이콘 */
+.svyReplyIcon {
+	background:url('/images/common/main/result_survey/circle_bt.png') no-repeat;
+	width: 16px;
+	height: 16px;
+	float: left;
+}
+
+/* 이중택일 답변 컨테이너 */
+.choiceContainer {
+	height: 300px;
+	margin: 20px 0 0 98px;
+}
+
+/* 이중택일 답변 사이 padding */
+.choiceContainer .contsDiv{
+	float: left;
+	padding: 0 70px 0 0;
+}
+
+.choiceContainer .contsDiv .contsTxtDiv{
+	padding: 10px 0;
+}
+
+/** 이중택일 설문 결과 화면 css **/
+/* 설문 결과 div */
+.choice_container {
+	clear: left;	/* conts 결과 float 초기화 */
+	height: 600px;
+}
+
+
+/* 이중택일형 img */
+.choice_container .choice_type_img{
+	background:url('/images/common/main/result_survey/type_bar_choice.png') no-repeat;
+	width: 539px;
+	height: 50px;
+	margin: 25px 0 0 0;
+}
+
+/* 중질문 div */
+.choice_container .second_title_txt{
+	line-height: 40px;	
+	padding: 25px 0 0 50px;
+	color: #7B7C7C;
+    font-weight: bold;
+}
+
+/* 답변 결과 span */
+.choice_container .rst_conts{
+	/* float:left; 	line_bar_img float 초기화해줌 */
+	margin: 38px 0 0 0;
+	padding: 0 35px 0 35px;
+	width:200px; height:160px;
+}
+
+.choice_container #rst_conts1{
+	float:left; 	
+}
+
+.choice_container #rst_conts2{
+}
+
+/* 답변 결과 1위 img */
+.choice_container .choiceRank1{
+	background:url('/images/common/main/result_survey/1_bt1.png') no-repeat;	
+	width: 30px;
+	height: 29px;
+	position: absolute;
+}
+
+/* 답변 결과 2위 img */
+.choice_container .choiceRank2{
+	background:url('/images/common/main/result_survey/2_bt2.png') no-repeat;	
+	width: 30px;
+	height: 29px;
+	position: absolute;
+	margin: 38px 0 0 305px;
+}
+
+/* 답변 결과 img */
+.rst_conts .rst_conts_img{
+	width:200px; height:160px;
+}
+
+.rst_conts #rst_conts_img1{
+
+}
+
+.rst_conts #rst_conts_img2{
+	margin: 38px 0;
+}
+
+/* 답변 결과 txt */
+.rst_conts .rst_conts_p {
+	text-align:center;
+	color: #6D7377;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.rst_conts #rst_conts_p1 {
+}
+
+.rst_conts #rst_conts_p2 {
+	margin: -38px 0 0 275px;
+}
+/***************** 이중택일형 css *********************/
+
+
+/***************** 선택형 css *********************/
+/** 선택형 유저 설문 참여 화면 css **/
+.type_select {
+	background:url('/images/common/main/result_survey/type_select.png') no-repeat;
+	width: 670px;
+	height: 40px;
+	margin-top: 20px;
+}
+/***************** 선택형 css *********************/
+
+

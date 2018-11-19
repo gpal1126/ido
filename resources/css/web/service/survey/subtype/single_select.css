@@ -1,0 +1,187 @@
+@CHARSET "UTF-8";
+/* header  */
+	body{
+		margin: 0 auto;
+		min-width: 320px;
+		padding: 0;
+	}
+	.header{
+		background-color: #344169;
+		width: 100%;
+		height:60px;
+		margin: 0 auto;
+		padding: 0;
+	}
+	
+	
+	.nav_1_menu{
+		float:left;
+		height: 47px;
+	}
+	
+	.header .nav_2{
+		width: 100%;
+		position:absolute;
+		height: 80%;
+	
+	}
+	/* header  */
+	.contents{
+		width: 100%;
+		
+		height: auto;
+	}
+	/* tabs */
+	ul.tabs {
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    list-style: none;
+	    height: 32px;
+	    border-bottom: 1px solid #eee;
+	    border-left: 1px solid #eee;
+	    width: 99.8%;
+	    font-family:"dotum";
+	    font-size:12px;
+	}
+	ul.tabs li {
+	    float: left;
+	    text-align:center;
+	    cursor: pointer;
+	    width:49.6%;
+	    height: 42px;
+	    line-height: 40px;
+	    border: 1px solid #eee;
+	    border-left: none;
+	    font-weight: bold;
+	    background: #fafafa;
+	    overflow: hidden;
+	    position: relative;
+	}
+	ul.tabs li.active {
+	    background: #FFFFFF;
+	    border-bottom: 1px solid #FFFFFF;
+	}
+	.tab_container {
+	    border-top: none;
+	    clear: both;
+	    float: left;
+	    width: 100%;
+	    background: #FFFFFF;
+	}
+	.tab_content {
+	 border: 1px solid #eee;
+	    padding: 20px;
+	    font-size: 12px;
+	    display: none;
+	}
+	.tab_container .tab_content ul {
+	    width:100%;
+	    margin:0px;
+	    padding:0px;
+	}
+	.tab_container .tab_content ul li {
+	    padding:5px;
+	    list-style:none
+	}
+	/* tab 끝 */
+	
+	
+	/* title Container */
+	.nonText{
+		padding-bottom:5px;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	
+	#reply_addbt{
+		margin-top: 5px;
+		margin-left: -5px;
+	}
+	
+	.subTitle_textArea_hr{
+		position: absolute;
+		width: 100%;
+		top: 75%;
+	}
+	/* title Container */
+	
+	/* Answer Container */
+	.survey_answer{
+		padding-top : 20px;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.surveyAnswer_inputContainer{
+		height: 40px;
+	}
+	
+	.answer_textArea_hr{
+		position: absolute;
+		width: 100%;
+		top: 57%;
+	}
+	/* Answer Container */
+	
+	/* 설정 */
+	
+	
+	/* ---- 설정 ---- */
+	/* contents */
+	.addEtc{
+		position: relative;
+		width: 30px;
+		height: 30px;
+		margin-top: -5px;
+	}
+	.addEtc input[type=checkbox]{
+		opacity:0;
+	    height: 30px;
+	    width: 30px;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    z-index: 2;
+		
+	}
+	.addEtc input[type=checkbox] + label{
+		background-image: url("/img/service/survey/single_select/cheak_box_off.png");
+		 height: 30px;
+	    width: 30px;
+	    position: absolute;
+	}
+	.addEtc input[type=checkbox]:checked + label{
+		background-image: url("/img/service/survey/single_select/cheak_box_on.png");
+		 height: 30px;
+	    width: 30px;
+	    position: absolute;
+	}
+	
+	
+	.etc_answer_textArea_hr{
+		position: absolute;
+		width: 100%;
+		top: 72%;
+	}
+	
+	
+	/* footer */
+	.footer{
+		position:fixed;
+		bottom:0;
+		width: 100%;
+		height: auto;
+	}
+	
+	
+	
+	
+	/* img */
+	
+	
+	.surveyAnswer_inputContainer_img{
+		width: 200px;
+		margin-left: -7px;
+	}
+	
+	

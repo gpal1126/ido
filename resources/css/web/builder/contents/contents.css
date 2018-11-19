@@ -1,0 +1,144 @@
+@CHARSET "UTF-8";
+.build_shape, .build_image {
+  position: relative;
+}
+
+.build_image img{ 
+  width: 500px;
+  height: auto; 
+}
+
+/* 3. 이미지 출처 */
+
+.build_image_origin{
+  position: absolute;
+  width: 160px;
+  height: 16px;
+  right: -40px;
+  top: 0%; 
+  font-size: xx-small;
+}
+
+/* 4. 컨텐츠 내부 내용 작성부분 */
+.build_contents{
+  width: 497px;
+  height: 150px;
+  position: relative;
+}
+
+/* li부분 스타일 없애기 */
+ul{
+  list-style: none;
+  width: 500px;
+}
+
+#image{
+  {display:fixed; width:59px; height:40px; background:url('/img/join_photo_in.png') repeat 0 0; background-size:100% 100%; text-indent:-9990px; margin:20px 0;}
+}
+
+/* 컨텐츠/설문조사 작성하기 title img */
+.contents_banner_title {
+	background:url('/images/common/builder/contents/category_text2.png') no-repeat;
+	width: 257px;
+	height: 20px;
+	margin-left: 40px;
+}
+
+/* 컨텐츠/설문조사 작성하기 subTitle img */
+.contents_banner_subTitle {
+	background:url('/images/common/builder/contents/small_title.png') no-repeat;
+	width: 201px;
+	height: 13px;
+	margin-left: 40px;
+	position: absolute;
+    margin: -13px 0 0 310px;
+}
+
+/* 컨텐츠 만들기 button img */
+.img-responsive {
+	background:url('/images/common/builder/contents/contents_link_bt.png') no-repeat;
+	width: 445px;
+	height: 70px;
+	margin: 33px 0 0 40px;
+	cursor: pointer;
+	float: left
+}
+
+/* 설문 만들기 button img */
+.add-survey {
+	background:url('/images/common/builder/contents/survey_link_bt.png') no-repeat;
+	width: 445px;
+	height: 70px;
+	margin: 33px 0 0 17px;
+	cursor: pointer;
+}
+
+/* 컨텐츠 div */
+li[id*=image_preview]{
+	margin-top: 50px;
+}
+
+/* 컨텐츠 삭제 버튼 img */
+.delete_btn {
+	background:url('/images/common/builder/contents/delete_bt.png') no-repeat;
+	width: 19px;
+	height: 19px;
+	cursor: pointer;
+ 	position: relative;
+    left: 480px;
+}
+
+/* 컨텐츠 저장 버튼 img */
+.save_btn {
+	background:url('/images/common/builder/contents/save_bt.png') no-repeat;
+	width: 80px;
+	height: 30px;
+	cursor: pointer;
+	margin: 10px 0 0 415px;
+}
+
+/* 설문 컨테이너 div */
+.survey_container {
+	width: 500px; 
+	margin-left: 40px; 
+	text-align: center;
+}
+
+/* 컨텐츠 설문조사 구분선 */
+.separate_line {
+	background:url('/images/common/builder/contents/line02.png') no-repeat;
+	width: 500px;
+	height: 5px;
+}
+
+/* 설문조사 썸네일 banner */
+.survey_banner {
+	background:url('/images/common/builder/contents/survey_banner.png') no-repeat;
+	width: 156px;
+	height: 26px;
+	margin: 35px auto 25px auto;
+}
+
+/* 대질문 title span */
+.survey_title {
+	font-size: 1.1em;
+    font-weight: bold;
+    color: #8B8686;
+}
+
+/* 대질문 제목 line */
+.blue_line {
+	background:url('/images/common/builder/contents/blue_line.png') no-repeat;
+	width: 30px;
+	height: 2px;
+	margin: 8px auto;
+}
+
+.del_survey {
+	background:url('/images/common/builder/contents/delete_bt.png') no-repeat;
+	width: 19px;
+	height: 19px;
+	cursor: pointer;
+ 	position: relative;
+    left: 480px;
+}

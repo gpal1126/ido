@@ -1,0 +1,279 @@
+/******* 설문참여 화면 ********/
+/* 설문 중질문 */
+.surveySecondTitleDiv .titleSpan{
+	font-weight:bold;
+	color: #ababab;
+	margin-left: 5%;
+}
+
+/* 별점형 답변 txt div */
+.starContainer .contsTxtDiv{
+	line-height: 20px;
+    text-align: center;
+    border: 1px solid #E5E5E5;
+    background: #F9F9F9;
+    font-weight: bold;
+    color: #848282; 	
+}
+
+/* 별점형 별점 */
+.starContainer .starDiv{
+	padding: 5% 0 10% 0;;
+}
+
+/******* 설문참여 화면 ********/
+
+
+/*최종 결과화면*/
+.btnLine{
+	display:inline-block;
+	top:35px;
+	left: 60%;
+	background-image: url("/images/common/survey/blue_linebar.gif");
+	background-repeat: no-repeat center;
+	width:30px; 
+	height:2px;
+}
+
+.surveyResult{
+	position: absolute;
+	width :320px;
+	height: auto;
+	left: 10%;
+}
+.top_container{
+	
+}
+.line_bar{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_top_img.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+.hrBar{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_top_line.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 1px;	
+}
+
+/* 중간 div 묶음*/
+.top_container{
+	height: auto;
+}
+
+
+/* 순위형 bar img */
+.rank_type_img{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_ranking.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+/* 선택형 bar img */
+.select_type_img{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_choice.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+/* 별점형 bar img */
+.star_type_img{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_star.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+/* 이중택일형 bar img */
+.choice_type_img{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_select.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+/* 텍스트 bar img */
+.text_type_img{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_text.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;
+}
+
+.typeButton{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_type_ranking.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 50px;	
+}
+
+.secondTitleBtn{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_q_button.gif");
+	background-repeat: no-repeat;
+	float: left;
+	width: 41px;
+	height: 40px;	
+}
+.secondTitle{
+	/* float: left; */
+	padding-left: 10px;
+	font-size: 0.9em;
+    line-height: 5px;
+}
+
+
+.dotteBar{
+	background-image: url("/images/builder/survey/result_survey/web_app/webapp_dot_line.gif");
+	background-repeat: no-repeat;
+	width: 314px;
+	height: 1px;
+	margin: 10% 0 0 0;
+}
+
+/*Bottom*/
+.bottm_container{
+	width: 314px;
+	height: 150px;
+	padding-left: 30px;
+}
+.rank1Btn{
+	background-image: url("/images/builder/survey/result_survey/web_app/1_button.gif");
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 30px;
+	height: 29px;
+}
+.rank2Btn{
+	background-image: url("/images/builder/survey/result_survey/web_app/2_button.gif");
+	background-repeat: no-repeat;
+	position: absolute;
+	width: 30px;
+	height: 29px;
+}
+.rank1{
+	float: left;
+	width: 100px;
+}
+.rank2{
+	width: 100px;
+	padding-left: 30px;
+	float: left;
+}
+
+/* 순위형 css */
+.bottm_container .rst_conts_p {
+	text-align:center;
+	color: #6D7377;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin: 0 0 0 0;
+}
+/* 순위형 css */
+
+/*별점형 css*/
+.star_container{
+	width: 314px;
+}
+
+.star_ques_img{
+	width: 100px; 
+	height: 100px;
+	margin: 0 0 0 30%;
+}
+
+.star_image{
+	margin-left: 87px;
+}
+
+.star_container .rstTitle .second_title{
+	padding-left: 20%;
+}
+
+.star_container .rst_conts{
+	margin-left: 31.5%;
+	width: 30%;
+	text-align: center;
+	font-weight: bold;
+	color: #6D7377;
+}
+
+/** 이중택일 설문 결과 화면 css **/
+/* 설문 결과 div */
+.choice_container {
+	clear: left;	/* conts 결과 float 초기화 */
+	height: 350px;
+}
+
+/* 중질문 div */
+.choice_container .second_title_txt{
+	line-height: 40px;	
+	padding: 25px 0 0 50px;
+	color: #7B7C7C;
+    font-weight: bold;
+}
+
+/* 답변 결과 span */
+.choice_container .rst_conts{
+	/* float:left; 	line_bar_img float 초기화해줌 */
+	margin: 38px 0 0 0;
+	padding: 0 15px 0 30px;
+	width:100px; height:100px;
+}
+
+.choice_container #rst_conts1{
+	float:left; 	
+}
+
+.choice_container #rst_conts2{
+}
+
+/* 답변 결과 1위 img */
+.choice_container .choiceRank1{
+	background:url('/images/common/main/result_survey/1_bt1.png') no-repeat;	
+	width: 30px;
+	height: 29px;
+	position: absolute;
+}
+
+/* 답변 결과 2위 img */
+.choice_container .choiceRank2{
+	background:url('/images/common/main/result_survey/2_bt2.png') no-repeat;	
+	width: 30px;
+	height: 29px;
+	position: absolute;
+	margin: 38px 0 0 175px;
+}
+
+/* 답변 결과 img */
+.rst_conts .rst_conts_img{
+	width:100px; height:100px;
+}
+
+.rst_conts #rst_conts_img1{
+
+}
+
+.rst_conts #rst_conts_img2{
+	margin: 38px 0;
+}
+
+/* 답변 결과 txt */
+.rst_conts .rst_conts_p {
+	text-align:center;
+	color: #6D7377;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.rst_conts #rst_conts_p1 {
+	margin: 0 0 0 0;
+}
+
+.rst_conts #rst_conts_p2 {
+	margin: -38px 0 0 135px;
+}
+/***************** 이중택일형 css *********************/

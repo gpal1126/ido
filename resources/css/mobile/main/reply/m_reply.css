@@ -1,0 +1,210 @@
+
+body{
+	position: relative;
+    min-width: 320px;
+    margin: 0 auto;
+    font-size: 100%;
+    line-height: 100%;
+    font-family: 나눔바른고딕, NanumBarunGothic, "Nanum Barun Gothic", Arial, sans-serif;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+img {
+    border: none;
+    vertical-align: top;
+    width: 100%;
+}
+
+.reply_wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: white;
+    z-index: 1001;
+	font-family: 나눔바른고딕, NanumBarunGothic, "Nanum Barun Gothic", Arial, sans-serif;
+}
+
+/** header 부분 **/
+.reply_wrap .reply_header{
+	width: 90%;
+	height: 10%;
+	/* padding-top: 10%; */
+	padding: 5%;
+}
+
+.reply_header .left_header .reply_title{
+	font-size: 1.2em;
+	color: #626262;
+	float: left;
+	margin-right: 1%;
+}
+.reply_header .left_header .reply_cnt{
+	font-size: 1.1em;
+	color: #0cc0fb;
+	float: left;
+	margin-right: 4%;
+}
+
+.reply_header .left_header .reply_refresh{
+	width:4%;
+	float: left;
+}
+
+.reply_header .reply_close{
+	width: 7%;
+	position: absolute;
+    right: 5%;
+    top: 2%;
+}
+
+.reply_header .order_reply{
+	width: 100%;
+	color: #626262;
+	margin: 10%;
+	clear: both;
+}
+
+.reply_header .order_reply .newlist {
+	width: 50%;
+	float: left;
+	line-height: 1.2;
+}
+
+.reply_header .order_reply .newlist .newlist_bt{
+	float: left;
+	width: 15%;
+	margin-right: 2%;
+}
+
+.reply_header .order_reply .bestlist{
+	width: 50%;
+	float: left;
+	line-height: 1.2;
+}
+
+.reply_header .order_reply .bestlist .bestlist_bt{
+	float: left;
+	width: 15%;
+	margin-right: 2%;
+}
+
+/** contents 부분 **/	
+.reply_wrap .reply_contents{
+	width: 100%;
+	height: 60%;
+	padding-left: 5%;
+	border-bottom: 1px solid #efefef;
+	overflow: scroll;
+}
+
+.reply_wrap .reply_contents::-webkit-scrollbar {
+    width: 22px;
+}
+
+.reply_wrap .reply_contents::-webkit-scrollbar-thumb {
+	background: #a9a9a9;
+}
+
+.reply_wrap .reply_contents .rep_conts{
+	width: 95%;
+	height: 25%;
+	margin-bottom: 5%;
+	border-bottom: 1px solid #efefef;
+}
+
+.reply_wrap .reply_contents .profile{
+	width: 15%;
+	float: left;
+	margin-right: 5%;
+}
+
+.reply_wrap .reply_contents .profile img{
+	border-radius: 100%;
+	width: 100%;
+	height: 50px;
+}
+
+.reply_wrap .reply_contents .right_info{
+	width: 80%;	
+}
+
+.reply_wrap .reply_contents .right_info .nickname{
+	color: #626262;
+	font-size: 1em;
+	margin-bottom: 2%;
+}
+
+.reply_wrap .reply_contents .right_info .reply{
+	color: #828080;
+	font-size: 0.9em;
+	margin-bottom: 1%;
+}
+
+.reply_wrap .reply_contents .right_info .rep_date{
+	color: #acabab;
+	font-size: 0.8em;
+}
+
+.reply_wrap .reply_contents .rep_contents_footer{
+	
+}
+
+.reply_wrap .reply_contents .rep_contents_footer .rep_like{
+	float: right;
+	/* margin-right: 10%; */
+	line-height: 20px;
+	color: #626262;
+}
+
+.reply_wrap .reply_contents .rep_contents_footer .like_bt{
+	width: 40%;
+	float: left;
+	margin-right: 20%;
+}
+
+.reply_wrap .reply_contents .rep_contents_footer .rep_delete{
+	float: right;
+	/* margin-right: 10%; */
+	line-height: 20px;
+	color: #626262;
+}
+
+.reply_wrap .reply_contents .rep_contents_footer .delete_bt{
+	width: 110%;
+	float: left;
+	margin-right: 20%;
+}
+
+/** footer 부분 **/	
+.reply_wrap .reply_footer{
+	width: 100%;
+	height: 30%;
+}
+
+.reply_wrap .reply_footer .reply_write{
+	width: 100%;
+	height: 50%;
+}
+
+.reply_wrap .reply_footer .reply_write #replyContents{
+	width: 100%;
+	height: 100%;
+	border-style: none;
+	font-size: 0.9em;
+}	
+
+.reply_wrap .reply_footer .submit_reply{
+	width: 100%;
+	height: 30%;
+	background-color: #0cc0fb;
+	text-align: center;
+	color: #fff;
+	margin-bottom: 2%;
+	line-height: 3;
+}
+
+
+

@@ -1,0 +1,221 @@
+body { position: relative; min-width: 320px; margin: 0 auto; font-size: 100%; line-height: 100%; font-family: 나눔바른고딕, NanumBarunGothic, "Nanum Barun Gothic", Arial, sans-serif;
+	text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+html, body { height: 100%; }
+.wrap{
+	width: 100%;
+	height: 100%;
+}
+
+.mypage_edit_header{
+	width: 100%;
+	height: 7%;
+	position: relative;
+}
+.close_bt {
+	position: absolute;
+	bottom: 0;
+	float: left;
+	left: 5%;
+}
+.close_bt img{
+	width: 100%;
+	height: 100%;
+}
+
+.mypageText{
+	position: absolute;
+	bottom: 0;
+	float: left;
+	font-size: 1.2em;
+	text-align: center;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-weight: bold;
+	color: black;
+}
+/* contents */
+.mypage_edit_contents{
+	width: 100%;
+	height: 70%;
+	position: relative;
+}
+.profile_text{
+	position: absolute;
+	top:5%;
+	float: left;
+	font-size: 1.5em;
+	text-align: center;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-weight: bold;
+	color: black;
+}
+.profile_image{
+	position: absolute;
+	top:16%;
+	left: 33%;
+}
+.profile_camera{
+	position: absolute;
+	top:77%;
+	right:5%;
+	width: 35px;
+	height: 35px;
+}
+.profile_id{
+	width:70%;
+	position:absolute;
+	top:56%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	height: 50px;
+	background-image:url("/img/mobile/main/survey/account_input.png");
+	background-repeat:no-repeat;
+	text-align: center;
+	color:white;
+	line-height: 50px;
+	background-size: 100% 100%;
+}
+.profile_birth{
+	width:70%;
+	position:absolute;
+	top:67%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	height:50px;
+	background-image:url("/img/mobile/main/survey/birth_input.png");
+	background-repeat:no-repeat;
+	text-align: center;
+	color:white;
+	line-height: 50px;
+	background-size: 100% 100%;
+}
+.mypage_edit_footer{
+	width: 100%;
+	height: 23%;
+}
+.profile_name{
+	position: absolute;
+	top:82%;
+	left: 10%;
+	width: 80%;
+	height: 40px;
+}
+.profile_name div{
+	float: left;
+}
+
+.myedit_nickName{
+	height: 100%;
+}
+
+#name_text{
+	padding-left: 5%;
+	width: 25%;
+	height: 100%;
+	font-weight: bold;
+	color:gray;
+}
+#name_text_box{
+	color:black;
+	width:50%;
+	height: 100%;
+	font-weight: bold;
+}
+
+#hrLine{
+	position: absolute;
+	top: 88%;
+	left: 10%;
+}
+
+.profile_password{
+	position: absolute;
+	top:92%;
+	left: 10%;
+	width: 90%;
+	height: 40px;
+}
+.profile_password div{
+	float: left;
+}
+#password_text{
+	padding-left: 5%;
+	width: 20%;
+	height: 100%;
+	font-weight: bold;
+	color:gray;
+}
+#password_text_box{
+	color:black;
+	width:60%;
+	height: 100%;
+	font-weight: bold;
+	line-height: 25px;
+}
+
+#hrLine{
+	position: absolute;
+	top: 88%;
+	left: 10%;
+}
+#hrLine1{
+	position: absolute;
+	top: 98%;
+	left: 10%;
+}
+.profilephoto {
+    width: 30%;
+	position: absolute;
+	top: 11%;
+	left: 50%;
+	transform: translate(-50%, 0);
+    height: auto;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    background: #363636;
+    overflow: hidden;
+    margin: 10px auto;
+}
+.profilephoto img {
+    width: 100%;
+    height: 100%;
+}
+
+.editPf{
+    position: absolute;
+	top:40%;
+	left:55%;
+	width: 50px;
+	height: 50px;
+    display: block;
+    z-index: 500;
+    background: url(/img/mypage_photo_bt.png) repeat 0 0;
+    background-size: 100% 100%;
+    text-indent: -9999px;
+    margin-right: -10px;
+}
+.footer_Btn{
+	width: 100px;
+	height: 30px;
+	margin-left: 25%; 
+	float: left;
+}
+
+.footer_Btn img{
+	margin-top:10px;
+	width: 100%;
+}
+.success_revise{
+	width: 70%;
+	height: 50px;
+	margin: 0 auto;
+}
+
+.success_revise img{
+	width:100%; 
+	height:50px;
+}

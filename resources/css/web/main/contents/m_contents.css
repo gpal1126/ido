@@ -1,0 +1,37 @@
+.replywrap {width:100%; margin:0 auto; /*border:1px solid #e8e8e8;*/ background:#f9f9f9; box-sizing:border-box; -moz-box-sizing:border:box; padding:20px 20px; clear:right;}
+.replywrap .reply_title_img {width:20px; height:20px; }
+.replywrap .replytitle {font-family:'nanumbarunpenb'; font-size:10pt; margin-left:5px;}
+.replywrap .replytx {font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; font-size:9pt; color:#afafaf; margin:0 0 0 3%;} 
+.replywrap .writewrap {width:100%; margin:0 auto; box-sizing:border-box; -moz-box-sizing:border:box;} 
+.replywrap .writewrap .writer {float:left;} 
+.replywrap .writewrap .contents {position:relative; float:left; width:82%; padding:0;} 
+.replywrap .writewrap .contents textarea {position:relative; z-index:3; border:2px solid #bababa; width:100%; height:40px;}
+.replywrap .writewrap .contents .resubmit {background-color: #40BCD2; border-radius: 50px; width:18%; height:25px; margin-bottom: 10px; float:right; color: #fff; line-height: 25px; text-align: center; }
+.replywrap .writewrap .contents .chcount {position:absolute; top:87px; right:80px; color:#999999; font-size:0.8em;} 
+.replywrap .writewrap .contents .chcounttx {color:#dd2c1a;} 
+.replywrap .writewrap:after {content:""; display:block; clear:both;}  
+
+.replywrap .writewrap .reprofile {-webkit-border-radius:50%; border-radius:50%; -moz-border-radius:50%; background:#EDEBEB; width:50px; height:50px; overflow:hidden;}
+.replywrap .writewrap .reprofile img {width:50px; height:50px;} /* 변경 전 height:auto; */
+
+
+
+.replywrap .replylist {position:relative; width:100%; background:#fff; margin:0; box-sizing:border-box; -moz-box-sizing:border:box; padding:10px 10px; border-bottom:1px solid #e7e7e7;} 
+.replywrap .replylist .writerarea {float:left; width:50px;}
+.replywrap .replylist .writerarea .reprofile {-webkit-border-radius:50%; border-radius:50%; -moz-border-radius:50%; background:#EDEBEB; width:50px; height:50px; overflow:hidden;}
+.replywrap .replylist .writerarea .reprofile img {width:50px; height:50px;} /* 변경 전 height:auto */
+.replywrap .replylist .rightcon {position:relative; float:left; width:80%; padding:0; text-align: left;} 
+.replywrap .replylist .rightcon .nickname{color:#333333; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; font-size:1em; margin:5px 0 0 0; padding: 0 5px;} 
+.replywrap .replylist .rightcon .replydate {color:#afafaf; font-family: 'Montserrat', sans-serif; font-size:0.8em; margin-left:3px;}
+.replywrap .replylist .rightcon .contents {width:100%; height:auto; margin:5px; word-break:break-all; color:#666666; font-size:0.95em;}
+.replywrap .replylist .likearea {/* position:absolute; top:0; right:0;  */ width:30%; height:auto; float: right;}
+.replywrap .replylist .likearea .like {float:right; }   
+/*#contentWrap .replywrap .replylist .likearea .like a{display:block; width:15px; height:12px; background:url('../img/reply_like.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px;}  */ 
+.replywrap .replylist .likearea .like .likecount {color:#afafaf; font-family: 'Montserrat', sans-serif; font-size:0.8em; margin-left:4px;}
+.replywrap .replylist .likearea .report {float:right; width:20px;}
+.replywrap .replylist .likearea .report a{display:block; width:14px; height:14px; background:url('../img/reply_report.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px;}    
+.replywrap .replylist:after {content:""; display:block; clear:both;}    
+/* 댓글 삭제 img */
+.delete_reply {
+	
+} 

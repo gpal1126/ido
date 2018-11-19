@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<!-- 모바일 웹앱 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+<link rel="stylesheet" href="/css/mobile/main/user/find_pwd.css" media="screen and (min-width:320px) and (max-width:440px)"/>
+<link rel="stylesheet" href="/css/mobile/main/user/find_pwd_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"/> <!-- ipad -->
+
+<title>아이두</title>
+<header>
+
+</header>
+<body>
+<div class="header">
+	<div class="nav_1">
+		<div class="nav_1_menu prve_btn" style="width: 10%;"><img id="back" src="/img/mobile/main/user/find_pwd/top_arrow.gif"></div>
+		<!-- <div class="nav_1_menu" style="width: 70%;"></div>
+		<div class="nav_1_menu" style="width: 10%;"><a href="#"></a></div>
+		<div class="nav_1_menu" style="width: 10%;"><a href="#"></a></div> -->
+	</div>
+	<div class="nav_2">
+		<div class="nav_2_menu"><img src="/img/mobile/main/user/find_pwd/research_text.gif"></div>
+		<div class="nav_2_menu"><h1>비밀번호 찾기</h1></div>
+	</div>
+</div>
+<section id="find_id">
+	<div class="find_id_img"><img src="/img/mobile/main/user/find_pwd/login_key.png"/></div>
+	<div class="find_id_form">
+		<!-- <p>이름</p> 
+		<input type="text" name="name" id="name"> -->
+		<p>이메일</p> 
+		<input type="text" id="email1" class="email1" name="email"> @ <input type="text" id="email2" class="email2" name="email">
+		<!-- <p>휴대전화</p>
+		<input type="text" id="phone1" class="phone phone1" name="phone" maxlength="3"> -
+		<input type="text" id="phone2" class="phone" name="phone" maxlength="4"> -
+		<input type="text" id="phone3" class="phone" name="phone" maxlength="4"> -->
+		<div class="find_user" style="display:none;"></div>
+		<div id="findBtn" class="find_bt">비밀번호찾기</div>
+	</div>
+</section> 
+<script>
+
+	//이전 페이지로 이동
+	$('.prve_btn').click(function(){
+		history.back();
+	});
+	
+	//패스워드 찾기
+	$('#findPwd').click(function(){
+		console.log('패스워드찾기');
+	});
+
+	//찾기 btn 
+	$('#findBtn').click(function(){
+		
+		var email1 = $('#email1').val();
+		var email2 = $('#email2').val();
+		var email = $('#email1').val() + '@' + $('#email2').val();
+		
+		console.log('email::'+email);
+		
+		if(email1=='' || email2==''){
+			alert('이메일을 입력해주세요.');
+		} else{
+			var json = {'email':email};
+			$.ajax({
+				url: '/user_info/find_pwd',
+				type: 'GET',
+				data: json,
+				success: function(data){
+					if(data != 'not_find'){
+						$('.find_user').empty();
+						$('.find_user').css('display','');
+						//$('.find_user').append('<p>비밀번호는 '+data+' 입니다.</p>');
+						$('.find_user').append('<p>해당 이메일로 전송하였습니다.</p>');
+						console.log(data);		
+					}else if(data == 'not_find'){
+						$('.find_user').empty();
+						$('.find_user').css('display','');
+						$('.find_user').append('<p>해당 이메일에 대한 비밀번호가<br/> 존재하지 않습니다.</p>');
+					}
+				}//end success
+			});//end ajax
+		}
+	});
+</script>
+</body>
+</html>

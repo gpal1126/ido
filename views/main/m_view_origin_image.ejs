@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>아이두2</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<link rel="stylesheet" href="/css/mobile/main/contents/m_view_origin_image.css">
+<script src="//rawgit.com/Soldier-B/jquery.toast/master/jquery.toast/jquery.toast.min.js"></script> <!-- toast js -->
+<script type="text/javascript" src="/js/mobile/main/survey/panzoom.js"></script>	<!-- zoom js -->
+<script type="text/javascript">
+$(document).ready(function(){
+	//location.reload();
+	
+	window.onload = function () {
+	    if (! localStorage.justOnce) {
+	        localStorage.setItem("justOnce", "true");
+	        window.location.reload();
+	    }
+        //localStorage.removeItem('justOnce');
+	}
+    
+	$(".panzoom").panzoom({
+		$zoomIn: $(".zoom-in"),
+	  	$zoomOut: $(".zoom-out"),
+	  	$zoomRange: $(".zoom-range"),
+	  	$reset: $(".reset"),
+	  	contain: "automatic",
+	  	transform: 'none',
+	  	//startTransform: true,
+	  	panOnlyWhenZoomed: true,
+	  	//easing: 'ease-in-out',
+	  	//startTransform: 'rotateZ(deg)',
+	  	minScale: 1
+	});
+	
+	$('.prev').click(function(){
+		history.back();
+		localStorage.removeItem('justOnce');
+		//history.go(-1);
+	});
+	
+	//컨테이너 클릭시 header, footer display toggle 시킴
+	$('.container').click(function(){
+		$(".header").animate({height:'toggle'}, 350); 
+		$(".footer").animate({height:'toggle'}, 350); 
+		
+		/* $('.container').css({'height': '100%', 'top':'0'}); */
+		
+		//이미지 vertical center
+		var parentH = $('#panzoom-parent').css('height').split('px')[0];
+		console.log('parentH:'+parentH);
+		var imgH = $('.panzoom img').css('height').split('px')[0];
+		console.log('imgH::'+imgH);
+		
+		var top = (parentH - imgH) / 2;
+		console.log('top::'+top);
+		
+		$('.panzoom').css('padding-top', top);
+	});
+	
+	$.toast.config.align = 'center';
+    $.toast.config.width = 180;
+	$.toast('<p style="text-align:center">컨텐츠 클릭시</p><p style="text-align:center">메뉴가 사리지고 생깁니다.</p>', {
+        duration: 2000,
+        type: 'info'
+    });
+	
+})
+</script>
+<body>
+	<div class="header">
+		<div class="top_back"></div>
+		<div class="prev_back"></div>
+		<div class="prev">
+			<img src="/img/mobile/main/survey/arrow_back.png">
+		</div>
+		<% if( image.SURVEY_TYPE == '5' ) { %> <!-- 별점형일 경우 -->
+			<div class="origin">출처 - <span class="oring_txt"><%=image.IMAGE_ORIGIN %></span></div>
+			<div class="link"><a href="<%=image.IMAGE_LINK_ADDR %>">이동하기</a></div>
+		<% }else { %> 
+		<div class="origin">출처 - <span class="oring_txt"><%=image.SURVEY_ORIGIN %></span></div>
+		<div class="link"><a href="<%=image.SURVEY_LINK_ADDR %>">이동하기</a></div>
+		<% } %>
+	</div>
+	<div class="container">
+		<section id="panzoom-parent" style="width:100%; height: 100%;">
+		  <div class="panzoom">
+		    <% if( image.SURVEY_TYPE == '5' ) { %> <!-- 별점형일 경우 -->
+				<img class="origin_image" src="<%= image.SECOND_SURVEY_IMAGE_PATH %>" style="width: 95%; height: 95%;" >
+			<% }else { %> 
+				<img class="origin_image" src="<%= image.SURVEY_IMAGE_PATH %>" style="width: 100%; height: 100%;" >
+			<% } %>
+		  </div>
+		</section>
+	</div>
+	<div class="footer">
+		<div class="reply_container" style=" left: 10%;"><img src="/img/mobile/main/reply/content_reply_icon.png" style="width: 17px; height: auto;">&nbsp;&nbsp;<span class="reply_cnt"><%=image.RCOUNT%></span></div>
+	  	<div class="like_container" style=" left: 43%;"><img src="/img/mobile/main/reply/content_like_icon.png" style="width: 17px; height: auto;">&nbsp;&nbsp;<span class="reply_cnt">39</span></div>
+	  	<div class="share_container" style=" left: 76%;"><img src="/img/mobile/main/reply/content_share_icon.png" style="width: 17px; height: auto;">&nbsp;&nbsp;<span class="reply_cnt">24</span></div>
+	</div>
+</body>
+<script type="text/javascript">
+var width = $('.origin_image').width();
+var height = $('.origin_image').height();
+console.log('w : '+width)
+console.log('h : '+height)
+if(width > height || height != 0){
+	console.log('h111 : '+height)
+	var checkV = width - height;
+	if(height > 200){
+		$('#panzoom-parent').css('top','0')
+	}else{
+		$('#panzoom-parent').css('top', height)
+	}
+}
+ 
+$(function(){
+	//이미지 vertical center
+	var parentH = $('#panzoom-parent').css('height').split('px')[0];
+	console.log('parentH:'+parentH);
+	var imgH = $('.panzoom img').css('height').split('px')[0];
+	console.log('imgH::'+imgH);
+	
+	var top = (parentH - imgH) / 2;
+	console.log('top::'+top);
+	
+	$('.panzoom').css('padding-top', top);
+});
+</script>
+</html>
+ 
+            

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+function delete_image(i){
+  console.log(i);
+	$('[name="image_preview'+i+'"]').remove();
+}
+</script>
+<script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+  </script>
+
+
+
+<style type="text/css">
+/* 1. 컨텐츠 틀 */
+.build_shape, .build_image {
+  position: relative;
+}
+
+.build_image img{ 
+  width: 500px;
+  height: auto; 
+}
+
+/* 2. x버튼 */
+#delete {
+  position: relative;
+    width: 15px;
+    height: 15px;
+    left: 495px;
+    top: 5px;
+}
+
+/* 3. 이미지 출처 */
+
+.build_image_origin{
+  position: absolute;
+  width: 160px;
+  height: 16px;
+  right: 0px;
+  top: 0%; 
+  font-size: xx-small;
+}
+
+/* 4. 컨텐츠 내부 내용 작성부분 */
+.build_contents{
+	width: 497px;
+	height: 150px;
+	position: relative;
+}
+
+/* li부분 스타일 없애기 */
+ul{
+  list-style: none;
+  width: 500px;
+}
+</style>
+</head>
+<body>
+<br>
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <input type="text" name="title">
+    <input type="file" id="image" name="file" multiple="multiple">
+</form>
+<ul id="sortable"> <!-- 컨텐츠들은 이쪽으로 들어간다. -->
+
+</ul>
+<button onclick="save()">save</button>
+<script>
+$(document).ready(function(){
+  var i = 0;
+$('#image').on('change', function() { // 빌더가 하나씩 생성될때마다 name값을 +1씩 해줌.
+      i++;
+      file = $('#image').prop("files")[0];
+      blobURL = window.URL.createObjectURL(file);
+      $('ul').append('<li id="image_preview'+i+'" name="image_preview'+i+'"><div class="build_shape" name="build_shape'+i+'"><br>'     /* 1. 컨텐츠 틀 */
+                      +'<input type="image" src="/images/util_image/x.png" id="delete" onclick="delete_image('+i+');">' // 2. 빌더 우측 x 그림부분 X버튼 변경을 원하면 src 부분 수정 / onclick부분은 현재 만들어진  name값의 빌더를 지우는 function
+                        +'<div class="build_image" name="build_image'+i+'"><img src='+blobURL+' name="build_image'+i+'">' // 파일 선택 후 이미지 화면 출력
+                          +'<input type="text" class="build_image_origin" name="build_image_origin'+i+'" placeholder="이미지 출처 입력" align="right"></div><br>' // 3. 이미지 출처
+                        +'<input type="text" class="build_contents" name="build_contents'+i+'"/>' // 4. 컨텐츠 내부 내용 작성부분 
+                        +'<button id="button'+i+'" onclick="save_image('+i+')">저장</button>'
+                      +'</div>'
+                      +'<div name="image_preview'+i+'" style="height:200px;"></div></li>'); //컨텐츠와 컨텐츠 사이의 간격을 위해 만든 <div>
+  });
+})
+</script>
+<script type="text/javascript">
+  function save_image(num){ //저장버튼을 누르면
+     console.log(num);
+    $('#button'+i+'').remove(); //저장버튼 삭제
+    $('div[name=build_shape'+i+']').wrap('<a href="#" id="build_contents_a'+i+'" onclick="active('+i+')"></a>'); //image_preview li 부분을 a링크로 감싸버린다.
+    $("input[name=build_image_origin"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+    $("input[name=build_contents"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+      
+    var file = $('#image').prop("files")[0]; //파일
+ 
+    var build_image_origin = $('input[name=build_image_origin'+i+']').val();
+    var build_contents = $('input[name=build_contents'+i+']').val();
+
+    var fd = new FormData();
+    fd.append('file', file);
+    fd.append('li', li);
+    fd.append('build_image_origin', build_image_origin);
+    fd.append('build_contents', build_contents);
+    
+   $.ajax({
+      url: '/upload/builder_contents',
+      data: fd,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data){
+        alert("EE");
+      }
+    });
+
+  }
+
+  function active(i){ //저장버튼 누른 후 수정을 원할시
+    console.log(i);
+    $('div[name=build_shape'+i+']').unwrap(); //감싸있는 a 태그 삭제
+    $('input[name=build_contents'+i+']').after('<button id="button'+i+'" onclick="save_image('+i+')">저장</button>');
+    $("input[name=build_image_origin"+i+"]").attr("readonly",false); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+    $("input[name=build_contents"+i+"]").attr("readonly",false); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+  }
+</script>
+
+</body>
+</html>

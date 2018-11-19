@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style type="text/css">
+#header {height:80px;background:#ff6600; width:100%;}
+#slider {float:left;height:1200px;width:12%;background:#ffcc00;}
+#contents {height:1200px; float:left; background:#ffffff; width:88%;}
+#footer {height:80px;background:#0099ff; clear:both}
+</style>
+
+<script>
+$(document).ready(function(){
+	console.log($("a[id*='m']").attr('id'));
+	$('a[id*=manage]').click(function(){
+		var manage_id = $(this).attr('id').split('manage_')[1]; //슬라이드바에 있는 id값들 뽑아오는 부분.
+		switch(manage_id){
+			case 'contents':
+				$('#contents_table').css('display', '')
+				break;
+			case 'coupon':
+				console.log('쿠폰');
+				break;
+			case 'advertisement':
+				console.log('광고');
+				break;
+			case 'survey':
+				console.log('서베이');
+				break;	
+		}
+	});
+
+	//체크박스 전체 체크 function
+	$("#checkAll").change(function () {
+	    $("input:checkbox").prop('checked', $(this).prop("checked"));
+	});
+
+	//delete 컨텐츠 버튼 클릭
+	$('#delete_contents').click(function(){
+		if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+			if (confirm("해당 컨텐츠가 영구히 삭제됩니다. 정말 삭제하시겠습니까??") == true){
+				$("input[name=box]:checked").each(function() { //체크박스에 체크된 id값 추출을 위한 function
+					var test = $(this).attr('id');
+					var json = {"contents_id":test}
+					$.ajax({
+						url:'/upload/delete_contents',
+						data : json,
+						success:function(){
+							console.log('ff');
+							location.reload();
+						}
+					})
+				});
+			}else{
+				return;
+			}
+		}else{   //취소
+		    return;
+		}
+	});
+
+	// 수정 - > 보기 클릭시 새창 띄우는 function
+	$('a[id*=update_]').click(function(){
+		var update_id = $(this).attr('id').split('update_')[1]
+		console.log($(this).attr('id'));
+		window.open("/upload/builder_thumbnail?contents_id="+update_id+"", "에디터 새창", "width=600, height=auto, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+	});
+
+	$(function () {
+	    $(".tab_content").hide();
+	    $(".tab_content:first").show();
+
+	    $("ul.tabs li").click(function () {
+	        $("ul.tabs li").removeClass("active").css("color", "#333");
+	        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+	        $(this).addClass("active").css("color", "darkred");
+	        $(".tab_content").hide()
+	        var activeTab = $(this).attr("rel");
+	        $("#" + activeTab).fadeIn();
+	    });
+	});
+
+
+
+})
+</script>
+<style type="text/css">
+	ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-family:"dotum";
+    font-size:12px;
+}
+/* 상단바 */
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:100px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    clear: both;
+    float: left;
+    width: 1000px;
+    background: #FFFFFF;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 12px;
+    display: none;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+
+.table_tr > th, td{
+	text-align: center;
+}
+
+</style>
+</head>
+<body ng-app="mainApp">
+<div id="header"> header </div>
+  <div id="slider"> 
+  <ul>
+  	<li>
+  		<a href="#" id="manage_contents">컨텐츠 관리</a>
+  	</li>
+  	<li>
+  		<a href="#" id="manage_coupon">쿠폰발급 관리</a>
+  	</li>
+  	<li>
+  		<a href="#" id="manage_advertisement">광고 관리</a>
+  	</li>
+  	<li>
+  		<a href="#" id="manage_survey">설문 관리</a>
+  	</li>
+  </ul>
+  </div>
+  <div id="contents">
+	<div id="container">
+	    <ul class="tabs">
+	        <li class="active" rel="tab1">조회</li>
+	        <li rel="tab2">등록</li>
+	    </ul>
+	    <div class="tab_container">
+	    	<!-- #tab1(조회) -->
+	        <div id="tab1" class="tab_content">
+	           <table border="1" style="width:80%; " id="contents_table">
+					<thead>
+					  <tr class="table_tr">
+						<th width="5%">
+			            	<input type="checkbox" id="checkAll">
+			       	 	</th>
+						<th width="7%">수정</th>
+						<th width="20%">컨텐츠 번호</th>
+						<th width="58%">컨텐츠 제목</th>
+						<th>등록일</th>
+					</tr>
+					</thead>
+				  <tr class="table_tr"><!-- contents_id와 partner id를 같이 넘겨주자. -->
+				  <% for (var i = 0; i < list.length; i++) { %>
+				  	<td align="center">
+				  		<input type="checkbox" name="box" id="check_<%=list[i].CONTENTS_ID %>">
+				  	</td>
+				  	<td align="center">
+					  	<a href="#" class="btn btn-fb" id="update_<%=list[i].CONTENTS_ID %>">
+					  		보기
+					  	</a>
+				  	</td>
+				  	<td>
+				  		<%if(list != null){ %><%= list[i].CONTENTS_ID %></a><% } %>
+				  	</td>
+				    <td>
+				    	<a href="/upload/builder_thumbnail?contents_id=<%if(list != null) { %><%= list[i].CONTENTS_ID %><%}%>" class="btn btn-fb">
+				    	<%if(list != null){ %><%= list[i].TITLE %></a><% } %>
+				    </td>
+				    <td>
+				    	<%if(list != null){ %><%= list[i].REG_DATE %></a><% } %>
+				    </td>
+				  </tr>
+				   <% } %>
+				</table>
+				<button id="delete_contents">삭제</button> 
+	        </div>
+			<!-- #tab2(등록) -->
+	        <div id="tab2" class="tab_content" ng-include="'../views/builder/thumbnail/upload_thumbnail.ejs'">
+	        	
+	        </div>
+	    </div>
+	    <!-- .tab_container -->
+
+	</div>
+  </div>
+
+  <div id="footer"> footer </div>
+
+
+
+
+
+
+<a href="/upload/builder_thumbnail?contents_id=new">New</a>
+<script type="text/javascript">
+	var mainApp = angular.module("mainApp", []);
+</script>
+</body>
+</html>
+
+

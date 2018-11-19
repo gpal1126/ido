@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" >
+<meta name="description" content="A basic demo of Cropper.">
+<title>아이두</title>
+  
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="js/web/builder/popup/popModal.css">
+<!-- 컨텐츠 관리 -> 등록 css / js -->
+<script type="text/javascript" src="js/web/builder/list/m_reg_list.js"></script>
+<link type="text/css" rel="stylesheet" href="css/web/builder/list/m_builder_320_list.css" media="screen and (min-width:319px) and (max-width:374px)">
+<link type="text/css" rel="stylesheet" href="css/web/builder/list/m_builder_list.css" media="screen and (min-width:374px) and (max-width:440px)">
+<link type="text/css" rel="stylesheet" href="css/web/builder/list/m_builder_list_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"> <!-- ipad -->
+
+<link rel="stylesheet" href="/css/mobile/main/survey/m_survey.css" media="screen and (min-width:360px) and (max-width:450px)"/> <!-- 설문참여 css -->
+<link rel="stylesheet" href="/css/mobile/main/survey/m_survey_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"> <!-- 별점형 참여 css -->
+<script type="text/javascript" src="/js/web/common/jquery.raty.js" ></script> <!-- 별점형 플러그인 js -->
+<script src="js/web/common/mobile/mobile-1.2.1.js" type="text/javascript"></script> <!-- tabhold 기능 -->
+<script src="//rawgit.com/Soldier-B/jquery.toast/master/jquery.toast/jquery.toast.min.js"></script> <!-- toast 기능 -->
+
+<script type="text/javascript" src="/js/web/common/pagingTest.js"></script> <!-- 페이징 테스트 -->
+<style type="text/css">
+
+</style>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+.cCategory{
+	font-size: 7pt;
+	font-weight: bold;
+	font-family: "Nanum Gothic", sans-serif;
+	color: white;
+	position:absolute;
+	top: 6%;
+	left: 10px;
+}
+.cTitle{
+	font-size: 18pt;
+	font-family: "Nanum Gothic", sans-serif;
+	color: white;
+	position:absolute;
+	top: 14%;
+	left: 10px;
+}
+.cRegDate{
+	font-size: 9pt;
+	font-weight: bold;
+	font-family: "Nanum Gothic", sans-serif;
+	color: white;
+	position:absolute;
+	top: 90%;
+	left: 10px;
+}
+.cRegDate span{
+	float: left;
+}
+.cReply{
+	font-size: 9pt;
+	font-weight: bold;
+	font-family: "Nanum Gothic", sans-serif;
+	color: white;
+	position:absolute;
+	top: 90%;
+	right: 20px;
+}
+.cReply span{
+	float: left;
+}
+
+.surveyTitle{
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    height: 25px;
+    color: white;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+    font-size: 16pt; 
+}
+
+.img{
+	-webkit-border-radius:100%;
+	-moz-border-radius:100%;
+}
+ 	
+/* toast */
+.toast{ position:fixed; list-style: none; padding: 0; top:40%; z-index: 9999; font-family: 'Nanum Barun Gothic'; font-size:14px; line-height:20px; }
+.toast li{ margin: 10px 0 0 0; display:block; background-color:#fcf8e3; color:#c09853; border:1px solid #fbeed5; padding:5px 10px; border-radius: 4px; -webkit-border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,.15); -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.15); }
+.toast li:first-child{ margin-top:0; }
+.toast li.info{ color: white; background-color: #363636 ; border-color: #363636; text-align: center; font-weight: normal; }
+
+.toast button.close{ background: none; border: none; font-size: 20px; line-height: 20px; float: right; padding: 0; margin: 0 0 0 5px; color: rgba(0,0,0,.25); cursor: pointer; }
+.toast h1, .toast h2, .toast h3, .toast h4 { display: inline; }
+/* toast */
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.app_btn').click(function(){
+			console.log($(this).attr('id'));
+			var result = confirm('컨텐츠 승인 신청을 하시겠습니까?');
+			var contenstId = $(this).attr('id').split('_')[1];
+			console.log(contenstId)
+			if(result){
+				$.ajax({
+					url:'/upload/request_contents_confirm?contentsId='+contenstId,
+					type: 'GET',
+					success:function(){
+						console.log('갔다옴');
+						 window.location.reload();
+					}
+				})
+			}else{
+			}
+		})
+	
+		//탭 형식 
+		function tabsFunc(){
+			$(".tab_content").hide();
+		    $(".tab_content:first").show();
+		
+		    $("ul.tabs li").click(function (e) {
+		        $("ul.tabs li").removeClass("active").css("color", "#333");
+		        $(this).addClass("active").css("color", "#fafafa");
+		        $(".tab_content").hide();
+		        var activeTab = $(this).attr("rel");
+		        $("#" + activeTab).fadeIn()
+		    });
+		}
+		
+		$('.t_logo').click(function(){//메인 이동
+			location.href="/m_index";
+		});
+		function cutString(str, len){//글자 자르기 func
+			if(str.length > len){
+				str = str.substring(0, len)+'..';
+			}
+			return str;
+		}
+	})
+</script>
+</head>
+<body>
+<header id="header">
+ 	<div class="t_logo"><img src="/img/mobile/builder/survey/m_builder_list/ido_webapp_logo.png"></div>
+</header>
+<input type="hidden" id="partnerId" value="<%= partnerId %>">
+<div class="wrap">
+<div style="height: 30px;"></div>
+<div style="font-size: 15pt; font-weight: bold; font-family: Nanum Gothic">컨텐츠관리</div>
+<div style="height: 13px;"></div>
+<div style="height: 20px;"><img src="/img/mobile/builder/survey/m_builder_list/con_tt_line.png" style=" vertical-align: top; width: 98%"></div>
+
+<div class="menuB">
+	<div style="width: 16%;">No</div>
+	<div style="width: 33%;">설문제목</div>
+	<div style="width: 17%;">등록일</div>
+	<div style="width: 18%;">컨텐츠 현황</div>
+	<div style="width: 14%;">수정</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	/* 
+	//페이징처리 			
+	var pagingObj = paging.pageUtil(<%=list.length%>, 1);
+	
+	//페이지네이션 출력
+	getPagination(pagingObj.startPage, pagingObj.endPage);
+	
+	var endRecordIdx = pagingObj.startRecordIdx+pagingObj.recordSize;
+	 */
+});
+</script>
+<section>
+<% for (var i = 0; i < list.length; i++) { %>
+	<div class="contents_list">
+		<div class="section_menu" style="width: 8%;">
+			<div class="checks etrans" >
+				<input type="checkbox" name="box" class="box" id="check_<%=list[i].CONTENTS_ID %>"> 
+				<label for="check_<%=list[i].CONTENTS_ID %>"></label>
+			</div>
+  		</div>
+  		<div class="section_menu con_id" style="width: 7%;">
+  			<div style="padding-top: 20px;"><%if(list != null){ %><%= list[i].CONTENTS_ID %><% } %></div>
+  		</div>
+  		<div class="section_menu" style="width: 33%; padding-left: 1%; font-weight: bold;">
+  			<div style="padding-top: 20px;" class="conDiv" id="<%= list[i].CONTENTS_ID %>">
+  			<%if(list != null){ %>
+			  	<% if(title[i].length > 8  ) { %>
+			  		<%= title[i].substring(0, 8) %>..
+			  	<% }else { %>
+			  		<%= title[i] %>
+			  	<% } %>
+			<% } %>
+			</div>
+  		</div>
+  		<div class="section_menu reg_date" style="width: 17%;">
+  			<div style="padding-top: 21px; text-align: center;"><%if(list != null){ %><%= list[i].REG_DATE %><% } %></div>
+  		</div>
+  		<div class="section_menu" style="width: 18%;">
+  			<%if(list[i].CONTENTS_TYPE == '1'){ %>
+				<div class="app_btn" id="contents_<%=list[i].CONTENTS_ID %>" style="padding-top: 12px;"><div style="background-color: #164772;">신청하기</div></div>
+			<% } else if(list[i].CONTENTS_TYPE == '2') {%>
+				<div class="app_btn" id="contents_<%=list[i].CONTENTS_ID %>" style="padding-top: 12px;"><div style="background-color: #0c94a4;">신청중</div></div>
+			<% } else if(list[i].CONTENTS_TYPE == '3') {%>
+				<div class="app_btn" id="contents_<%=list[i].CONTENTS_ID %>" style="padding-top: 12px;"><div style="background-color: #d44063;">신청완료</div></div>
+			<% } %>
+  		</div>
+  		<div class="section_menu" style="width: 14%; font-size: 8pt;">
+  			<div style="padding-top: 12px;"><div class="revise_btn" id="<%=list[i].CONTENTS_ID%>_<%= list[i].SURVEY_ID %>" style="margin:0 auto; width: 51px; height: 22px; background-color:  #0a66cd; padding-top: 8px;  color:white; text-align: center;">수정</div></div>
+  		</div>
+  	</div>
+<% } %>
+</section>
+<div id="paging" class="paging"></div>
+<div id="delete_contents" class="del_bt">삭제</div>
+<div id="new_contents" class="add_bt">등록</div>
+<div class="surveyWrap"></div><!-- 미리보기 -->
+<!--  리스트 wrap -->
+<div class="list_wrap" id="listWrap" style="display:none; width:100%; height: 100%; background-color: #fff; position: fixed; z-index:10; top:0; left:0;">
+	<div class="wrap_header">
+		<div class="close_btn"><img src="/images/common/builder/m_survey/survey_list_closebt.png"></div>
+		<div class="list_eng_banner">IDO MAKE RESEARCH</div>
+		<div class="list_kor_banner">설문리스트</div>
+	</div>
+	<div id="listDiv"></div><!-- 설문조사 list div -->
+	<div class="footer">
+		<!-- <div class="list_conts">컨텐츠관리</div> -->
+		<div class="add_survey">추가하기</div>
+	</div>
+</div>
+<!--  //리스트 wrap -->
+<input type="hidden" id="total"> <!-- 설문조사 갯수 -->
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+$('.conDiv').click(function(){//컨텐츠 클릭시
+  	$('.survey_category_button').css('display','none');
+  	$('.header').css({'position':''}); //헤더 고정 풀기
+  	$('body').css('position','fixed'); //바디 고정
+  	console.log($(this).attr('id'));
+  	var contentsId = $(this).attr('id');
+
+  	/*ido.setContentId(contentsId) //앱호출 */
+
+  	$('.surveyWrap').css('display','');
+  	
+  	$.toast.config.align = 'center';
+    $.toast.config.width = 180;
+	$.toast('<p style="text-align:center">응답 이미지 원본을 보시려면</p><p style="text-align:center">이미지를 길게 눌러주세요</p>', {
+        duration: 2000,
+        type: 'info'
+    });
+  	
+  	$.ajax({
+       	url:'/m_contents_view?contentsId='+contentsId+'',
+       	success:function(data){
+     		console.log(data);
+   			var survey = data.data1;  //설문 정보
+   			//localstorage
+   			
+     		$('.surveyWrap').append(
+     			'<div class="surveyContainer">'+
+     			'<input type="hidden" id="contentsId" value="'+contentsId+'">'+
+               	'<div class="surveyHeader">'+
+                   	'<div class="closeButton"><img src="images/main/survey/sub_close_bt.png"></div>'+
+                       '<div class="categoryButton">'+$('#'+contentsId).children('.cCategory').text()+'</div>'+ 
+                       /* '<div class="surveyTitle">'+data.data1[0].SURVEY_TITLE+'</div>'+ */
+                   '</div>'+
+                   '<div class="surveyContents"></div>'+
+                //'<div class="surveyFooter"></div>'+
+                '</div><input type="hidden" class="contentsId" value="'+contentsId+'">'
+            );
+  				
+    		for(index in survey){
+          		$.ajax({
+          			url : '/upload/listSurveySecondTitle?surveyId='+data.data1[0].SURVEY_ID,
+          			type : 'GET',
+          			success : function(data){
+          				$('#total').val(data.title.length) //설문조사의 갯수
+            				console.log(data);
+            				//title 값 for
+	            		for(var i in data.title){
+	              				//i값 숫자로 변환
+			                i = parseInt(i);
+			                console.log('survey_type_id::'+data.title[i].SURVEY_TYPE_ID);
+			                //답변 타입 텍스트:1, 이미지:2
+			                var answerType = data.title[i].SURVEY_ANSWER_TYPE;
+			                
+			                var idx=0;
+			                
+			                userId = '';
+			                
+			                //첫번째 survey 
+			                var surveyType = data.title[i].SURVEY_TYPE;
+			                console.log('type : '+surveyType)
+						  	if(surveyType=='1'){  //양자택일형
+						    	console.log('양자택일형' + i);
+						    	var json = {title:data.title[i], reply:data.reply[i]};
+							    result_chooseType(json, i, userId);
+						    	//console.log(json);
+						  	}else if(surveyType=='2'){  //단수선택형
+						  		console.log('단수선택형'+i);
+							    var json = {title:data.title[i], reply:data.reply[i]};
+							    result_singleType(json, i, userId);
+						  	}else if(surveyType=='3'){  //복수선택형
+							    console.log('복수선택형'+i);
+							    var json = {title:data.title[i], reply:data.reply[i]};
+							    result_selectType(json, i, userId);
+						  	}else if(surveyType=='4'){  //순위형
+						  		console.log('순위형'+i);
+						  	
+							    var json = {title:data.title[i], reply:data.reply[i]};
+							    console.log(json)
+							    result_rankingType(json, i, userId); 
+						  	}else if(surveyType=='5'){  //별점채점형
+						  		console.log('별점채점형'+i);
+							    var json = {title:data.title[i], reply:data.reply[i]};
+							    result_starType(json, i, userId);
+							    //textType(json, i);
+						  	}//if
+						  	
+						}//for  data.title
+					
+
+    					/********** 다음버튼 클릭시 ***********/
+            
+    					/* *********** 수정버튼 클릭시 *********** */
+    					
+    					/* < 버튼 클릭시 */	 
+    					$('.surveyHeader').on('click','.revise_bt',function(){
+    						var formLength = $('.surveyContents form').size(); //클릭된 form 사이즈
+    						var surveyCount = $(this).attr('id').split('reviseBtn')[1]; // 현재 다음 버튼
+    						var surveyType = $('#surveyType'+surveyCount).val();
+    						console.log(surveyCount)
+    						
+							$('#nBtn'+surveyCount).css('display','none');
+    						$('#reviseBtn'+surveyCount).css('display','none');
+    						$('#sBtn'+surveyCount).css('display','none'); //통계보기
+    						$('#surveyForm'+surveyCount).css('display','none');
+    						
+    						
+    						$('#reviseBtn'+(parseInt(surveyCount)-1)).css('display','');
+    						$('#nBtn'+(parseInt(surveyCount)-1)).css('display','');
+    						$('#sBtn'+(parseInt(surveyCount)-1)).css('display',''); //통계보기
+    						$('#surveyForm'+(parseInt(surveyCount)-1)).css('display','');
+                		});
+                				
+                		/* > 버튼 클릭시 */	                				
+    					$('.surveyHeader').on('click','.n_bt',function(){
+    						var formLength = $('.surveyContents form').size(); //클릭된 form 사이즈
+    						var surveyCount = $(this).attr('id').split('nBtn')[1]; // 현재 다음 버튼
+    						var surveyType = $('#surveyType'+surveyCount).val();
+    						
+    						console.log('surveyCount : '+surveyCount)
+    						
+							$('#nBtn'+surveyCount).css('display','none');
+							$('#sBtn'+surveyCount).css('display','none'); //통계보기
+							$('#surveyForm'+surveyCount).css('display','none');
+							
+							$('#reviseBtn'+(parseInt(surveyCount)+1)).css('display',''); // < (이전버튼)
+							$('#nBtn'+(parseInt(surveyCount)+1)).css('display','');
+							$('#sBtn'+(parseInt(surveyCount)+1)).css('display',''); //통계보기
+							$('#surveyForm'+(parseInt(surveyCount)+1)).css('display','');
+
+                		});
+    					/* *********** 수정버튼 클릭시 *********** */
+    					
+    					/********** 통계보기 클릭시 ***********/
+    					$('.surveyWrap').on('click','.show_chart',function(){
+    						console.log('통계보기')
+    						var nextId = $(this).attr('id').split('sBtn')[1];
+    						var formLength = $('.surveyContents form').size(); //클릭된 form 사이즈
+    						var surveyCount = $(this).attr('id').split('sBtn')[1]; // 현재 다음 버튼
+    						var surveyType = $('#surveyType'+surveyCount).val();
+    						
+							if(surveyType == 1){//양자택일형
+								result_inputChoose('finish', surveyCount);
+		                    	var contsRst = contsRstVal.getValue();
+		                    	console.log('contsRst:::::::??????'+contsRst);
+		                  	}else if(surveyType==2){//단수선택형
+		                  		console.log(surveyCount)
+		                  		console.log('단수선택 마지막 : '+surveyCount);
+		                  		result_inputSingle('finish', surveyCount);
+		                  	}else if(surveyType==3){//복수선택형
+		                  		result_inputSelect('finish', surveyCount);
+		                  	}else if(surveyType==4){//순위형
+		                  		result_inputRank('finish', surveyCount);
+		                  	}else if(surveyType==5){//별점채점형
+		                  		result_inputStar('finish', surveyCount); 
+		                  	}
+    						
+                		});//end next click
+    					/********** 통계보기 클릭시 ***********/
+    					
+    				},//end success																
+          			error : function(error){
+          			}
+        		});//end ajax 
+
+      		} /*surveyFor문 끝*/
+          		
+      		//댓글 수
+      		$('.reply_cnt').html(data.reply.length);
+      		
+      		$('.reply_container').on('click', function(){//댓글로 이동
+      			console.log('댓글 클릭!');
+      			var contents_id = data.data1[0].CONTENTS_ID;
+      			console.log('contents_id::'+contents_id);
+      			location.href = 'reply/m_view_reply?contents_id='+contents_id;
+      		});
+    			
+    	}//end success
+    });//end ajax  
+  	
+}); /*conDiv Click function 끝*/
+</script>
+<script src="/js/web/main/survey/choose/choose.js"></script> <!-- 양자택일형 JS -->
+<script src="/js/web/main/survey/single/single.js"></script> <!-- 단수선택형 JS -->
+<script src="/js/web/main/survey/select/select.js"></script> <!-- 복수선택형 JS -->
+<script src="/js/web/main/survey/rank/rank.js"></script> <!-- 순위형 JS -->
+<script src="/js/web/main/survey/star/star.js"></script> <!-- 별점형 JS -->
+<!-- 결과 화면  -->
+<script src="/js/mobile/main/survey/result/result_choose.js"></script> <!-- 양자택일형 JS -->
+<script src="/js/mobile/main/survey/result/result_single.js"></script> <!-- 단수선택형 JS -->
+<script src="/js/mobile/main/survey/result/result_select.js"></script> <!-- 복수선택형 JS -->
+<script src="/js/mobile/main/survey/result/result_rank.js"></script> <!-- 순위형 JS -->
+<script src="/js/mobile/main/survey/result/result_star.js"></script> <!-- 별점형 JS -->
+<script type="text/javascript" src="js/web/main/survey/result/result_surveyAnswer.js"></script> <!-- 결과화면JS -->
+<!-- 결과 화면  -->

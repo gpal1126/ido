@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>ido mobile</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="keywords" content="IDO" />
+<meta name="description" content="IDO" />
+<meta name="author" content="IDO.COM" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel='stylesheet' type='text/css'> 
+<!-- http://ionicons.com/ --> 
+<!-- <link rel="stylesheet" type="text/css" href="/css/mobile/main/user/mypage.css" /> --> <!-- 추후에 이쪽에 style 넣어야됨 -->
+<link rel="stylesheet" href="/css/web/main/layout1024.css" media="screen and (max-width:1024px)">
+<link rel="stylesheet" href="/css/web/main/mobile.css" media="screen and (max-width:600px)">
+
+
+<link rel="stylesheet" href="/css/mobile/main/user/mypage.css" media="screen and (min-width:320px) and (max-width:440px)">
+<link rel="stylesheet" href="/css/mobile/main/user/mypage_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"> <!-- ipad -->
+
+<script type="text/javascript" src="/js/getUrlParameter.js"></script>
+<script type="text/javascript" src="/js/web/main/common/common.js"></script> 
+<script type="text/javascript" src="/js/web/main/common/jquery.blockUI.js"></script> 
+<script type="text/javascript">
+$(function(){
+	var userId = getUrlParameter('userId');
+	console.log('userId::'+userId);
+
+  	//프로필 편집 이동
+  	$('.editlink').attr('href', '/user/m_mypageEdit?userId='+userId+'');
+  
+  	
+  	$.ajax({
+    	url :'/user/join_surveyList?userId='+userId,
+    	success:function(data){
+	      	console.log('data.length');
+	      	console.log(data.length);
+	      	console.log(data);
+	      	console.log('<%=user%>');
+	      	$('.countNm').append(data.length)
+	      	for(i in data){
+	      		i = parseInt(i);
+	      		
+	      		var mcontent_html = '';
+	      		mcontent_html = ''+
+					      		'<div class="mcontent">'+
+				           			'<div class="photo"><img id="survey_img'+(i+1)+'" src="#" alt="" /></div>'+
+				          			'<div class="titleDate">'+
+				          				'<p class="mytitle">'+data[i].SECOND_SURVEY_TITLE+'</p>'+
+				          				'<p class="mydate">'+data[i].ANSWER_DATE+'</p>'+
+				         			'</div>'+
+				        		'</div>'+
+	      						'';
+				$('.mcontentWrap').append(mcontent_html);       
+				
+	      		if( data[i].SURVEY_TYPE == '5'){//별점형이면
+	      			$('.photo #survey_img'+(i+1)+'').attr('src', data[i].SECOND_SURVEY_CROP_IMAGE);
+	      		}else {//별점형이 아니면
+	      			$('.photo #survey_img'+(i+1)+'').attr('src', data[i].SURVEY_CROP_IMAGE);
+	      		}//if
+	      		
+	      	}//for
+      	}//end success
+  	});//ajax
+  	
+  	//마이페이지 닫기
+  	$('.close_mypage').click(function(){
+  		location.href = "/"; //메인으로 이동
+  	});
+  	
+});
+</script>
+</head>
+<body>
+	<div id="wrap"> 
+		<section id="mptopWrap"> 
+			<div class="close_mypage"><img src="/img/mobile/main/join/close_bt.png"></div>
+	    	<h1>MYPAGE</h1> 
+
+		    <div class="profileWrap">
+		    <% if(user == undefined || user == '') { %>
+			    
+		    <% }else {%>
+		    	<% if(user.provider == "naver") {%><!-- 네이버 로그인 -->
+			    	<img class="profilephoto" src="<%= user._json.profile_image %>" alt="logo" /> 
+	            <%}else if(user.provider == "facebook"){%> <!-- 페이스북 로그인 -->
+			    	<img class="profilephoto" src="<%= user.photos[0].value %>" alt="logo" /> 
+	            <%}else {%>
+			    	<img class="profilephoto" src="<%= user.profileImg %>" alt="logo" /> 
+	            <%} %>
+		      <% } %>
+	        </div>
+	        
+	        <!-- ***************************************************** -->
+	        <% if(user == undefined || user == '') { %>
+			    
+		    <% }else {%>
+		    	<% if(typeof user.emails == 'string'){ %>
+		               	<p id="nickname"><%= user.nickname %></p>
+		        		<a class="editlink" href="#">프로필편집</a>
+		            <% }else{%> <!-- facebook 로그인시 --> 
+		              	<% if(user.provider == "naver") {%><!-- 네이버 로그인 -->
+	            	
+				   		<div style="text-align: center;"><%= user.displayName %>님 환영합니다</div>
+				   		<br><br>
+		            <%}else {%> <!-- 페이스북 로그인 -->
+		         
+				   		<div style="text-align: center;"><%= user.name.familyName %><%= user.name.givenName %>님 환영합니다</div>
+				   		<br><br>
+		            <%}%>
+		            <% } %>
+		      <% } %>
+	         
+	       
+	        <div class="empty_div"></div>
+	        <div class="countBox"> 
+	        	<ul>
+					<li>참여한 설문<p class="countNm"></p></li> 
+	                
+	            </ul> 
+	       	</div>	
+		</section>
+		<br><br><br><br><br><br>
+	    <section id="mpcontentWrap"> 
+		    <div class="mycontent"> 
+	    	    <h2> 참여한 설문 </h2> 
+	        </div> 
+	        <div class="mcontentWrap"></div><!-- 참여한 설문 리스트 wrap -->
+		</section> 
+	</div> 
+</body> 

@@ -1,0 +1,45 @@
+.reward_container{
+	width: 100%;
+	height: auto;
+}
+
+.thing_name, .thing_pic, .thing_info, .thing_price{
+	padding-left: 5%;
+}
+.thing_pic_container{
+	position:relative;
+	margin-left:5%;
+	width: 90%;
+	height:150px;
+	background-color: #fafafa;
+}
+
+.reg_pic {
+	position: absolute;
+	top:30%;
+	left: 2%;
+}
+
+.reward_container input{
+	width: 93%;
+	height: 25px;
+	background-color: #f5f5f5;
+	border-style: solid;
+	border-color: #ececec;
+	
+}
+
+.thing_info_container{
+	position:relative;
+	margin-left:5%;
+	width: 90%;
+	height:150px;
+	background-color: #fafafa;
+}
+
+.thing_info_container textarea{
+	width: 100%; 
+	height: 100%;
+	background-color: #f5f5f5;
+	border-style: none;
+}

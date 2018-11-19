@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+
+body {height: auto;}
+*{font-family: Malgun Gothic,맑은고딕,돋움,윤고딕,Dotum,verdana,sans-seif;}
+/*
+h1{font-size:30px;text-align:left;letter-spacing:-1px;}
+ */
+/* 로그인폼*/
+#wrap { position: absolute; top: 30%; }
+#wrap .container { position: relative; left: 30%; }
+#login_wrap {width:800px;}
+#login_wrap .title_box1 {float:left;}
+#login_wrap .title_box2 {vertical-align:middle; line-height:50px; text-align:right;}
+#login_wrap .conbox {width:800px;height:435px;border:1px solid #dcdcdc; border-top:2px solid #0074bd;}
+#login_wrap .conbox .leftbox {width:330px;float:left;height:435px;}
+#login_wrap .conbox .leftbox ul {margin:68px; list-style:none;}
+#login_wrap .conbox .leftbox ul li.mt20 {margin-top:20px;}
+
+#login_wrap .conbox .rightbox {width:468px;float:left;height:435px;}
+#login_wrap .conbox .rightbox ul {margin:68px 0  0 63px; width:350px; list-style:none;} 
+#login_wrap .conbox .rightbox ul li.mt7{margin-top:7px;} 
+#login_wrap .conbox .rightbox ul li input{margin:color:#336699;width:350px;height:44px;padding-left:70px;border:1px solid #dddddd;} 
+#login_wrap .conbox .rightbox ul li input.deco_box{color:#336699;width:280x;height:44px;padding-left:70px;border:1px solid #dddddd;background:url('/images/common/main/user/partner/password_ico.png') no-repeat;} 
+
+
+#login_wrap .conbox .rightbox .mt30 {margin-top:30px; margin-left: 70px;}
+#login_wrap .conbox .rightbox .login_2bt {width:350px;margin:0 0 0 0px;}
+#login_wrap .conbox .rightbox .login_2bt ul {margin-top:26px;}
+#login_wrap .conbox .rightbox .login_2bt ul li.mt15{margin-top:15px;}
+#login_wrap .conbox .rightbox .login_2bt ul li.txtrt{text-align:right;}
+
+/* 페이스북 btn */
+.facebook_bt{
+	background:url('/images/common/main/user/partner/facebook_login.png') repeat 0 0;
+	width: 350px;
+	height: 44px;
+}
+/* 로그인 btn */ 
+.login_bt{
+	background:url('/images/common/main/user/partner/login_bt.png') repeat 0 0;
+	width: 350px;
+	height: 50px;
+}

@@ -1,0 +1,348 @@
+@CHARSET "UTF-8";
+
+body{
+	margin: 0; padding: 0; 
+	width: 100%;
+	height: 100%;
+}
+
+header{
+	width: 100%;
+	height: 40px;
+	background-color: #f6f6f6;
+	margin: 0;
+	padding: 0;
+}
+
+header div{
+	width : 10%;
+	height:100%;
+	padding-top : 10px;
+	float: left;
+}
+.login_bt{
+	width: 3%;
+	height: 100%;
+}
+.register_bt{
+	width : 8%;
+	height: 100%;
+	margin-right: 5px;
+}
+
+.header_1{
+	width: 59%;
+}
+.flag{
+	width: 2%;
+}
+.dott{
+	width: 2%;
+}
+
+/* second_header */
+.second_header{
+	clear:both;
+	width: 100%;
+	height: 90px;
+}
+
+.second_empty_menu{
+	width : 37%;
+	float: left;
+	height: 30px;
+}
+
+.second_header_menu{
+	width: 13%;
+	float: left;
+	height:30px;
+	margin-top: 30px;
+}
+
+.select_class{
+	clear:both;
+	width: 88%;
+	height: 270px;
+	background-color: #f6f6f6;
+	padding-left: 12%;
+}
+
+.select_class_menu{
+	float:left;
+	width: 15%;
+	height: 80%;
+	margin-left: 4.2%;
+	margin-top: 40px;
+}
+
+.contents{
+	width: 100%;
+	height: 60%;
+}
+
+.contents_wrap{
+	padding-left:15%;
+	width: 70%;
+	height: 100%;
+}
+.con_left{
+	margin-left:3%;
+	float: left;
+	width: 59%;
+	height: 100%;	
+}
+.con_right{
+	margin-left:4%;
+	float: left;
+	width: 30%; 
+	height: 100%;
+}
+
+.k_banner{
+	width: 100%;
+}
+
+.login_wrap{
+	width: 360px;
+	height: 320px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #f6f6f6;
+}
+.daily_banner{
+	width: 99.7%;
+	height: 180px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #f6f6f6;
+}
+
+.situation_conversations{
+	width: 99.7%;
+	height: 100px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #f6f6f6;
+}
+
+.prepare_contents{
+	width: 100%;
+	height: 148px;
+}
+
+.prepare_contents_left{
+	float:left;
+	width:48%;
+	height:100%;
+ 	border-style: solid;
+	border-width: 2px;
+	border-color: #f6f6f6;
+}
+.prepare_contents_right{
+	float:left;
+	width:48%;
+	margin-left:23px;
+	height:100%;
+	border-width: 2px;	
+}
+.login_wrap{
+	position: relative;
+}
+
+.please_title{
+	position: absolute;
+	top: 27px;
+	left: 27px;
+}
+
+.user_name{
+	position: absolute;
+	top: 70px;
+	left: 27px;
+}
+.password{
+	position: absolute;
+	top: 133px;
+	left: 27px;
+}
+
+.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0
+}
+.checks input[type="checkbox"] + label {
+  display: inline-block;
+  position: absolute;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+   top: 200px;
+   left: 27px;
+}
+.remember_txt{
+	position: absolute;
+	top: 200px;
+	left: 60px;
+}
+.checks input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+  content: ' ';
+  display: inline-block;
+  width: 21px;  /* 체크박스의 너비를 지정 */
+  height: 21px;  /* 체크박스의 높이를 지정 */
+  line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #cacece;
+  border-radius : 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+}
+.checks input[type="checkbox"] + label:active:before,
+.checks input[type="checkbox"]:checked + label:active:before {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checks input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+  content: '\2714';  /* 체크표시 유니코드 사용 */
+  color: #99a1a7;
+  text-shadow: 1px 1px #fff;
+  background: #e9ecee;
+  border-color: #adb8c0;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+
+.login_button{
+	position: absolute;
+	top: 250px;
+	left : 27px;
+}
+
+
+.daily_banner{
+	position: relative;
+}
+
+.today_title{
+	position: absolute;
+	top: 30px;
+	left: 27px;
+}
+
+.today_image{
+	position: absolute;
+	top : 75px;
+	left: 40px;
+}
+
+.today_a_example{
+	position: absolute;
+	top: 85px;
+	left: 160px;
+}
+.a_example_audio{
+	position: absolute;
+	top: 85px;
+	left: 360px;
+}
+.today_b_example{
+	position: absolute;
+	top: 85px;
+	left: 420px;
+}
+.b_example_audio{
+	position: absolute;
+	top: 85px;
+	left: 620px;
+}
+
+.situation_left{
+	float: left;
+	width: 30%;
+	height: 100%;
+	position: relative;
+}
+.situation_txt{
+	position: absolute;
+	top: 30px;
+	left: 27px;	
+}
+
+.situation_right{
+	float: right;
+	width: 70%;
+	height: 100%;
+}
+
+.situation_menu{
+	float: left;
+	margin-left:5.5%;
+	margin-top : 20px;
+}
+
+.airport {
+   background-image: url('/img/hangul/con_air_icon_off.png');
+   width: 55px;
+   height: 55px;
+   background-repeat: no-repeat;
+}
+
+.airport:hover {
+   background-image: url('/img/hangul/con_air_icon_on.png');
+}
+
+.subway {
+   background-image: url('/img/hangul/con_subway_icon_off.png');
+   width: 55px;
+   height: 55px;
+   background-repeat: no-repeat;
+}
+
+.subway:hover {
+   background-image: url('/img/hangul/con_subway_icon_on.png');
+}
+
+.hotel {
+   background-image: url('/img/hangul/con_hotel_icon_off.png');
+   width: 55px;
+   height: 55px;
+   background-repeat: no-repeat;
+}
+
+.hotel:hover {
+   background-image: url('/img/hangul/con_hotel_icon_on.png');
+}
+
+.post {
+   background-image: url('/img/hangul/con_post_icon_off.png');
+   width: 55px;
+   height: 55px;
+   background-repeat: no-repeat;
+}
+
+.post:hover {
+   background-image: url('/img/hangul/con_post_icon_on.png');
+}
+
+.department {
+   background-image: url('/img/hangul/con_department_icon_off.png');
+   width: 55px;
+   height: 55px;
+   background-repeat: no-repeat;
+}
+
+.department:hover {
+   background-image: url('/img/hangul/con_department_icon_on.png');
+}
+
+.advertisement_banner img{
+	width: 360px;
+}

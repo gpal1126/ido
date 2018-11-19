@@ -1,0 +1,24 @@
+{
+  "name": "ido_server",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "connect-flash": "~0.1.1",
+    "cors": "^2.7.1",
+    "errorhandler": "^1.1.1",
+    "express": "^4.13.3",
+    "express-session": "^1.7.2",
+    "jade": "^1.5.0",
+    "method-override": "^2.1.2",
+    "morgan": "^1.2.2",
+    "multer": "^1.1.0",
+    "node-php-server": "^0.1.2",
+    "passport-facebook": "^2.0.0",
+    "passport-naver": "1.0.4",
+    "serve-favicon": "^2.0.1"
+  }
+}

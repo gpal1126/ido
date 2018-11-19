@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>아이두</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="js/web/common/jquery-ui.js"></script>
+<script type="text/javascript" src="js/web/common/jquery-modal/jquery.modal.js"></script>
+<script type="text/javascript" src="js/web/common/jquery.blockUI.js"></script> 
+<!-- 탑메뉴 css -->
+<link rel="stylesheet" type="text/css" href="/css/web/main/common1.css" />
+<link rel="stylesheet" href="/css/web/main/contents/search_contents.css">	<!-- 검색 css -->
+<link rel="stylesheet" type="text/css" href="js/web/common/jquery-modal/jquery.modal.css" />
+<script type="text/javascript">
+$(function(){
+	function getUrlParameter(sParam){ //View에 URL에 접근하여 get parameter값을 가져옴
+		var sPageURL = window.location.search.substring(1);
+	  	var sURLVariables = sPageURL.split('&');
+	  	for (var i = 0; i < sURLVariables.length; i++){
+	    	var sParameterName = sURLVariables[i].split('=');
+	        if (sParameterName[0] == sParam){
+	        	return sParameterName[1];
+	        }//if
+	    }//for
+	}
+	
+	console.log('search::::'+getUrlParameter('search'));
+	
+	if(getUrlParameter('search')!=null){//메인에서 검색시 파라미터로 search값 가져옴
+		var searchTxt = decodeURI(getUrlParameter('search')); 
+	
+		//컨텐츠 가져오기 function
+		search_contents(0, searchTxt);
+	}
+	
+	$('#searchBtn').click(function(e){
+		
+		//페이지 URL 파라미터 제거
+		var PageURL = window.location.href.split('?')[0];
+		//console.log('PageURL:::'+PageURL);
+		
+		var searchTxt = $('#searchInput').val();
+		//console.log('searchTxt::'+searchTxt);
+		
+		if(searchTxt == ''){
+			  alert('검색어를 입력해주세요.');
+			  return false;
+		}//if
+		
+		//location.href search 파라미터 
+		location.href = PageURL+'?search='+searchTxt;
+		
+		//기존 컨텐츠 지우기
+		$('.contents_div').remove();
+		
+		//컨텐츠 가져오기 function
+		search_contents(0, searchTxt);
+		
+	});//end click
+	
+	function search_contents(no, searchTxt){
+		var json = {'no' : no, 'search' : searchTxt };
+		
+		$.ajax({
+			url: '/search_contents',
+			data: json,
+			async: false,
+			type: 'GET',
+			success: function(data){
+				
+				if(data=='noSearch'){
+					console.log('검색 결과가 없습니다.')
+				}else {
+					console.log(data);
+					
+					//검색 박스에 value값 넣기 
+					$('#searchInput').val(searchTxt);
+					
+					//no 초기값
+					var no = 0;
+					//변하는 no 값
+					var chg_no = data.no;
+					
+					for(var i in data.contents){
+						i = parseInt(i);
+						
+						//파트너 프로필
+						var partnerProfile = data.contents[i].PROFILE_PICTURE_PATH;
+						console.log(partnerProfile);
+						var profileIdx = partnerProfile.indexOf('/');
+						console.log('indexOf:::::'+profileIdx);
+						var profile = partnerProfile.substring(profileIdx);
+						console.log('profile::'+profile);
+						
+						//썸네일 컨텐츠
+						var contents = data.contents[i].THUMBNAIL_CONTENTS;
+						contents = contents.replace('<br>','\t');	//<br>을 tab으로 바꿈
+						
+						var searchHtml = '';
+						
+						searchHtml += ''+
+									  '<div class="contents_div">'+
+										  '<div class="contents_img_div"><a href="/view_contents?contentsId='+data.contents[i].CONTENTS_ID+'" rel="modal:open"><img class="contents_img" src="'+data.contents[i].THUMBNAIL_IMAGE_PATH+'"></a></div>'+
+										  '<div class="right_contents">'+
+											  '<span class="partner"><img class="partner_profile" id="partnerProfile'+(i+1)+'" src="'+profile+'"><span class="partner_nickname">'+data.contents[i].NIKNAME+'</span> </span>'+
+											  '<span class="title">'+data.contents[i].TITLE+'</span>'+
+											  '<span class="contents">'+contents+'</span>'+
+											  '<span class="date">'+data.contents[i].REG_DATE+'</span>'+
+										  '</div>'+
+										  '<div class="bottom_contents">'+
+											  '<span class="like_img"><img src="img/con_like_icon.png"></span>'+
+											  '<span class="like_cnt">'+data.contents[i].CLICK_COUNT+'</span>&nbsp;&nbsp;'+
+											  '<span class="reply_img"><img src="img/con_reply_icon.png"></span>'+
+											  '<span class="reply_cnt">'+data.contents[i].REPLY_CNT+'</span>'+
+										  '</div>'+
+									  '</div>'+
+									  '';
+									  
+						$('.search_section').append(searchHtml);
+						
+						$('#chg_no').val(chg_no);
+						
+					}//for
+				}//if
+			}
+		});//end ajax
+	}
+	
+	//무한 스크롤 구현
+	$(window).scroll(function() {
+    	chg_no = $("#chg_no").val();
+
+      	if(getUrlParameter('search')!=null){//메인에서 검색시 파라미터로 search값 가져옴
+  			var searchTxt = decodeURI(getUrlParameter('search')); 
+      	}else {
+	      	var searchTxt = $('#searchInput').val();
+    	  	console.log(searchTxt);
+      	}
+      
+		//          스크롤의 위치값        윈도우의 크기
+		var scrollHeight = $(window).scrollTop() + $(window).height();
+		console.log(scrollHeight);
+		
+		//현재페이지(문서)의 높이
+		var documentHeight = $(document).height();
+		console.log(documentHeight);
+		//alert('scrollHeight:'+scrollHeight+'documentHeight:'+documentHeight);
+		
+		//스크롤 위치값과 현재문서 높이가 같으면 = 스크롤을 끝까지 내리면 
+		if(scrollHeight == documentHeight) {
+			//이미지 로딩 함수 호출
+		  	search_contents(chg_no, searchTxt);
+			  
+			console.log('받는 값 chg_no::::'+chg_no);
+		}//if
+    });
+});
+</script>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- header --> 
+	<section id="header"> 
+	  <nav style="height: 75px"> 
+	    <!-- <a href="/"><h1 style="color: white; font-size: 50px; font-weight: bold; padding-top:10px">i DO</h1></a>  -->
+		<a href="/"><img src="/images/common/main/ido_logo4.png"></a> 
+	    <!-- 실시간 인기순위(util_menu) -->
+	    <div class="util_menu"> 
+	       <!-- //rank --> 
+	    <!--// menu -->  
+	    <!-- 
+	      <div class="menu"> 
+	        <a href="#" class="menuOpen" id="menutest"> 메뉴열기 </a> 
+	      </div>
+	     -->   
+	    <!-- //menu --> 
+	    </div> 
+	    <!-- 실시간 인기순위(util_menu) -->
+	  </nav> 
+	  <div id="mask"></div> 
+	</section> 
+	<!-- //header --> 
+	<section class="search_section">
+		<!-- 검색바 --> 
+		<div class="search_div">	
+	    	<input type="text" class="search_input" id="searchInput" name="search">
+	    	<div class="search_btn" id="searchBtn"></div> 
+		</div>
+		<!-- //검색바 --> 
+		<div style="height:50px;"></div>	
+		
+		<!-- 컨텐츠 div 들어오는 곳-->
+		<input type="hidden" id="chg_no"  value=""/>  
+	</section>	
+</div>
+</body>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="/css/web/service/survey/survey_write.css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/js/web/common/getUrlParameter.js"></script>
+
+</head>
+<body>
+<!-- Text 파일 / csv 파일  -->
+<!-- <pre id="out"></pre>
+<input type="file" name="xlfile" id="xlf">
+<input type="file" name="filename" id="filename" accept=".csv">
+<div id="csvimporthint"></div>
+ -->
+ <div class="header ">
+	<div class="nav_1">
+		<div class="nav_1_menu" style="width: 10%;"><a href="#"><img src="/img/service/survey/top_arrow.gif" style="width: 70%; height: 50%; padding-left: 40%; padding-top: 45%;"></a></div>
+		<div class="nav_1_menu" style="width: 70%;"></div>
+		<div class="nav_1_menu" style="width: 10%;"><a href="#"></a></div>
+		<div class="nav_1_menu" style="width: 10%;" id="step3_survey"><img src="/img/service/survey/menu.gif" style="width: 50%; padding-top: 45%"></div>
+	</div>
+	<div class="nav_2">
+		<div class="nav_2_menu"><img src="/img/service/survey/research_text.gif" style="margin-top: 10%; padding-left:6%;"></div>
+		<div class="nav_2_menu"><h1 style="margin-top: 0; padding-left:5%; font-size: 40px; letter-spacing: -4px; color: white;">설문 작성하기</h1></div>
+	</div>
+</div>
+ <div class="contents">
+ 	<br>
+	<div class="surveyList" style="clear: both;"></div>
+</div>
+<div class="footer">
+<div class="wrap">
+</div>
+<div class="side_button_container">
+	<div class="single_select_button category_button" id="rank_select"><div>순위형</div><img src="/img/service/survey/단일형.png"></div>
+	<div class="multi_select_button category_button" id="multi_select"><div>선택형</div><img src="/img/service/survey/선택다중형.png"></div>
+	<div class="rank_button category_button" id="rank"><div>별점형</div><img src="/img/service/survey/순위형.png"></div>
+	<div class="opinion_button category_button" id="opinion"><div>의견란</div><img src="/img/service/survey/의견형.png"></div>
+</div>
+	<!-- <div class="register" style="float:left;"><img src="/img/service/survey/register_bt.gif"></div> -->
+	<div class="survey_category_button">
+	<input type="checkbox" id="btnControl">
+	<label for="btnControl">
+		<img src="/img/service/survey/button2.png">
+	</label>
+	</div>
+	</div>
+<input type="file" id="image">이미지 등록
+<script type="text/javascript">
+	$(document).ready(function(){
+/* step3 이동 */
+		$('#image').on('change', function() {
+        file = $('#image').prop("files")[0];
+       
+        console.log(file)
+      	});     
+
+		$('#step3_survey').click(function(){
+			var surveyId = getUrlParameter('surveyId');
+			location.href="/service/step3_survey?surveyId="+surveyId;
+		})
+		
+		
+		/* 우측 사이드 버튼 클릭시 카테고리 나오는 function */
+		$('.wrap').css('display','none');
+		$('.side_button_container').css('display','none');
+		$('.survey_category_button').click(function(){
+			if($("input:checkbox[id='btnControl']").is(":checked")){
+				$('.wrap').css('display','');
+				$('.side_button_container').css('display','');
+			}else{
+				$('.wrap').css('display','none');
+				$('.side_button_container').css('display','none');
+			}
+		});
+		/* 각 카테고리 버튼 클릭시 페이지 이동 function */
+		/* /question/single_select */
+		$('.category_button').click(function(){
+			var surveyId = getUrlParameter('surveyId');
+			var title = decodeURIComponent(getUrlParameter('surveyTitle'));
+			switch($(this).attr('id')){
+				case 'rank_select' :
+					location.href="/m_survey/rank_select?surveyId="+surveyId;
+					break;
+				case 'multi_select' :
+					location.href="/m_survey/multi_select?surveyId="+surveyId;
+					break;
+				case 'opinion' :
+					location.href="/m_survey/opinion?surveyId="+surveyId;
+					break;
+			}
+		})
+		
+		/* $('.surveyTitle h1').append(decodeURIComponent(getUrlParameter('surveyTitle'))) */
+		var surveyId = getUrlParameter('surveyId')
+		var json = {"surveyId":surveyId};
+		
+		/* List View 가져오는 부분 */
+		$.ajax({
+			url :'/register/select_surveyList',
+			data : json,
+			type : 'POST',
+			success:function(data){
+				console.log(data.title[0])
+				
+				for(i in data.title[0]){
+					$('.surveyList').append('<br><div id="surveySecondId_'+data.title[0][i].SURVEY_SECOND_ID+'"><h3>'+data.title[0][i].SURVEY_SECOND_TITLE+'</h3></div>')
+				}
+				
+				for(i in data.contents[0]){
+					console.log(data.contents[0][i])
+					$('#surveySecondId_'+data.contents[0][i].survey_second_id).append('<div>'+data.contents[0][i].survey_contents+'</div>')
+				} 
+			}
+		})
+		
+	})
+</script>
+
+</body>
+</html>

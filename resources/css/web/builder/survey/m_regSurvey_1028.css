@@ -1,0 +1,176 @@
+.left{
+	width:49.2%;
+	float: left;
+	list-style: none;
+} 
+.right{
+	width:50.7%;
+	float: left;
+	list-style: none;
+} 
+.list{
+	width: 100%;
+	margin: 0;
+	padding:0;
+	height: auto;
+}
+.second_cat_container_header{
+	width: 100%;
+	height: 50px;
+	background-color: #164672;
+}
+
+.second_category_div{
+	position:relative;
+    border-collapse: collapse;
+	border-bottom:1px solid #7a7a7a;
+	border-right:1px solid #7a7a7a;
+	height:47px;
+	background-color: #363636;
+	color: white;
+	font-family:'Nanum Barun Gothic',sans-serif;
+	font-size: 10pt;
+	padding-left:18%;
+}
+.second_category_div img{
+	top: 50%;
+	position: absolute;
+}
+.second_category_div span{
+	top: 38%;
+	padding-left:10px;
+	position: absolute;
+}
+
+.explain_txt{
+	position: absolute;
+	right: 5%;
+	font-size: 13pt; 
+	letter-spacing: -1px; 
+	float: left; 
+	padding-left: 30%;	
+}
+
+.header_line{
+	padding: 0;
+	margin: 0;
+	height: 2px;
+}
+input[type=text] {   
+	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+}
+
+body{
+  	padding: 0;
+  	margin: 0;
+}
+.header{
+    /*background-color: black;*/
+    position: relative;
+    width: 100%;
+    height: 85px;
+}
+.header div{
+    position: absolute;
+    float: left;
+    padding-top: 15px;
+}
+.header div img{
+    width: 15px;
+    height: 26px;
+}
+.second_header{
+    width: 100%;
+    height: auto;
+}
+.wrap{
+    width:100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top:0;
+    background-color: #363636;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+/* 닫기 버튼 */
+.cat_close{
+    width: 5%;
+    /* height: 100px; */
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+}
+.cat_close img{
+	width: 100%; 
+	height: 100%;
+}
+/* 닫기 버튼 */
+
+.cat_left{
+	position: fixed;
+    width: 50%;
+    /* height: 400px; */
+    bottom: 3%; 
+    left: 5%;
+    z-index: 2;
+}
+.cat_right{
+    position: fixed;
+    width: 50%;
+    /* height: 400px; */
+    bottom: 3%; 
+    right: 0;
+    z-index: 2;
+}
+
+.category_button{
+	width: 200px; 
+  	height: 130px;
+  	/* margin-bottom: 20px; */
+  	margin-left: 5%;
+  	z-index: 33;
+}
+.category_button img{
+	width: 100%;
+	height: auto;
+	/* width: 200px;
+	height: 130px; */
+}
+.second_cat_container{
+	width: 100%;
+  	background-color: #363636;
+  	position:fixed;
+  	height: 100%;
+  	z-index: 3;
+}
+li{
+  	z-index: 3;
+}
+.catTxt{
+ 	position: absolute;
+ 	top: 28%;
+ 	font-weight:bold;
+ 	left: 10%;
+ 	font-family:'Nanum Barun Gothic',sans-serif;
+ 	font-size: 20pt;
+ 	color: white;
+}
+.cat1 {
+ 	position: absolute;
+ 	top: 13%;
+ 	left: 10%;
+ 	color: white;
+	font-family:'Nanum Barun Gothic',sans-serif;
+}
+.cat1 img{
+	width: 30px;
+}
+
+
+

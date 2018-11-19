@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="../../css/web/builder/contents/adjust_contents.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="../../js/getUrlParameter.js"></script>
+<script type="text/javascript">
+function delete_image(i){ //x버튼누르면 사라짐.
+  var contents_id = getUrlParameter('contentsId');
+  var li_value = i;
+  var delete_values = {"contents_id":contents_id, "li_value":li_value};
+  $.ajax({
+    url : '/upload/delete_contents_image',
+    data : delete_values,
+    success : function(){
+      console.log('성공');
+    }
+  })
+  $('[name="image_preview'+i+'"]').remove();
+}
+</script>
+<script> /*이미지 마우스 잡아서 이동하는 부분*/
+  $(function() {
+      $( '#sortable' ).sortable({
+          stop: function () {
+              var li = $('li.currentposition');
+              var nbElems = li.length;
+              $('li.currentposition').each(function(idx) {
+                  $(this).val(idx);
+                  var li_value = $(this).attr('id');
+                  var order_num = $(this).val(idx)+"";
+                  var contents_id = getUrlParameter('contentsId');
+
+                  var json = {"li_value":li_value, "order_num":idx, "contents_id":contents_id};
+                    $.ajax({
+                      url : '/upload/change_order',
+                      data : json,
+                      success: function(){
+                        console.log('success');
+                      }
+                    })
+                });
+          }
+      });
+    $( "#sortable" ).disableSelection();
+  });
+</script>
+</head>
+<body>
+<br>
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <input type="text" name="title">
+    <input type="file" id="image" name="file" multiple="multiple">
+</form>
+<ul id="sortable"> <!-- 컨텐츠들은 이쪽으로 들어간다. -->
+<% if(data == null) {%>
+      <% }else {%>
+          <% for (var i = 0; i < data.length; i++) { %>
+            <li id="image_preview<%= data[i].LI_VALUE %>" name="image_preview<%= data[i].LI_VALUE %>" class="currentposition" value="<%= data[i].ORDER_NUM%>">
+              <a href="#" id="build_contents_a<%= data[i].LI_VALUE%>" onclick="active(<%= data[i].LI_VALUE%>); return false;">
+              <div class="build_shape" name="build_shape<%= data[i].LI_VALUE%>"><br> 
+                <input type="image" src="/images/util_image/x.png" id="delete" onclick="delete_image(<%= data[i].LI_VALUE%>);">
+                <div class="build_image" name="build_image<%= data[i].LI_VALUE%>"><img src="<%= data[i].CONTENTS_IMAGE_PATH %>" id="build_image<%= data[i].LI_VALUE%>" name="build_image<%= data[i].LI_VALUE%>">
+                <input type="text" class="build_image_origin" name="build_image_origin<%= data[i].LI_VALUE%>" placeholder="이미지 출처 입력" align="right" value="<%=data[i].CONTENTS_IMAGE_ORIGIN %>"></div><br>
+                <input type="text" class="build_contents" name="build_contents<%= data[i].LI_VALUE%>" value="<%= data[i].CONTENTS%>" />
+              </div>
+              </a>
+              <div style="height:200px;"></div>
+            </li>
+        <% } %>
+      <% } %>
+</ul>
+<button onclick="save()">save</button>
+<script>
+$("input[name *=build_image_origin]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+$("input[name *=build_contents]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+</script>
+<script type="text/javascript">
+  $('#image').on('change', function(){ // 빌더가 하나씩 생성될때마다 name값을 +1씩 해줌.
+      $.ajax({
+        url : '/upload/check_contents_image_id',
+        success: function(data){
+          console.log(data);
+          if(data==1){
+            var i = data;
+          }else{
+            var i = data.LI_VALUE; //가장 최근 저장되어 있는 값  
+          }
+          file = $('#image').prop("files")[0];
+          blobURL = window.URL.createObjectURL(file);
+          $('ul').append('<li id="image_preview'+(i+1)+'" name="image_preview'+(i+1)+'" class="currentposition"><div class="build_shape" name="build_shape'+(i+1)+'"><br>'     /* 1. 컨텐츠 틀 */
+          +'<input type="image" src="/images/util_image/x.png" id="delete" onclick="delete_image('+(i+1)+');">' // 2. 빌더 우측 x 그림부분 X버튼 변경을 원하면 src 부분 수정 / onclick부분은 현재 만들어진  name값의 빌더를 지우는 function
+            +'<div class="build_image" name="build_image'+(i+1)+'"><img src='+blobURL+' name="build_image'+(i+1)+'">' // 파일 선택 후 이미지 화면 출력
+              +'<input type="text" class="build_image_origin" name="build_image_origin'+(i+1)+'" placeholder="이미지 출처 입력" align="right"></div><br>' // 3. 이미지 출처
+            +'<input type="text" class="build_contents" name="build_contents'+(i+1)+'"/>' // 4. 컨텐츠 내부 내용 작성부분 
+            +'<button id="button'+(i+1)+'" onclick="save_image('+(i+1)+')">저장</button>'
+          +'</div>'
+          +'<div style="height:200px;"></div></li>'); //컨텐츠와 컨텐츠 사이의 간격을 위해 만든 <div>
+        }
+      })
+    });
+
+
+  function save_image(i){ //저장버튼을 누르면
+    document.getElementById("image_preview"+i+"").value = i;
+    $('#button'+i+'').remove(); //저장버튼 삭제
+    $('div[name=build_shape'+i+']').wrap('<a href="#" id="build_contents_a'+i+'" onclick="active('+i+')"></a>'); //image_preview li 부분을 a링크로 감싸버린다.
+    $("input[name=build_image_origin"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+    $("input[name=build_contents"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+      
+    var file = $('#image').prop("files")[0]; //파일
+ 
+    var build_image_origin = $('input[name=build_image_origin'+i+']').val(); //이미지 출처
+    var build_contents = $('input[name=build_contents'+i+']').val(); // contents의 내용
+    var contents_id = getUrlParameter('contentsId'); // thumbnail에서 가져온 contents_id값 / DB에서 쿼리를 확인할 때 contents_id값으로 확인해야하므로 필요함.
+    var order = $('[name="image_preview'+i+'"]').val(); //미리저장시 순서확인을 위한 변수
+    var fd = new FormData();
+
+    fd.append('li_value', i);
+    fd.append('file', file); 
+    fd.append('order', order); //순서
+    fd.append('contents_id', contents_id); //컨텐츠 ID
+    fd.append('build_image_origin', build_image_origin); //이미지 출처
+    fd.append('build_contents', build_contents); //컨텐츠 내용
+
+   $.ajax({
+      url: '/upload/builder_contents',
+      data: fd,
+      processData: false,
+      contentType: false,
+      async : false,
+      type: 'POST',
+      success: function(){
+        console.log('success');
+      }
+    });
+
+  }
+
+  function active(i){ //저장버튼 누른 후 수정을 원할시
+    console.log('활성화');
+    $('div[name=build_shape'+i+']').unwrap(); //감싸있는 a 태그 삭제
+    $('input[name=build_contents'+i+']').after('<button id="r_button'+i+'" onclick="revise_image('+i+')">저장</button>');
+    $("input[name=build_image_origin"+i+"]").attr("readonly",false); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+    $("#build_image"+i+"").after('<div class="file_input_div" id="file_input_div'+i+'"><img src="http://sstatic.naver.net/search/img3/btn_sch.gif" class="file_input_img_btn" alt="open" />'
+                                +'<input type="file" name="file_input_hidden'+i+'" id="file_input_hidden'+i+'" class="file_input_hidden" onchange="change_image('+i+')"/></div>'); //검색이미지 변경을 원할시 src부분을 변경
+    $("input[name=build_contents"+i+"]").attr("readonly",false);
+  }
+
+
+
+  function change_image(i){ //이미지 변경 function
+    file = $('#file_input_hidden'+i+'').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+    $('#build_image'+i+'').attr('src', blobURL);
+  }
+
+
+  //이미지 변경 없이 수정후 다시 저장 function
+  function revise_image(i){
+    $('#r_button'+i+'').remove(); //저장버튼 삭제
+    $('div[name=build_shape'+i+']').wrap('<a href="#" id="build_contents_a'+i+'" onclick="active('+i+'); return false;"></a>'); //image_preview li 부분을 a링크로 감싸버린다.
+    $("input[name=build_image_origin"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+    $("input[name=build_contents"+i+"]").attr("readonly",true); //a 링크로 감싸면서 input tag를 못쓰도록 함.
+
+    file = $('#file_input_hidden'+i+'').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+
+    var build_image_origin = $('input[name=build_image_origin'+i+']').val(); //이미지 출처
+    var build_contents = $('input[name=build_contents'+i+']').val(); // contents의 내용
+    var contents_id = getUrlParameter('contentsId'); // thumbnail에서 가져온 contents_id값 / DB에서 쿼리를 확인할 때 contents_id값으로 확인해야하므로 필요함.
+    var order = $('[name="image_preview'+i+'"]').val(); //미리저장시 순서확인을 위한 변수
+    var fd = new FormData();
+
+    fd.append('file', file);
+    fd.append('li_value', i);
+    fd.append('order', order); //순서
+    fd.append('contents_id', contents_id); //컨텐츠 ID
+    fd.append('build_image_origin', build_image_origin); //이미지 출처
+    fd.append('build_contents', build_contents); //컨텐츠 내용
+    
+    console.log(file);
+    console.log(order);
+    console.log(contents_id);
+    console.log(build_image_origin);
+     $.ajax({
+        url: '/upload/revise_builder_contents',
+        data: fd,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function(data){
+          alert("EE");
+        }
+      });
+    $('#file_input_div'+i+'').remove();
+  }
+</script>
+</body>
+</html>

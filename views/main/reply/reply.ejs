@@ -1,0 +1,55 @@
+<!DOCTYPE html> 
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>ido mobile</title> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!-- <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+<!-- 댓글 wrap -->
+<section class="reply">
+	<div class="reply_wrap" style="">
+		<div class="reply_header">
+			<div class="left_header">
+				<div class="reply_title">댓글</div>
+				<div class="reply_cnt" id=""></div>
+				<div class="reply_refresh">
+					<img src="/img/mobile/main/reply/refresh_icon.png"> 
+				</div>
+			</div>
+			<div class="reply_close">
+				<img src="/img/mobile/main/reply/reply_close_bt.png">
+				<!-- <img src="/img/mobile/main/survey/arrow_back.png"> -->
+			</div>
+			<div class="order_reply">
+				<div class="newlist"><div class="newlist_bt"><img src="/img/mobile/main/reply/newlist_off.png"></div>최신순정렬</div>
+				<div class="bestlist"><div class="bestlist_bt"><img src="/img/mobile/main/reply/bestlist_off.png"></div>인기순정렬</div>
+			</div>
+		</div>
+		<div class="reply_contents">
+		</div>
+		<div class="reply_footer">
+			<div class="reply_write">
+				<textarea id="replyContents" rows="5" placeholder="깨끗한 댓글을 달아주세요."></textarea>
+			</div>
+			<div class="submit_reply">댓글달기</div>
+		</div>
+	</div>
+</section>
+<!-- 댓글 wrap -->
+
+<script type="text/javascript" src="/js/getUrlParameter.js"></script> <!-- getURL JS -->
+<script type="text/javascript" src="/js/web/main/reply/reply.js"></script> <!-- 댓글 JS -->
+<link rel="stylesheet" href="/css/web/main/reply/reply.css" /> <!-- 댓글 css -->
+<input type="hidden" id="chg_no"  value=""/>  <!-- no 변경값 -->
+<input type="hidden" id="replyCnt"  value=""/>  <!-- 댓글 개수 -->
+<input type="hidden" id="sessionId"  value=""/>  <!-- session_id -->
+
+</body>
+</html>

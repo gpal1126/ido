@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+<form id="myForm">
+  <input type="checkbox" name="agreement" >여기에
+  <input type="checkbox" name="agreement" >이용약관
+  <input type="checkbox" name="agreement" >넣어주기
+  <input type="checkbox" name="agreement" >4
+  <input type="checkbox" name="agreement" >5
+  <input type="checkbox" name="all" id="all">전체
+  <!-- 5개의 체크가 모두 되어야 다음 스텝 버튼이 활성화 됨 -->
+  <br/>
+  <br>
+  상호명 : <input type="text" id="companyName" disabled="disabled"><br>
+  사업자등록번호 : <input type="text" id="company_number1" disabled="disabled"> - <input type="text" id="company_number2" disabled="disabled"> - <input type="text" id="company_number3" disabled="disabled">
+</form>
+<button id="validate"  disabled="disabled">사업자번호 인증</button>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $('input[name="agreement"]').click(function(){
+    if($('input[name="agreement"]:checked').length == 5 ){
+      $('#validate').removeAttr('disabled')
+      $('#companyName').removeAttr('disabled');
+      $('#company_number1').removeAttr('disabled');
+      $('#company_number2').removeAttr('disabled');
+      $('#company_number3').removeAttr('disabled');
+    }
+    if($('input[name="agreement"]:checked').length < 5 ){
+      $('#validate').attr('disabled', true);
+      $('#companyName').attr('disabled', true);
+      $('#company_number1').attr('disabled', true);
+      $('#company_number2').attr('disabled', true);
+      $('#company_number3').attr('disabled', true);
+    }
+  });
+
+  $("#all").click(function() {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+          this.checked = true;
+      });
+      if($('input[name="agreement"]:checked').length == 5 ){
+        $('#validate').removeAttr('disabled');
+        $('#companyName').removeAttr('disabled');
+        $('#company_number1').removeAttr('disabled');
+        $('#company_number2').removeAttr('disabled');
+        $('#company_number3').removeAttr('disabled');
+      }
+    }
+    else {
+
+        $(':checkbox').each(function() {
+              this.checked = false;
+          });
+          $('#validate').attr('disabled', true);
+          $('#companyName').attr('disabled', true);
+          $('#company_number1').attr('disabled', true);
+          $('#company_number2').attr('disabled', true);
+          $('#company_number3').attr('disabled', true);
+      }
+
+  });
+})
+</script>
+<script type="text/javascript">
+$("#validate").click(function(){
+  
+  var session = $('#session').val();
+  var companyName = $('#companyName').val();
+  var company_number1 = $('#company_number1').val();
+  var company_number2 = $('#company_number2').val();
+  var company_number3 = $('#company_number3').val();
+
+  console.log(companyName + company_number1 + company_number2 + company_number3)
+  if(companyName == '' || company_number1=='' || company_number2 == '' || company_number3 == ''){
+    alert('입력을 완료하여 주십시오.');
+  }else{
+    var businessNumber = {businessNumber : company_number1 + '-' + company_number2 +'-'+ company_number3 +'-'+session};
+    /*ajax 구현*/
+    $.ajax({
+      url : '/user/check_businessNumber',
+      type : 'GET',
+      data : businessNumber,
+      success:function(data){ //사업자 번호 확인 후 승인완료되면 success를 넘긴다.
+        var json = {"userId":data};
+        if(data != null){
+          $.ajax({
+            url : '/user/applicationPartner',
+            data : json,
+            type : 'POST'
+          })
+          location.href = "/main_login"; //신청이 완료되었습니다. 페이지 보여주고 -> 홈으로 이동.
+        }
+      }
+    })
+  }
+});
+</script>
+<input id="session" type="hidden" value="<%= session %>">
+</body>
+</html>
+
+

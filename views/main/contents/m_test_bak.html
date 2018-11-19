@@ -1,0 +1,1388 @@
+<!-- commit test -->
+<!DOCTYPE html> 
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>ido mobile</title> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/getUrlParameter.js"></script>
+<script src="js/web/common/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="css/web/common/jquery-ui.css">
+<script type="text/javascript" src="js/web/common/jquery-modal/jquery.modal.js"></script>
+<script type="text/javascript" src="js/web/common/jquery.blockUI.js"></script> 
+<link rel="stylesheet" type="text/css" href="js/web/common/jquery-modal/jquery.modal.css" />
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="js/web/survey/m_surveyAnswer.js"></script>
+<script src="js/web/survey/amcharts.js" type="text/javascript"></script>
+<script src="js/web/survey/pie.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/web/builder/survey/m_result_survey.css">
+<link rel="stylesheet" type="text/css" href="css/web/main/contents/m_contents.css"> <!-- 컨텐츠 css -->
+
+<!-- 별점형 별점 주기 js -->
+<script type="text/javascript" src="/js/web/common/jquery.raty.js" ></script> 
+<script>
+var contentsId = getUrlParameter('contentsId');
+$.ajax({
+	url :'/m_contents_view?contentsId='+contentsId,
+	success:function(data){
+		var contents = data.data;	//파트너 및 컨텐츠 정보
+		var survey = data.data1;	//설문 정보
+		var session = data.session;	//세션 정보
+		var reply = data.reply;		//댓글 정보
+		var likeInfo = data.likeInfo;	//댓글 좋아요 정보
+		//console.log(contents[0].THUMBNAIL_IMAGE_PATH);
+		//console.log(contents[0].PROFILE_PICTURE_PATH);
+		var partner_profile = contents[0].PROFILE_PICTURE_PATH;
+		var idx = partner_profile.indexOf('/');
+		partner_profile = partner_profile.substring(idx+1);
+		//console.log('partner_profile::'+partner_profile);
+		/* 상단 썸네일 부분에 구성요소들 */
+		$('.thumbnail_container').append('<div class="thumbnail_image"><img src="'+contents[0].THUMBNAIL_IMAGE_PATH+'"></div>');
+		$('.thumbnail_container').append('<div class="p_profile">'
+											+'<span><img src="'+partner_profile+'" style="width:50px; height:50px;"></span>'
+											+'<span class="p_nickname">'+contents[0].NIKNAME+'</span>'
+											+'<span class="p_regdate">'+contents[0].REG_DATE+'</span>'
+										+'</div>');
+		$('.thumbnail_container').append('<div class="thumbnail_title">'+contents[0].TITLE+'</div>');
+		$('.thumbnail_container').append('<div class="thumbnail_contents">'+contents[0].THUMBNAIL_CONTENTS+'</div>');
+		$('.thumbnail_container').append('<div class="thumbnail_imoticon"></div>');
+		/* 상단 썸네일 부분에 구성요소들 */
+		for(i in contents){
+			console.log(contents[i])
+			
+			$('.contsContainer').append('<div class="contsImg"><img src="'+contents[i].CONTENTS_IMAGE_PATH+'" style="width:95%; height:auto"></div>'
+										+'<div class="contsImageOrigin">출처 : '+contents[i].CONTENTS_IMAGE_ORIGIN+'</div><br>'
+										+'<div class="contsContents">'+contents[i].CONTENTS.replace(/\n/g, '<br>')+'</div><br>'
+										+'<div class="gray_line" id="grayLine'+(parseInt(i)+1)+'"><img src="images/common/web_app/contents/gray_line.png"></div>');
+			
+			/* 마지막 컨텐츠 line 지우기 */
+			if(parseInt(i)+1==contents.length){
+				$('#grayLine'+(parseInt(i)+1)+'').remove();
+			}
+		}
+
+		console.log(survey)
+		for(index in survey){
+			var index = parseInt(index);
+			if(survey != ''){
+				$('.survey').append('<div class="surveyTitleDiv">'+
+										'<div class="survey_title">'+
+											'<span id="surveyTitle'+(index+1)+'">'+survey[index].SURVEY_TITLE+'</span><br>'+
+											'<div class="more_arrow"></div>'+
+										'</div>'+
+										'<div id="dialog-survey'+(index+1)+'" title="IDO RESEARCH" style="display:none;">'+
+										'<div class="selectSurveyDiv" id="selectSurveyDiv'+(index+1)+'"></div>'+
+										'</div>'+
+										'<div class="survey_banner"><img src="/images/common/main/contents/start_research.png" style="width:94%; height:auto"></div> '+
+										'<div class="btn_arrow"></div> '+
+										'<div class="surveyThumbDiv_B" id="surveyThumbDiv'+(index+1)+'" style="z-index:1">'+
+											'<img src="/images/common/main/contents/black_bg_350.png" style="width:94%; height:auto;">'+
+										'</div>'+
+										'<div class="surveyThumbDiv" id="surveyThumbDiv'+(index+1)+'">'+
+			   							'<img class="surveyThumbnailImg" src="'+survey[index].SURVEY_THUMBNAIL+'" id="surveyThumbnailImg'+(index+1)+'" style="width:94%; height:auto;">'+
+			   							'</div>'+
+	   								'</div>')
+			}
+
+			var dialog, form;
+
+			dialog = $( "#dialog-survey"+(index+1)).dialog({
+			  	autoOpen: false,
+			  	height: 400,
+			  	width: 375,
+			  	modal: true,
+			  	buttons: {
+			    	"닫기": function() {
+			    		$( "#dialog-survey"+(index+1) ).dialog( "close" );
+			   		}
+				},
+				close: function() {
+					//컨텐츠 새창으로 다시 돌아가기
+			    	//location.href="/upload/update_builder_contents?contentsId="+getUrlParameter('contentsId');
+					//데이터 초기화
+					$('.selectSurveyDiv').empty();
+					
+					$('#surveyThumbnailImg'+(index+1)).unbind('onclick');
+					$('#surveyThumbnailImg'+(index+1)).bind('onclick');
+					
+					//다음 버튼 초기화
+					$('#nextBtn').unbind('click');
+					$('#nextBtn').bind('click');
+					
+					//완료 버튼 초기화
+					$('#finishBtn').unbind('click');
+					$('#finishBtn').bind('click');
+			  	}
+			});	
+
+			$('#surveyThumbDiv'+(index+1)).on('click',function(){
+				console.log('surveyId::'+$('#surveyId').val());
+				console.log('surveyId::'+survey[index].SURVEY_ID);
+				$('#dialog-survey'+(index+1)).dialog('open');
+				$.ajax({
+					url : '/upload/listSurveySecondTitle?surveyId='+survey[index].SURVEY_ID,
+					type : 'GET',
+					success : function(data){
+						console.log(data);
+						//title 값 for
+						for(var i in data.title){
+							//i값 숫자로 변환
+							i = parseInt(i);
+							console.log('survey_type_id::'+data.title[i].SURVEY_TYPE_ID);
+							//답변 타입 텍스트:1, 이미지:2
+							var answerType = data.title[i].SURVEY_ANSWER_TYPE;
+							
+							var idx=0;
+							
+							//첫번째 survey 
+							selectSurveyType(0, i);
+							
+							function selectSurveyType(idx, i){
+								if(i==idx){
+									//설문 유형 타입
+									var surveyType = data.title[i].SURVEY_TYPE;
+									if(surveyType=='1'){	//순위형
+										console.log('순위형 i::'+i);
+										var json = {title:data.title[i], reply:data.reply[i]};
+										//console.log(json);
+										rankingType(json, i);	
+									}else if(surveyType=='2'){	//별점형
+										var json = {title:data.title[i], reply:data.reply[i]};
+										starType(json, i);
+									}else if(surveyType=='3'){	//이중택일형
+										console.log('택일형 i::'+i);
+										var json = {title:data.title[i], reply:data.reply[i]};
+										chooseType(json, i);
+									}else if(surveyType=='4'){	//선택형
+										var json = {title:data.title[i], reply:data.reply[i]};
+										selectType(json, i);
+									}else if(surveyType=='5'){	//텍스트형
+										var json = {title:data.title[i], reply:data.reply[i]};
+										textType(json, i);
+									}//if
+								}//if
+							}//end function
+						}//for	ui-dialog-buttonpane
+						
+						if(idx!=i){//마지막 설문이 아닐 때
+							$('.ui-dialog-buttonset').css('float', 'left')
+							$('.ui-dialog-buttonpane').append('<div class=""><button style="position:absolute; left:80%;" class="nextBtn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="nextBtn" value="다음"><span class="ui-button-text">다음</span></button></div>');
+						}else if(idx==i){//마지막 설문일 때
+							$('#nextBtn').hide();
+							$('.ui-dialog-buttonset').css('float', 'left')
+							$('.ui-dialog-buttonpane').append('<div class=""><button style="position:absolute; left:80%;" class="finishBtn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="finishBtn" value="완료"><span class="ui-button-text">완료</span></button></div>');
+						}//if
+						// if(idx!=i){//마지막 설문이 아닐 때
+						// 	$('#selectSurveyDiv'+(index+1)).after('<button style="position:absolute; top:230px; left:290px;" class="nextBtn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="nextBtn" value="다음">다음</button><br/>');
+						// }else if(idx==i){//마지막 설문일 때
+						// 	$('#nextBtn').hide();
+						// 	$('#selectSurveyDiv'+(index+1)).after('<div style="position:absolute; top:230px; left:290px;"><input type="button" class="finishBtn" id="finishBtn" value="완료"></div><br/>');
+						// }//if
+						
+						//다음버튼 클릭시
+						$('#nextBtn').click(function(){
+							var surveyType = $('#surveyType'+(idx+1)).val();
+							if(surveyType == 1){
+								inputRank('next', idx);
+							}else if(surveyType==2){
+								inputStar('next', idx);
+								var starScore = starScoreObj.getValue();
+								console.log('starScore::::::????'+starScore);
+								if(starScore==''){
+									alert('해당 답변에 별점을 주시기 바랍니다.');
+									return false;
+								}
+							}else if(surveyType==3){
+								inputChoice('next', idx);
+								var contsRst = contsRstVal.getValue();
+								console.log('contsRst:::::::??????'+contsRst);
+								if(typeof contsRst=='undefined'){
+									alert('먼저 이중택일을 해주시기 바랍니다.');
+									return false;
+								}
+							}else if(surveyType==4){
+								inputSelect('next', idx);
+							}else if(surveyType==5){
+								inputText('next', idx);
+							}//if
+							
+							idx += 1;
+							for(var j=1; j<=i; j++){
+								console.log('j::'+j);
+								selectSurveyType(idx, j);
+								//$('#surveyDiv'+(j-1)+'').hide();
+								//$('#nextBtn'+(j-1)+'').hide();
+								console.log('i::'+i);
+							}
+							if(idx==i){//마지막일 때
+								console.log('마지막값::');
+								$('#nextBtn').hide();
+								$('.ui-dialog-buttonpane').append('<div class=""><button style="position:absolute; left:80%;" class="finishBtn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="finishBtn" value="완료"><span class="ui-button-text">완료</span></button></div>');
+							}//if
+							$('#selectSurveyDiv'+(index+1)+' #surveyDiv'+(idx)+'').hide();
+							
+							//완료버튼 클릭시
+							$('#finishBtn').click(function(){
+								var surveyType = $('#surveyType'+(idx+1)).val();
+								if(surveyType == 1){
+									inputRank('finish', idx);
+								}else if(surveyType==2){
+									inputStar('finish', idx);	
+									var starScore = starScoreObj.getValue();
+									console.log('starScore::::::????'+starScore);
+									if(starScore==''){
+										alert('해당 답변에 별점을 주시기 바랍니다.');
+										return false;
+									}
+								}else if(surveyType==3){
+									inputChoice('finish', idx);
+									var contsRst = contsRstVal.getValue();
+									console.log('contsRst:::::::??????'+contsRst);
+									if(typeof contsRst=='undefined'){
+										alert('먼저 이중택일을 해주시기 바랍니다.');
+										return false;
+									}
+								}else if(surveyType==4){
+									inputSelect('finish', idx);
+								}else if(surveyType==5){
+									inputText('finish', idx);
+								}//if
+							})
+						});
+
+						$('#finishBtn').click(function(){
+							var surveyType = $('#surveyType'+(idx+1)).val();
+							if(surveyType == 1){
+								inputRank('finish', idx);
+							}else if(surveyType==4){
+								inputSelect('finish', idx);
+							}
+						})	
+					},//end success
+					error : function(error){
+					}
+				});//end ajax	
+			});
+
+
+			function rankingType(json, i){
+				console.log('순위형::');
+				//console.log(json.title);
+				//console.log(json.reply);
+				console.log('SURVEY_TYPE_ID::'+json.title.SURVEY_TYPE_ID);
+				console.log('SURVEY_TYPE::'+json.title.SURVEY_TYPE);
+				console.log('SURVEY_ANSWER_TYPE::'+json.title.SURVEY_ANSWER_TYPE);
+				console.log('SECOND_SURVEY_TITLE::'+json.title.SECOND_SURVEY_TITLE);
+				
+				//중질문 타이틀
+			 	var surveyTitleHtml = ''+
+			 					      '<form id="surveyForm'+(i+1)+'"><div id="surveyDiv'+(i+1)+'" class="surveyDiv" style="border:0px solid #000; position:relative">'+
+				 					  	'<input type="hidden" id="surveyAnswerType'+(i+1)+'" name="surveyAnswerType" value="'+json.title.SURVEY_ANSWER_TYPE+'">'+
+										'<input type="hidden" id="surveyTypeId'+(i+1)+'" name="surveyTypeId" value="'+json.title.SURVEY_TYPE_ID+'"/>'+
+										'<input type="hidden" id="surveyType'+(i+1)+'" name="surveyType" value="'+json.title.SURVEY_TYPE+'">'+
+										'<div class="rank_type_img" style="margin-left:5%;"></div><br>'+
+			  							/* '<div class="surveyTypeDiv" style="font-size:1.2em; font-weight:700; margin-left:42%"><div class="typeButton"></div><br><br>'+ */ 
+			  							'<div class="surveySecondTitleDiv">'+
+			  								'<div class="titleSpan" id="titleSpan'+(i+1)+'"><span style="color:#438CBE;">◎</span> '+json.title.SECOND_SURVEY_TITLE+'</div><br>'+
+			  							'</div>'+
+			  							'<div class="contsContainer" style="width:100%; position:absolute; top:80px"></div>'+
+			  							'</form>';
+			  							
+			  					
+			  	
+			  	//중질문 타이틀 append						
+				$('#selectSurveyDiv'+(index+1)).append(surveyTitleHtml);
+			  	
+			  							
+				for(var j in json.reply){
+					console.log('j : '+j);
+				  	//중질문 답변 						
+					var surveyReplyHtml =	'<div class="contsDiv'+(i+1)+'" id="contsDiv'+(i+1)+'_'+(j+1)+'">'+
+												'<input type="hidden" id="surveyContentsId'+(j+1)+'" name="surveyContentsId" value="'+json.reply[j].SURVEY_CONTENTS_ID+'">';
+											
+					if(json.title.SURVEY_ANSWER_TYPE=='1'){
+						surveyReplyHtml +=	//'<div></div>'+
+						  						'<div class="contsTxtDiv">'+
+							  						'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+						  						'</div>';
+			  		}
+			  		if(json.title.SURVEY_ANSWER_TYPE=='2'){
+			  			surveyReplyHtml +=	'<div class="img" name="rankCheckbox"  id="img'+(i+1)+'_'+(j+1)+'" style="content: url('+json.reply[j].SURVEY_IMAGE_PATH+'); width:100px; height:100px;">'+				
+			  									'<input type="hidden" name="rank_sub_input'+(i+1)+'" id="sub_input_'+(i+1)+'_'+(j+1)+'" value="">'+
+			  					    		'</div>'+ 		 				
+				  							'<div class="contsTxtDiv" style="text-align:center; color:#8d8d8d; text-decoration:underline; font-size: 0.9em;">'+
+				  								'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+				  							'</div>';
+			  		}//if			
+		    		surveyReplyHtml += '</div>';
+					
+		    		//중질문 답변 append
+					
+		    		$('#selectSurveyDiv'+(index+1)+' #surveyDiv'+(i+1)+' .contsContainer').append(surveyReplyHtml);
+		    		
+
+		    		switch(json.reply.length){
+		    			case 2 :
+		    				console.log('222222');
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    				$('.contsContainer').css({'top':'120px'});
+		    				$('div[class*="contsDiv"]').css({'padding-left':'50px'});  
+		    			break;
+		    			case 3 :
+		    				console.log('333333');
+		    				$('div[class*="contsDiv"]').css({'width':'100px'});
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    				$('.contsContainer').css({'top':'100px'});
+		    				$('div[class*="contsDiv"]').css({'padding-left':'10px'});
+		    			break;
+		    			case 4 :
+		    				console.log('333333');
+		    				$('div[class*="contsDiv"]').css({'width':'100px'});
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    				$('.contsContainer').css({'top':'100px'});
+		    				$('div[class*="contsDiv"]').css({'padding-left':'40px'});
+		    			break;
+		    		}
+				}//for
+				
+
+				
+				var clickCount = 0;
+				$('div[id*=img'+(i+1)+']').click(function(){
+					clickCount++;
+					var matches = 1;
+					var id = $(this).attr('id').split('img'+(i+1)+'_')[1];
+					var rankValue = 1;
+					console.log('count : '+clickCount)
+					if(clickCount > 2){ //2개 이상 선택시
+						if($('#sub_input_'+(i+1)+'_'+id).val()=='1' || $('#sub_input_'+(i+1)+'_'+id).val()=='2'){ //만약 2개이상 클릭시인데 1위 2위를 다시 클릭시 0으로 만듬.
+							$('#sub_input_'+(i+1)+'_'+id).val('0');
+							clickCount = 1;
+						}else{ // 1 2위를 제외한 나머지 이미지 클릭시 alert
+							alert('이미 두개를 선택하셨습니다.')
+						}
+					}else{ // 2개 아래로 선택시
+						$("input[id*=sub_input_"+(i+1)+"]").each(function(index, val) { // 1위가 선택되어있으면 2등의 값을 제공한다.
+							if ($('input[name="rank_sub_input'+(i+1)+'"]').eq(index).val() == '1') {
+								rankValue = 2;
+							}
+						});
+						if($('#sub_input_'+(i+1)+'_'+id).val()=='1' || $('#sub_input_'+(i+1)+'_'+id).val()=='2'){
+							$('#sub_input_'+(i+1)+'_'+id).val('0');
+						}else{
+							$('#sub_input_'+(i+1)+'_'+id).val(rankValue);
+							 
+							$('#sub_input_'+(i+1)+'_'+id).parent().wrap('<div id="rankWrap'+id+'" style="content : url(images/common/builder/survey/'+rankValue+'.png); width:100px; height:100px;"></div>');
+						}	
+					}
+
+					var wrapCount = 0;
+					//순위 수정을 원할때 unwrap해주는 function
+					$('div[id*=rankWrap]').click(function(){
+						wrapCount++;
+						if(wrapCount == 2){
+							clickCount = 0;
+						}else{
+							clickCount = 1;
+						}
+						var rankWrapId = $(this).attr('id').split('rankWrap')[1];
+						
+						$('#sub_input_'+(i+1)+'_'+rankWrapId).val('0');
+						
+						$(this).children().unwrap();
+					})
+				})
+			}/*Rank*/
+
+			function starType(json, i){
+				console.log('별점형::');
+				console.log('SURVEY_TYPE_ID::'+json.title.SURVEY_TYPE_ID);
+				console.log('SURVEY_TYPE::'+json.title.SURVEY_TYPE);
+				console.log('SURVEY_ANSWER_TYPE::'+json.title.SURVEY_ANSWER_TYPE);
+				console.log('SECOND_SURVEY_TITLE::'+json.title.SECOND_SURVEY_TITLE);
+				
+				//중질문 타이틀
+			 	var surveyTitleHtml = ''+
+			 					      '<div id="surveyDiv'+(i+1)+'" class="surveyDiv" style="border:0px solid #000; position:relative;">'+
+				 					  	'<input type="hidden" id="surveyAnswerType'+(i+1)+'" name="surveyAnswerType" value="'+json.title.SURVEY_ANSWER_TYPE+'">'+
+										'<input type="hidden" id="surveyTypeId'+(i+1)+'" name="surveyTypeId" value="'+json.title.SURVEY_TYPE_ID+'"/>'+
+										'<input type="hidden" id="surveyType'+(i+1)+'" name="surveyType" value="'+json.title.SURVEY_TYPE+'">'+
+										'<div class="type_star"></div>'+
+										'<div class="star_type_img" style="margin-left:5%;"></div><br>'+
+										/* '<div class="surveyTypeDiv" style="font-size:1.2em; font-weight:700; margin-left:42%;"><span class="surveyTypeTxt">별점형</span></div><br>'+ */
+			  							'<div class="surveySecondTitleDiv">'+
+			  								'<span class="titleSpan" id="titleSpan'+(i+1)+'"><span style="color:#438CBE;">◎</span> '+json.title.SECOND_SURVEY_TITLE+'</span>'+
+			  								'<div class="blue_line"></div>'+
+				  							'<div class="secSvyTitleDiv">'+
+												'<img class="secSvyTitleImg" src="'+json.title.SECOND_SURVEY_IMAGE_PATH+'" id="secSvyTitleImg'+(i+1)+'" style="width:100px; height:100px; margin:0 0 0 32%"/>'+
+											'</div>'+
+			  							'</div><br><br>'+
+			  							'<div class="starContainer" style="position:absolute; left:110px; top:200px;"></div>'+
+			  							'';
+			  							
+			  				
+				//중질문 타이틀 append						
+				$('#selectSurveyDiv'+(index+1)).append(surveyTitleHtml);
+			  	
+			  
+			  							
+				for(var j in json.reply){
+					j = parseInt(j);
+					console.log('j::'+j);
+					console.log(json.reply[j].SURVEY_CONTENTS_ID);
+					console.log(json.reply[j].SURVEY_CONTENTS);
+					console.log(json.reply[j].SURVEY_IMAGE_PATH);
+					
+				  	//중질문 답변 						
+					var surveyReplyHtml =	'<div class="contsDiv" id="contsDiv'+(i+1)+'_'+(j+1)+'">'+
+												'<input type="hidden" id="surveyContentsId'+(j+1)+'" name="surveyContentsId" value="'+json.reply[j].SURVEY_CONTENTS_ID+'">';
+											
+					if(json.title.SURVEY_ANSWER_TYPE=='1'){
+						surveyReplyHtml +=	//'<div></div>'+
+						  						'<div class="contsTxtDiv">'+
+							  						'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+						  						'</div>'+
+						  						'<div class="starDiv">'+
+							  						'<span class="star" id="star'+(i+1)+'_'+(j+1)+'"></span>'+
+							  						'<input type="hidden" class="starRating" id="starRating'+(i+1)+'_'+(j+1)+'"/>'+
+						  						'</div>'+
+						  						'';
+			  		}
+			  		if(json.title.SURVEY_ANSWER_TYPE=='2'){
+			  			surveyReplyHtml +=	
+					  							'<img class="img" src="'+json.reply[j].SURVEY_IMAGE_PATH+'" id="img'+(i+1)+'_'+(j+1)+'" style="width:200px; height:160px;"/>'+
+					  							'<div class="contsTxtDiv">'+
+					  								'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+					  							'</div>'+
+					  							'<div class="starDiv" style="position:absolute; margin:-20px 0 0 200px;">'+
+							  						'<span class="star" id="star'+(i+1)+'_'+(j+1)+'"></span>'+
+							  						'<input type="hidden" class="starRating" id="starRating'+(i+1)+'_'+(j+1)+'"/>'+
+						  						'</div>'+
+					  							'';	
+			  		}//if			
+			  					    		'</div>'; 		 				
+		    		surveyReplyHtml += '</div>';
+		    		
+		    		//중질문 답변 append
+				
+		    		$('#selectSurveyDiv'+(index+1)+' #surveyDiv'+(i+1)+' .starContainer').append(surveyReplyHtml);
+		    		
+					$('#surveyDiv'+(i+1)+' #star'+(i+1)+'_'+(j+1)+'').raty({
+						score: 0
+						,path : "/images/common/main/result_survey"
+						,width : 200
+						,click: function(score, evt) {
+							var clkContsDiv = $(this).attr('id');
+							//j값 뽑아오기
+							var j = clkContsDiv.split('_')[1];
+							j = parseInt(j);
+						 	console.log('j:::???????'+j);
+						    $('#starRating'+(i+1)+'_'+j+'').val(score);
+						}
+					});
+
+					switch(json.reply.length){
+		    			case 2 :
+		    				console.log('222222');
+		    			break;
+		    			case 3 :
+		    				console.log('333333');
+		    			break;
+		    		}
+				}//for
+			}	
+
+			
+			function chooseType(json, i){
+				console.log('이중택일형::');
+				
+				console.log('SURVEY_TYPE_ID::'+json.title.SURVEY_TYPE_ID);
+				console.log('SURVEY_TYPE::'+json.title.SURVEY_TYPE);
+				console.log('SURVEY_ANSWER_TYPE::'+json.title.SURVEY_ANSWER_TYPE);
+				console.log('SECOND_SURVEY_TITLE::'+json.title.SECOND_SURVEY_TITLE);
+				
+				
+				//중질문 타이틀
+			 	var surveyTitleHtml = ''+
+			 					      '<div id="surveyDiv'+(i+1)+'" class="surveyDiv" style="border:0px solid #000; position:relative">'+
+				 					  	'<input type="hidden" id="surveyAnswerType'+(i+1)+'" name="surveyAnswerType" value="'+json.title.SURVEY_ANSWER_TYPE+'">'+
+										'<input type="hidden" id="surveyTypeId'+(i+1)+'" name="surveyTypeId" value="'+json.title.SURVEY_TYPE_ID+'"/>'+
+										'<input type="hidden" id="surveyType'+(i+1)+'" name="surveyType" value="'+json.title.SURVEY_TYPE+'">'+
+										'<div class="choice_type_img" style="margin-left:5%;"></div><br>'+
+										/* '<div class="surveyTypeDiv" style="font-size:1.2em; font-weight:700; margin-left:39%;"><span class="surveyTypeTxt">이중택일형</span></div><br>'+ */
+			  							'<div class="surveySecondTitleDiv">'+
+			  								'<div class="blue_line"></div>'+
+			  								'<span class="titleSpan" id="titleSpan'+(i+1)+'"><span style="color:#438CBE;">◎</span> '+json.title.SECOND_SURVEY_TITLE+'</span>'+
+			  							'</div>'+
+			  							'';
+			  					
+			  	
+				//중질문 타이틀 append						
+				$('#selectSurveyDiv'+(index+1)).append(surveyTitleHtml);
+			  	console.log('택일형 뭘까????:<%=index+1%>');
+			  
+			  							
+				for(var j in json.reply){
+					j = parseInt(j);
+					console.log('j::'+j);
+					console.log(json.reply[j].SURVEY_CONTENTS_ID);
+					console.log(json.reply[j].SURVEY_CONTENTS);
+					console.log(json.reply[j].SURVEY_IMAGE_PATH);
+					
+					viewConts();
+					if(j>=2){
+							$('#selectSurveyDiv'+(index+1)+' #contsDiv'+(i+1)+'_'+(j+1)+'').hide();
+					}
+		    		 
+		    		function viewConts(){
+					  	//중질문 답변 						
+						var surveyReplyHtml =	'<span class="contsDiv'+(i+1)+'" id="contsDiv'+(i+1)+'_'+(j+1)+'" style="float:left; padding:0 5px 0 0;">'+
+													'<input type="hidden" id="surveyContentsId'+(j+1)+'" name="surveyContentsId" value="'+json.reply[j].SURVEY_CONTENTS_ID+'">';
+												
+						if(json.title.SURVEY_ANSWER_TYPE=='1'){
+							surveyReplyHtml +=		''+
+							  						'<span class="contsTxtDiv">'+
+								  						'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+							  						'</span>'+
+							  						'';
+				  		}else if(json.title.SURVEY_ANSWER_TYPE=='2'){
+				  			surveyReplyHtml +=		''+
+				  									'<a href="#" class="choiceAtag" id="choiceAtag">'+
+						  							'<img class="img" src="'+json.reply[j].SURVEY_IMAGE_PATH+'" id="img'+(i+1)+'_'+(j+1)+'" style="width:100px; height:100px;"/>'+
+						  							'<div class="contsTxtDiv" style="text-align:center; color:#8d8d8d; text-decoration:underline; font-size: 0.9em;">'+
+						  								'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+						  							'</div>'+
+						  							'</a>'+
+						  							'';	
+				  		}//if			
+				  					    		'</span>'; 		 				
+				  					    		
+		    			surveyReplyHtml += '</div>';
+		    			
+		    			
+		    			//중질문 답변 append
+		        		$('#selectSurveyDiv'+(index+1)+' #surveyDiv'+(i+1)+'').append(surveyReplyHtml);
+		    			
+					}
+					/* 답변 갯수에 맞춘 css */
+					switch(json.reply.length){
+		    			case 2 :
+		    				$('span[class*=contsDiv]').css('margin-top',40);
+		    				$('span[class*=contsDiv]').css('margin-left',47);
+		    			break;
+		    			case 3 :
+		    				console.log('333333');
+		    			break;
+		    			case 4 :
+		    				$('span[class*=contsDiv]').css('margin-top',40);
+		    				$('span[class*=contsDiv]').css('margin-left',47);
+		    			break;
+		    			case 5 :
+		    				console.log('555555');
+		    			break;
+		    		}	
+
+				}//for
+				
+				
+					//중질문 답변 append
+					//$('#selectSurveyDiv<%=index+1%> #surveyDiv'+(i+1)+'').append(surveyReplyHtml);
+					
+					//선택한 답변 배열 선언
+					var contsArr = new Array();
+					
+					//시작idx와 끝idx 선언
+					var startIdx = 0;
+					var endIdx = 2;
+					
+					//답변 클릭시 function
+					$('span[id*=contsDiv]').click(function(){
+						console.log('?????')
+						//스크롤 고정
+						$( 'html, body' ).stop().animate({ scrollTop : '+=1' });
+						
+						console.log('이중택일 답변 클릭!!');	
+						
+						//선택한 답변 id 선언
+						var choiceContsDiv = $(this).attr('id'); 
+						
+						//선택한 답변 push
+						contsArr.push(choiceContsDiv);
+						
+						//중복 제거
+						var choiceContsArr = [];
+						$.each(contsArr, function(idx, elem){
+							if($.inArray(elem, choiceContsArr) == -1){
+								choiceContsArr.push(elem);
+								//console.log(choiceContsArr);
+							}//if
+						});
+						
+						startIdx += 2;
+						endIdx += 2;
+						
+						if(json.reply.length==2){
+							//$('#'+choiceContsDiv+' #choiceAtag').css('opacity', '1.0');
+							var contsRst = $(this).attr('id');
+							console.log('contsRst???'+contsRst);
+							if(contsRst.length>0){
+								$('.selectSurveyDiv span[id*=contsDiv]').hide();	//나머지 답변 숨김
+								$('.selectSurveyDiv #'+contsRst+'').show();	//마지막 결과 답변만 보여줌
+								$('#'+contsRst+' #choiceAtag').css('opacity','1.0');
+								
+								contsRstVal.setValue(contsRst);
+							}
+						}else if(json.reply.length==4){	//답변이 4개일 경우
+							//if(choiceContsArr.length<2){
+								
+								for(var j in json.reply){
+									j = parseInt(j);
+									
+									//2개씩 답변 보여주기
+									nextConts(j);
+								}//for
+							//}else 
+							if(contsArr.length>=2){
+								console.log('contsArr::'+contsArr);
+								
+								for(var no in contsArr){
+									no = parseInt(no);
+									
+									var choiceContsDiv = contsArr[no];
+									
+									console.log('choiceContsDiv::'+choiceContsDiv);
+									//선택한 답변 div 배열 보여주기
+									$('.selectSurveyDiv  #'+choiceContsDiv+'').show();
+									
+									if(contsArr.length>2){//답변 배열이 2이상이면 배열 마지막 값만 뽑아오기
+										var contsRst = contsArr[contsArr.length-1]; 
+										console.log('contsRst::'+contsRst);
+										console.log('$(this).attr(id)::'+$(this).attr('id'));
+										if(contsRst.length>0){
+											if(contsRst==$(this).attr('id')){
+												$('.selectSurveyDiv #'+contsArr[no]+'').hide();	//나머지 답변 숨김
+												$('.selectSurveyDiv #'+contsRst+'').show();	//마지막 결과 답변만 보여줌
+												$('#'+contsRst+' #choiceAtag').css('opacity','1.0');
+												
+												contsRstVal.setValue(contsRst);
+											}//if
+										}//if
+									}//if
+								}//for
+							}//if	
+						}else if(json.reply.length==8){	//답변이 8개일 경우
+							console.log('contsArr.length:::'+contsArr.length);
+							console.log('visible:::');
+							
+							for(var j in json.reply){
+								j = parseInt(j);
+								
+								//2개씩 답변 보여주기
+								nextConts(j);
+							}//for
+							
+							//4강    답변 배열 4개 
+							if(contsArr.length>=4){
+								console.log('답변이 모두 none??');
+								$('.selectSurveyDiv #contsDiv'+(i+1)+'_'+(j+1)+'').hide();
+								
+								var conts = contsArr; 
+								
+								console.log('contsArr::'+contsArr);
+								
+								for(var no in contsArr){
+									no = parseInt(no);
+									
+									var choiceContsDiv = contsArr[no];
+									
+									if(no>=0 && no<2){	//배열의 답변1,답변2 값 2개씩 뿌리기
+										console.log('contsArr[no]::'+contsArr[no]);
+										$('.selectSurveyDiv  #'+contsArr[no]+'').show();
+									}else {
+										$('.selectSurveyDiv  #'+contsArr[no]+'').hide();
+									}//if										
+									
+									$('.selectSurveyDiv  #'+contsArr[no]+'').click(function(){
+										console.log('원원원원원');
+										for(var no in contsArr){
+											no = parseInt(no);
+											if(no>=2 && no<4){	//배열의 답변3,답변4 값 2개씩 뿌리기
+												console.log('contsArr[no]::'+contsArr[no]);
+												$('.selectSurveyDiv #'+contsArr[no]+'').show();
+											}else {
+												$('.selectSurveyDiv #'+contsArr[no]+'').hide();
+											}//if
+										
+											//2강(결승) 
+											$('.selectSurveyDiv  #'+contsArr[no]+'').click(function(){
+												console.log('투투투투투투');
+												for(var no in contsArr){
+													no = parseInt(no);
+													if(no>=4 && no<6){	//답변 선택시 다음 값 2개씩 뿌리기
+														console.log('contsArr[no]::'+contsArr[no]);
+														$('.selectSurveyDiv #'+contsArr[no]+'').show();
+													}else {
+														$('.selectSurveyDiv #'+contsArr[no]+'').hide();
+													}//if
+												}//for
+												
+												if(contsArr.length>4){//답변 배열이 2이상이면 배열 마지막 값만 뽑아오기
+													
+													var contsTmp = []; 
+													contsTmp.push(contsArr[contsArr.length-2]); 
+													contsTmp.push(contsArr[contsArr.length-1]); 
+													
+													for(var no in contsTmp){	//마지막 답변 뽑아오기
+														$('.selectSurveyDiv #'+contsTmp[no]+'').click(function(){
+															console.log('$(this).attr(id)::'+$(this).attr('id'));
+															contsTmp.push($(this).attr('id'));
+															console.log('contsTmp::'+contsTmp);
+															var contsRst = contsTmp[contsTmp.length-1];
+															console.log('contsRst::'+contsRst);
+															
+															if(contsRst.length>0){
+																if(contsRst==$(this).attr('id')){
+																	for(var no in contsTmp){//나머지 답변 숨기기
+																		$('.selectSurveyDiv #'+contsTmp[no]+'').hide();
+																	}//for
+																	//마지막 답변 보여주기
+																	$('.selectSurveyDiv #'+contsRst+'').show();
+																	$('#'+contsRst+' #choiceAtag').children('img').css({'width':'400px', 'height':'350px'});
+																	$('#'+contsRst+' #choiceAtag').css('opacity','1.0');
+																	
+																	contsRstVal.setValue(contsRst);
+																}//if
+															}//if 
+														});	
+													}//for
+												}//if
+											});
+										}//for
+									});
+								}//for
+							}//if
+						}//if
+						
+						function nextConts(j){
+							if(j>=startIdx && j<endIdx){	//답변 선택시 다음 값 2개씩 뿌리기 
+								console.log('contsClick  j::'+j);
+								//답변 다음값 보이기
+								$('.selectSurveyDiv #contsDiv'+(i+1)+'_'+(j+1)+'').show();
+							}else{
+								//답변 나머지 숨기기
+								$('.selectSurveyDiv #contsDiv'+(i+1)+'_'+(j+1)+'').hide();
+							}//if
+						}//end funcion
+					});
+			}/*Choose */
+
+
+			function selectType(json, i){
+
+				console.log('선택형::');
+				//console.log(json.title);
+				//console.log(json.reply);
+				console.log('SURVEY_TYPE_ID::'+json.title.SURVEY_TYPE_ID);
+				console.log('SURVEY_TYPE::'+json.title.SURVEY_TYPE);
+				console.log('SURVEY_ANSWER_TYPE::'+json.title.SURVEY_ANSWER_TYPE);
+				console.log('SECOND_SURVEY_TITLE::'+json.title.SECOND_SURVEY_TITLE);
+				
+				//중질문 타이틀
+			 	var surveyTitleHtml = ''+
+			 					      '<form id="surveyForm'+(i+1)+'"><div id="surveyDiv'+(i+1)+'" class="surveyDiv" style="border:0px solid #000;">'+
+				 					  	'<input type="hidden" id="surveyAnswerType'+(i+1)+'" name="surveyAnswerType" value="'+json.title.SURVEY_ANSWER_TYPE+'">'+
+										'<input type="hidden" id="surveyTypeId'+(i+1)+'" name="surveyTypeId" value="'+json.title.SURVEY_TYPE_ID+'"/>'+
+										'<input type="hidden" id="surveyType'+(i+1)+'" name="surveyType" value="'+json.title.SURVEY_TYPE+'">'+
+										'<div class="select_type_img" style="margin-left:5%;"></div><br>'+
+										/* '<div class="surveyTypeDiv" style="font-size:1.2em; font-weight:700; margin-left:42%"><span class="surveyTypeTxt">선택형</span></div><br>'+ */
+			  							'<div class="surveySecondTitleDiv">'+
+			  								'<span class="titleSpan" id="titleSpan'+(i+1)+'"><span style="color:#438CBE;">◎</span> '+json.title.SECOND_SURVEY_TITLE+'</span>'+
+			  							'</div><br></form>'+
+			  							'';
+			  					
+			  	
+			  	//중질문 타이틀 append						
+				$('#selectSurveyDiv'+(index+1)).append(surveyTitleHtml);
+			  	
+			  							
+				for(var j in json.reply){
+					j = parseInt(j);
+					console.log('j::'+j);
+					console.log(json.reply[j].SURVEY_CONTENTS_ID);
+					console.log(json.reply[j].SURVEY_CONTENTS);
+					console.log(json.reply[j].SURVEY_IMAGE_PATH);
+					
+				  	//중질문 답변 						
+					var surveyReplyHtml =	'<div class="contsDiv'+(i+1)+'" id="contsDiv'+(i+1)+'_'+(j+1)+'" name="contsDiv'+(i+1)+'_s'+(j+1)+'">'+
+												'<input type="hidden" id="surveyContentsId'+(j+1)+'" name="surveyContentsId" value="'+json.reply[j].SURVEY_CONTENTS_ID+'">';
+											
+					if(json.title.SURVEY_ANSWER_TYPE=='1'){
+						surveyReplyHtml +=	//'<div></div>'+
+						  						'<div class="contsTxtDiv">'+
+							  						'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+						  						'</div>';
+			  		}//if
+			  		if(json.title.SURVEY_ANSWER_TYPE=='2'){
+			  			surveyReplyHtml +=	'<div class="img" name="selectCheckbox"  id="select_img'+(i+1)+'_'+(j+1)+'" style="content: url('+json.reply[j].SURVEY_IMAGE_PATH+'); width:100px; height:100px;">'+				
+			  									'<input type="hidden" name="select_sub_input'+(i+1)+'" id="select_sub_input_'+(i+1)+'_'+(j+1)+'" value="">'+
+			  					    		'</div>'+ 		 				
+				  							'<div class="contsTxtDiv" style="text-align:center; color:#8d8d8d; text-decoration:underline; font-size: 0.9em;">'+
+				  								'<span class="contsTxtSpan" id="contentsSpan'+(i+1)+'_'+(j+1)+'" >'+json.reply[j].SURVEY_CONTENTS+'</span>'+
+				  							'</div>';	
+			  		}//if			
+			  		
+		    		surveyReplyHtml += '</div>';
+					
+		    		//중질문 답변 append
+					
+		    		$('#selectSurveyDiv'+(index+1)+' #surveyDiv'+(i+1)+'').append(surveyReplyHtml);
+		    		
+
+					console.log('???????????????????? : '+$('div[name$=_s4]').attr('id'));
+					switch(json.reply.length){
+		    			case 2 :
+		    				console.log('222222');
+		    				$('.contsContainer').css({'top':'120px'});
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    				$('div[class*="contsDiv"]').css({'padding-left':'50px'});  
+		    			break;
+		    			case 3 :
+		    				console.log('333333');
+		    				$('div[class*="contsDiv"]').css({'width':'100px'});
+		    				$('div[class*="contsDiv"]').css({'margin-top':'40px'});
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    				$('div[class*="contsDiv"]').css({'padding-left':'10px'});
+		    			break;
+		    			case 4 :
+		    				console.log('444444');
+		    				$('div[class*="contsDiv"]').css({'padding-left':'65px'});
+		    				$('div[class*="contsDiv"]').css({'width':'100px'});
+		    				$('div[class*="contsDiv"]').css({'float':'left'});
+		    			break;
+		    			case 5 :
+		    				console.log('555555');
+		    				$('div[class*="contsDiv"]').css({'padding-left':'10px', 'width':'100px', 'float':'left'});
+		    				$('div[name$=_s4]').css({'padding-left':'50px','padding-top':'20px'});
+		    				$('div[name$=_s5]').css({'padding-top':'20px'});
+		    			break;
+		    			case 6 :
+		    				console.log('666666');
+		    				$('div[class*="contsDiv"]').css({'padding-left':'35px'});
+		    			break;
+		    		}
+
+				}//for
+				
+
+				$('div[id*=select_img'+(i+1)+']').click(function(){
+					var id = $(this).attr('id').split('img'+(i+1)+'_')[1];
+					
+					console.log('id : '+id);
+					if($('#select_sub_input_'+(i+1)+'_'+id).val()=='1'){
+						$('#select_sub_input_'+(i+1)+'_'+id).val('0');
+					}else{
+						$('#select_sub_input_'+(i+1)+'_'+id).val('1');
+						$('#select_sub_input_'+(i+1)+'_'+id).parent().wrap('<div id="selectWrap'+id+'" style="content : url(images/common/builder/survey/check_img2.png); width:100px; height:100px;"></div>');
+					}
+
+					$('div[id*=selectWrap]').click(function(){
+						var selectWrap = $(this).attr('id').split('selectWrap')[1];
+						
+						$('#select_sub_input_'+(i+1)+'_'+selectWrap).val('0');
+						
+						$(this).children().unwrap();
+					})
+				})
+			}/*선택형 끝 */
+
+
+		}/* end survey for */
+		
+		/***** 상위 이동 버튼 *****/
+		var top_move = '';
+		top_move =	'<div class="top_move">'+
+						'<div class="top_move_btn" id="topMoveBtn"></div>'
+					'</div>';
+		$('.survey').after(top_move);
+		
+		$('#topMoveBtn').click(function(){
+			window.scroll(0, 0);
+		});
+		/***** 상위 이동 버튼 *****/
+		
+		/*** date format ***/
+		String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+		String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+		Number.prototype.zf = function(len){return this.toString().zf(len);};
+		Date.prototype.format = function(f) {
+		    if (!this.valueOf()) return " ";
+		 
+		    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+		    var d = this;
+		     
+		    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+		        switch ($1) {
+		            case "yyyy": return d.getFullYear();
+		            case "yy": return (d.getFullYear() % 1000).zf(2);
+		            case "MM": return (d.getMonth() + 1).zf(2);
+		            case "dd": return d.getDate().zf(2);
+		            case "E": return weekName[d.getDay()];
+		            case "HH": return d.getHours().zf(2);
+		            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+		            case "mm": return d.getMinutes().zf(2);
+		            case "ss": return d.getSeconds().zf(2);
+		            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+		            default: return $1;
+		        }
+		    });
+		};
+		/*** date format ***/
+		
+		var replyHtml = '';
+		replyHtml += ''+
+					 '<img class="reply_title_img" src="img/reply_icon.png" /><span class="replytx">타인을 배려하는 마음을 담아 댓글을 달아주세요. </span> '+
+					 '<div class="writewrap"> '+
+					 '	<div class="writer">'+
+					 '		<div class="reprofile"><img id="session_profile" src="/images/common/main/contents/noprofile.png" alt="" /></div>'+
+					 '	</div> '+
+					 '	<div class="contents">'+
+					 '		<textarea id="replyContents" rows="5" cols="90"></textarea><div class="resubmit" id="replySubmit">등록</div> '+
+					 '	</div> '+
+					 '</div> '+
+					 '';
+					 
+		for(var i in reply){
+		i = parseInt(i);
+		replyHtml += ''+
+					 '<div class="replylist"> '+
+					 '	<input type="hidden" id="contentsReplyId'+(i+1)+'" value="'+reply[i].CONTENTS_REPLY_ID+'">'+
+					 ' 	<input type="hidden" id="userId'+(i+1)+'" value="'+reply[i].USER_ID+'">'+
+					 '  <div class="writerarea"><div class="reprofile"><img id="reply_profile'+(i+1)+'" src="" alt="" /></div></div> '+
+					 '	<div class="rightcon">'+
+					 '   	<img class="best_reply" id="best_reply'+(i+1)+'" src="#" alt=""/> <span class="nickname">'+reply[i].NIKNAME+'</span><span class="replydate" id="replyDate'+(i+1)+'"> </span> '+
+					 '   	<div class="contents">'+
+					 '   		'+reply[i].REPLY+''+
+					 '   	</div> '+
+					 '		<div class="likearea"> '+
+					 '     		<div class="report"><a href="">신고하기</a></div>'+
+					 '     		<div class="like"><span id="likeSpan'+(i+1)+'"><a id="likeA'+(i+1)+'" href="#" rel="#"><img id="likeImg'+(i+1)+'" src="/images/common/main/contents/reply_unlike.png"  alt="" /><span class="likecount">'+reply[i].RECOMMENDATION+'</span></a></span></div>'+
+					 '     	 	<div class="delete_reply"><a id="delReply'+(i+1)+'"  href="#" rel="#" ><img id="delImg'+(i+1)+'" src="/images/common/main/contents/del_icon.png"></a></div>'+
+					 '     	</div> '+
+					 '  </div> '+
+					 '</div>'+
+					 '';
+		}			 
+		$('.replywrap').append(replyHtml);		
+		
+		for(var i in reply) {
+			i = parseInt(i);
+			//ex) 2016.03.24 23:30
+			var date = new Date(reply[i].REG_DATE).format('yyyy.MM.dd HH:mm');
+			//댓글 등록일 태그에 넣음
+			$('#replyDate'+(i+1)+'').text(date);
+		 
+			var profilePath = reply[i].PROFILE_PICTURE_PATH;
+			//console.log(profilePath);
+			var profileIdx = profilePath.indexOf('/');
+			//console.log('indexOf:::::'+profileIdx);
+			var profile = profilePath.substring(profileIdx);
+			//프로필 사진 img src에 넣음
+			$('#reply_profile'+(i+1)+'').attr('src', profile);
+			
+			//베스트 댓글 2개만 best img를 줌 
+			if( (i+1) <=2){
+				$('#best_reply'+(i+1)+'').attr('src', 'img/reply_best_icon.png');
+			}else {
+				$('#best_reply'+(i+1)+'').attr('src', '');
+			}
+		}//for 
+		
+		if(session != ''){//로그인 했을 때 프로필표시/댓글 쓰기 가능
+			var sessionProfPath = session[0].PROFILE_PICTURE_PATH;
+			//console.log('sessionProfPath::'+sessionProfPath);
+			var sessionProfIdx = sessionProfPath.indexOf('/');
+			//console.log('indexOf:::::'+profileIdx);
+			var sessionProf = sessionProfPath.substring(sessionProfIdx);
+			//프로필 사진 img src에 넣음
+			$('#session_profile').attr('src', sessionProf);
+		} else{
+			$('#replyContents').text('로그인시 이용 가능한 서비스입니다.');
+			$('#replyContents').css('color', 'gray');
+			$('#replyContents').css('disabled');
+			$('#replyContents').attr('readonly', true);
+			$('#replyContents').click(function(){
+				var login = confirm('로그인 하시겠습니까');
+				if(login){
+					console.log('로그인')
+					location.href="/login"
+				}else{
+					console.log('비로그인')
+				}
+			})
+		}//if
+		
+		
+		var fd = new FormData();
+		if(session == ''){ //세션이 없으면
+			$('#replySubmit').css('cursor','default');	//댓글 등록 버튼
+		}else {
+			for(var i in reply) {
+				i = parseInt(i);				
+				for(var j in likeInfo) { 
+					//console.log('좋아요 컨텐츠 댓글 id:::::::'+likeInfo[j].CONTENTS_REPLY_ID);
+					//console.log('댓글  컨텐츠 댓글 id:::::::'+reply[i].CONTENTS_REPLY_ID);
+					//좋아요 컨텐츠_댓글_id와 댓글 컨텐츠_댓글_id가 같고 좋아요플래그가 1이면 
+					if( ( likeInfo[j].CONTENTS_REPLY_ID == reply[i].CONTENTS_REPLY_ID ) && ( likeInfo[j].LIKE_FLAG=='1' ) ){
+						$('#likeImg'+(i+1)+'').attr('src','/images/common/main/contents/reply_like.png');
+					}//if
+				}//for 
+			}//for 
+		}//if
+
+		$('#replySubmit').click(function(e){
+			$( 'html, body' ).stop().animate({ scrollTop : '+=1' });
+			//컨텐츠 id
+			console.log('contents_id::::::???'+contentsId);
+			
+			//댓글 
+			var reply = $('#replyContents').val();
+			if(reply==''){
+				alert('댓글을 입력해주세요.');
+				return false;
+			}
+			
+			if(session == ''){ //세션이 없으면
+				alert('로그인시 이용 가능한 서비스입니다.');
+				e.preventDefault();
+			}else { //세션이 있으면 댓글 달기 가능
+				
+				fd.append('reply', reply);
+				fd.append('contents_id', contentsId);
+				
+				$.ajax({
+					url : '/reply/insert_reply',
+					data : fd,
+					type : 'POST',
+					processData : false,
+					contentType : false,
+					success : function(){
+						console.log('댓글 성공!');
+						location.reload();
+					}//end success
+				});//end ajax
+			}//end if
+		});
+		
+		for(var i in reply) {	//click func 안에서도 for문을 돌기 위해서 let으로 선언 but, ios 모바일웹에서 에러 ㅠㅠ
+			i = parseInt(i);
+		
+			(function(i){	//click func 안에서도 for문을 loop하기 위해서 써줌
+				
+				$('#likeSpan'+(i+1)+'').click(function(e){
+					
+					console.log('좋아요(i+1)::'+(i+1));
+					
+					$('.jquery-modal').stop().animate({ scrollTop : '+=200' });
+					//$( 'html, div[class*="jquery-modal"]' ).stop().animate({ scrollTop : '+=1' });
+					
+					var contentsReplyId = $('#contentsReplyId'+(i+1)+'').val();
+					console.log('댓글 인덱스');
+					console.log(contentsReplyId);
+					
+					if(session == ''){ //세션이 없으면
+						e.preventDefault();
+						alert('로그인시 이용 가능한 서비스입니다.');
+					}else { //세션이 있으면 추천하기 가능
+						
+						fd.append('contentsReplyId', contentsReplyId);
+						fd.append('sessionUserId', session[0].USER_ID);
+					
+						$.ajax({
+							url : '/reply/update_like',
+							data : fd,
+							type : 'POST',
+							processData : false,
+							contentType : false,
+							success : function(data){
+								console.log(data);
+								console.log('추천 성공!');
+								location.reload();
+							}//end success
+						});//end ajax
+					}//end if
+				});//end like_click
+			
+				//댓글 삭제
+				$('#delReply'+(i+1)+'').click(function(e){
+					
+					console.log('댓글삭제(i+1)::'+(i+1));
+					
+					console.log('댓글삭제?????????');
+					var contentsReplyId = $('#contentsReplyId'+(i+1)+'').val();
+					console.log('contentsReplyId::::::::::::'+contentsReplyId);
+					
+					if(session != ''){
+						
+						var session_user_id = session[0].USER_ID;
+						var reply_user_id = $('#userId'+(i+1)+'').val();
+						console.log('session_user_id:::::::::::::'+session_user_id);
+						console.log('reply_user_id :::::::::::::'+reply_user_id );
+						
+						if(session_user_id != reply_user_id){
+							alert('작성하신 글만 삭제할 수 있습니다.');
+							return false;
+						}else {
+							
+							$.ajax({
+								url : '/reply/delete_reply?contentsReplyId='+contentsReplyId,
+								data : fd,
+								type : 'POST',
+								processData : false,
+								contentType : false,
+								success : function(){
+									console.log('삭제성공!');
+									location.reload();
+								}//end success
+							});//end ajax
+						}//end if
+					}else {
+						e.preventDefault();
+						alert('로그인시 이용 가능한 서비스입니다.');
+					}//end if
+				});//end del_click
+			
+			})(i); //end function(i)
+			
+		}//end for
+
+	}/* success */
+})/* ajax */
+</script>
+<style type="text/css">
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	.wrap{
+		position: relative;
+		min-width: 320px;
+		max-width: 640px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	/*thumbnail 부분*/
+		.thumbnail_container{
+			position: relative;
+			height: 350px;
+		}
+
+		.thumbnail_image{
+			position: absolute;
+			width: 100%;
+			height: auto;
+			top: 0px;
+		}
+		.p_profile {
+			position: absolute;
+    		top: 42%;
+		    left: 3%;
+		}
+		.p_profile img{
+			-webkit-border-radius: 50%;
+		}
+		.p_nickname{
+			margin: 5px 0 0 60px;
+		    color: #fff;
+		    font-weight: bold;
+		    display: block;
+		}
+		.p_regdate{
+			margin-left: 60px;
+		    color: #fff;
+		    display: block;
+		}
+		
+		.thumbnail_title{
+			position: absolute;
+			top: 65%;
+			left: 5%;
+			font-weight: 800;
+			font-size: 22px;
+			color: #696868;
+		}
+		.thumbnail_contents{
+			position: absolute;
+			top: 78%;
+			left: 5%;
+			padding-right: 20px;
+			font-size: 15px;
+		}
+		.thumbnail_imoticon{
+			position: absolute;
+			top: 95%;
+			left: 85%;
+			padding-right: 20px;
+		}
+		.thumbnail_container img{
+			position: absolute;
+			width: 100%;
+			height: 220px;
+			top: 0;
+		}
+	/*thumbnail 부분*/
+		.hrLine{
+			padding-left: 10px;
+			margin-top: -5%;
+		}
+		.hrLine img{
+			width: 95%;
+		}
+		.gray_line{
+			padding-left: 10px;
+			margin-bottom: 5%;
+		}
+		.gray_line img{
+			width: 95%;
+		}
+
+	/*contents 부분*/
+		.contents{
+
+		}
+		.contsContainer{
+			width: 100%;
+			height: 100%;
+		}
+		.contsImg{
+			width: 90%;
+			margin-left: 7%;
+		}
+		.contsImageOrigin{
+			float: right;
+			margin-right: 8%;
+			font-size: 5px;	
+		}
+		.contsContents{
+			width: 90%;
+			margin-left: 7%;
+			color: #8d8d8d;
+			font-size: 0.9em;
+		}
+
+		/*Survey*/
+		.surveyTitleDiv{
+			position: relative;
+			height: 380px;
+		}
+		.surveyThumbDiv{
+			width: 90%;
+			margin-left: 7%;
+		}
+		
+		.slash_line {
+			background:url('/images/common/main/contents/slash_line.png') no-repeat;
+			width: 90%;
+			height: 5px;
+			margin: 10% auto 40px auto;
+		}
+
+		/* 설문시작하기 banner */
+		.survey_banner {
+			width: 90%;
+			left: 7%;
+			height: 63px;
+			top: 0;
+			margin: 0;
+			position: absolute;
+			z-index: 3;
+		}
+		/* 화살표 img */
+		.btn_arrow {
+			background:url('/images/common/main/contents/botton_arrow.png') no-repeat;
+			width: 17px;
+			height: 9px;
+			top: 12.4%;
+			position: absolute;
+		    margin-left: 48%;
+		    z-index: 2;
+		}
+		.surveyThumbDiv{
+			padding-top: 12%;
+			position: absolute;
+		}
+		.surveyThumbDiv_B{
+			width: 90%;
+			padding-left: 7%;
+			padding-top: 12.5%;
+			height: auto;
+			position: absolute;
+		}
+		.survey_title{
+			position: absolute;
+			z-index: 4;
+			top: 30%;
+			left: 13%;
+			text-align: center;
+			vertical-align: middle;
+			color: #fff;
+			font-size: 1em;
+		}
+
+		.more_arrow {
+			background:url('/images/common/main/contents/more_arrow.png') no-repeat;
+			width: 36px;
+			height: 36px;
+			z-index: 4;
+			text-align: center;
+			vertical-align: middle;
+			color: #fff;
+			font-size: 2em;
+			cursor: pointer;
+		}
+		/* black bg */
+		/* 대질문 타이틀 div */
+	/*survey*/
+	
+	/* 상위 이동 */
+	.top_move {
+		text-align: right;
+	    margin: 5% 7%;
+	    width: 10%;
+	    float: right;
+	}
+	.top_move_btn {
+		background:url('/images/common/main/contents/top_bt1.png') no-repeat;
+		width: 50px;
+		height: 50px;
+	}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+	<!-- <section class="header" style="height: 45px; background-color: #164672;">
+		<div class="header_menu" style="float: left; width: 10%;"><img src="/img/lookbig.png" style="width: 20px; height: 20px; padding-top:11px; padding-left: 14px"></div>	
+		<div class="header_menu"  style="float: left; width: 80%;"></div>	
+		<div class="header_menu"  style="float: right; width: 10%;">
+			<div class="menu"> 
+	          <a href="#" class="menuOpen" id="menutest"> <img src="/img/list.png" style="width: 20px; height: 20px; padding-top:11px; padding-right: 11px"> </a> 
+	        </div>
+		</div>
+		<div id="mask"></div>
+	</section> -->
+	<div class="thumbnail_container"></div>
+	<div class="hrLine"><img src="images/common/web_app/contents/hr_line.png"></div>
+	<br>
+	<div class="contents">
+		<div class="contsContainer"></div>
+		<div class="slash_line"></div>
+		<div class="survey"></div>
+	</div>
+	<div class="replywrap"></div>
+</div>
+</body>
+</html>

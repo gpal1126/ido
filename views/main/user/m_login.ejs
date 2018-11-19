@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>아이두</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" >
+<!-- 탑메뉴 css -->
+<link rel="stylesheet" type="text/css" href="/css/web/main/common1.css" />
+<link rel="stylesheet" href="/css/web/builder/user/partner/m_login_partner.css">
+</head>
+
+<body>
+<div style="width: 100%; height: 40%; position: relative;">
+	<div style="position: absolute; top: 20%; left: 26%; width: 50%;"><a href="/m_index"><img src="/images/common/main/user/partner/login_ldo_logo.png" width="100%"></a></div>
+	<div style="position: absolute; top: 75%; left: 50%; transform: translate(-50%, 0); "><img src="/images/common/main/user/partner/logo_login_tt.png" width="80%"></div>
+</div>
+<div class="wrap" style="width:100%;">
+		
+		
+		
+		<% if(contentsId == null) {%>
+			<form action="/m_login/mypage" method="post">
+		<% }else{%>
+			<form action="/m_login/contentsId" method="post">
+		<% }%>
+			<div id="login_wrap">
+				
+				<div class="conbox">
+
+					<div class="rightbox">
+						<ul>
+							<li class="mt7"><input type="text" class="deco_box" id="userid" name="userid"
+								placeholder="아이디를 입력해주세요" onfocus="this.style.color='#ff4884';"
+								style="background: url('/images/common/main/user/partner/name_ico.png') no-repeat;"></input></li>
+							<li class="mt7"><input type="password" id="password"
+								name="password" placeholder="비밀번호를 입력해주세요"
+								onfocus="this.style.color='#ff4884';" class="deco_box"></input></li>
+								<input type="hidden" name="contentsId" id="contentsId" value="<%= contentsId %>">
+						</ul>
+						<div class="find_pwd_btn">비밀번호 찾기<!-- <img src="/images/common/main/user/partner/login_id_pw_tt.png" width="70%"> --></div>
+						<div class="login_2bt">
+							<ul>
+								<li><button class="facebook_bt" type="submit" style="background-color: #555555; color:#fff; width: 100%; height: 60px; line-height: 60px; font-size: 14pt;">로그인</button></li>
+								<li class="mt15" style="background-color: #3B5998; width: 100%; height:60px; line-height: 60px; text-align: center; font-size: 14pt;"><a href="/auth/facebook" class="btn btn-fb" id="facebook" style="color: #fff;">facebook Login<!-- <img src="/images/common/main/user/partner/facebook_login.png" style="width: 100%"> --></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+<div class="footer">
+	
+</div>
+</body>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>아이두</title>
+<meta charset="euc-kr">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="/css/index.css">
+
+<style>
+*{font-family: Malgun Gothic,맑은고딕,돋움,윤고딕,Dotum,verdana,sans-seif;}
+h1{font-size:30px;text-align:left;letter-spacing:-1px;}
+
+#header {width:100%;height:90px;}
+#header #gnb {width:100%;height:30px;background:#696868;}
+#header #t_logo {width:100%;height:60px;background:#4e92c1;}
+#header #t_logo span.logo{font-size:25px;font-weight:bold;line-height:60px;float:left;margin-left:30px;color:#ffffff;}
+#header #gnb .l_text {float:left;color:#ffffff;width:150px;line-height:26px;text-align:left;padding-left:30px;letter-spacing:1px;font-size:11px;}
+#header #gnb .r_text {float:left;color:#ffffff;width:820px;text-align:right;line-height:26px;}
+
+/*left_menu*/
+#left_menu {width:180px;height:800px;float:left;background:#f3f3f3;}
+#left_menu div ul {width:100%;margin-top:30px;}
+#left_menu div ul li{height:40px;font-size:15px;text-align:left;line-height:35px;color:#7e7e7e;}
+#left_menu div ul li a:hover {background:#4e92c1;width:100%;height:40px;display:block;font-size:15px;color:#ffffff;text-decoration:none;}
+#left_menu div ul li a span{margin-left:30px;display:block;}
+#left_menu div ul li.on{background:#4e92c1;width:100%;height:40px;display:block;color:#ffffff;}
+
+/*right_contents*/
+#right_cont {width:820px;height:800px;float:left;}
+#right_cont .box {border-bottom:1px solid #c9c9c9;margin:30px;height:45px;border:0px solid #000;line-height:35px;}
+#right_cont .tabbox {width:790px;margin:30px;height:auto;}
+#right_cont .tabbox ul {height:31px;border-bottom:1px solid #939292;}
+#right_cont .tabbox li {float:left;width:90px;height:30px;background:#ffffff;display:inline-block;border:1px solid #dddddd;line-height:27px;margin-right:5px;}
+#right_cont .tabbox li.b_noline{border-bottom:1px solid #939292;}
+#right_cont .tabbox li a{display:block;height:100%;}
+#right_cont .tabbox li.active{background:#939292;color:#fff;}
+
+#right_cont .adm_tbbox {margin-left:30px;}
+#right_cont .adm_tbbox .adm_tb {width:790px;}
+#right_cont .adm_tbbox .adm_tb th{border-top:1px solid #dbdbdb;background:#f9f9fb;height:40px;font-size:13px;border-bottom:2px solid #4e92c1;}
+#right_cont .adm_tbbox .adm_tb td{height:40px;border-bottom:1px solid #dbdbdb;font-size:12px;}
+
+#right_cont .adm_bt {margin-left:30px;}
+#right_cont .adm_bt ul {float:left;}
+#right_cont .adm_bt ul li.del_bt {width:50px; height:25px;background:#696868;line-height:20px;color:#ffffff;display:inline-block;}
+#right_cont .adm_bt ul li.add_bt {width:50px; height:25px;background:#2f8fd2;line-height:20px;color:#ffffff;display:inline-block;}
+
+/*체크박스 css*/
+.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0
+}
+</style>
+</head>
+
+
+<body>
+<header id="header">
+	<div id="gnb">
+		<div class="l_text">HOME <span style="font-size:10px;width:11px;line-height:11px;">|</span> LOGOUT</div>
+		<div class="r_text">ㆍAdmin > 관리자메인 : admin님</div>
+	</div>
+	<div id="t_logo"><span class="logo">lDOLOGO<span></div>
+</header>
+
+
+<section id="left_menu">
+ <div>
+	<ul>
+		<li class="on"><a><span>ㆍ컨텐츠 관리</span></a></li>
+		<li><a><span>ㆍ쿠폰발급 관리</span></a></li>
+		<li><a><span>ㆍ광고 관리</span></a></li>
+		<li><a><span>ㆍ설문 관리</span></a></li>
+	</ul>
+</div>
+</section>
+
+<!-- right_content : start -->
+<section>
+<div id="right_cont">
+	<div class="box">
+		<h1>컨텐츠 관리</h1>	
+	</div>
+	<div class="tabbox">
+		<ul>
+			<li class="active"><a>조회</a></li>
+			<li class="b_noline">등록</li>
+		</ul>
+	</div>
+
+	<div class="adm_tbbox">
+		<table class="adm_tb">
+			<col width="10%">
+			<col width="10%">
+			<col width="20%">
+			<col width="40%">
+			<col width="20%">
+			<tr>
+				<th><input type="checkbox" id=""></th>
+				<th>수정</th>
+				<th>컨텐츠 번호</th>
+				<th>컨텐츠 제목</th>
+				<th>컨텐츠 등록일</th>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>22</td>
+				<td>서울 나들이 추천 코스 top5는?</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>23</td>
+				<td>부산 여행 추천 장소!</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>24</td>
+				<td>여자들이 좋아하는 네일아트 모음!</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>25</td>
+				<td>탐나는 컬러 테크, 어떤 게 있나?</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>26</td>
+				<td>피부의 적이 되는샤워 습관 10</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>27</td>
+				<td>살면서 버려야할 15가지습관</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>28</td>
+				<td>유형별로 보는맞춤형 도시락</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>29</td>
+				<td>스타들의 드레스 전쟁, 화려함 끝판왕은?</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+			<tr>
+				<td><input type="checkbox" id=""></td>
+				<td>보기</td>
+				<td>30</td>
+				<td>다이어트 성공 후 생기는일들?</td>
+				<td>2016. 05. 12</td>			
+			</tr>
+		</table>
+	</div>
+
+	<br /><br />
+
+<div class="adm_bt">
+		<ul>	
+	<li class="del_bt">삭제</li>
+	<li class="add_bt">등록</li>
+		</ul>
+</div>
+</section>
+
+</body>

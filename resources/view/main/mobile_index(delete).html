@@ -1,0 +1,265 @@
+<!DOCTYPE html> 
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>ido mobile</title> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/js/web/main/common/m_common.js"></script>
+<link rel="stylesheet" href="/css/web/main/m_ido.css" />
+
+<!-- 메인 슬라이드 -->
+<script type="text/javascript" src="/js/web/main/common/slider/shCore.js"></script>
+<script type="text/javascript" src="/js/web/main/common/slider/shBrushXml.js"></script>
+<script type="text/javascript" src="/js/web/main/common/slider/shBrushJScript.js"></script>
+<script src="/js/web/main/common/slider/jquery.easing.js"></script>
+<script src="/js/web/main/common/slider/jquery.mousewheel.js"></script>
+<script defer src="/js/web/main/common/slider/demo.js"></script>
+<script defer src="/js/web/main/common/slider/jquery.flexslider.js"></script>
+<link rel="stylesheet" href="/css/web/main/m_flexslider.css" type="text/css" media="screen" />
+<script type="text/javascript">
+$(function(){
+    SyntaxHighlighter.all();
+  });
+  $(window).load(function() {
+    $('.flexslider').flexslider({
+      animation: "slide"
+    });
+  });
+</script>
+<!-- //메인슬라이드 -->
+
+<script type="text/javascript">
+ 	call_image(0);
+    //이미지로딩 서버로 요청
+    function call_image(no){
+      console.log('받는값 no::'+no);
+      $.ajax({
+        url : 'http://172.16.75.7:5555/m_main?no='+no+'',
+        type : 'GET',
+        success : function(data) {
+          var jCount = $('#jCount').val();
+  		  console.log(data);
+          //처음 이미지 로딩 할 때 - no값 초기화 선언
+          var no = 0;
+          var firstCategory = new Array();
+          var secondCategory = new Array();
+          //서버에서 데이터 응답받아 이미지 여러개 가져옴
+          for(var i in data.contents){
+            firstCategory[i] = data.contents[i].CATEGORY.split('_')[0];
+            secondCategory[i] = data.contents[i].CATEGORY.split('_')[1];
+            
+            switch(firstCategory[i]){
+              case 'fashion':
+                  firstCategory[i]="패션/뷰티"
+                  break;
+              case 'food':
+                  firstCategory[i]= "음식/여행"
+                  break;    
+              case 'hobby':
+                  firstCategory[i]="취미/게임"
+                  break;    
+              case 'life':
+                  firstCategory[i]="생활/쇼핑"
+                  break;    
+              case 'edu':
+                  firstCategory[i]="정치/교육"
+                  break;    
+              case 'digital':
+                  firstCategory[i]="디지털/가전"
+                  break;    
+              case 'car':
+                  firstCategory[i]="자동차/교통"
+                  break;    
+              case 'media':
+                  firstCategory[i]="방송/연예"
+                  break;                            
+              case 'sports':
+                  firstCategory[i]="스포츠/건강"
+                  break;        
+            }
+      /*App과 같이 */
+      //       jCount = $('#jCount').val();
+      // 		console.log(jCount)
+	     //  	if(jCount % 2 ==0 && jCount != 1){ //2의 배수 list들 
+	     //  		console.log('2의 배수 들어옴');
+	     //  		chg_no = data.no;
+	     //  		// 서버로부터 4개씩 value를 받아온다.
+	     //  		//제일마지막 4번째 값은 가로 긴 이미지로 잡고,
+	     //  		if(i % 3 == 0 && i != 0){
+	     //  			$('.list-breaktime').append('<li style="width:100%; height:175px; overflow:hidden;"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:125%; height:576px;"/><figcaption>food</figcaption></a></li>')
+	     //  			jCount++;
+	     //  			$('#jCount').val(jCount);
+	     //  		//나머지 값들은 이쪽으로 보낸다.
+	     //  		}else{
+	     //  			if(i==1){
+						// $('.list-breaktime').append('<li style="width:50%; height:350px; overflow:hidden; float:right"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:125%; height:576px;" margin-top:5px;/><figcaption>food</figcaption></a></li>')
+	     //  			}else{
+						// $('.list-breaktime').append('<li style="width:50%; height:175px; overflow:hidden;"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:125%; height:576px;"/><figcaption>food</figcaption></a></li>')
+	     //  			}
+	     //  		}
+	      		
+	     //  	}else{ //홀수 list
+	     //  		chg_no = data.no;
+	     //  		console.log('먼저들어옴')
+	     //  		if(i % 3 == 0 && i != 0){
+	     //  			$('.list-breaktime').append('<li class="list_4" style="width:100%; height:175px; overflow:hidden; position:relative"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:110%; height:auto; position:absolute; bottom:-50px; left:-20px;"/><figcaption>food</figcaption></a></li>')
+	     //  			jCount++;
+	     //  			$('#jCount').val(jCount);
+	     //  		}else{
+	     //  			if(i==0){
+						// $('.list-breaktime').append('<li class="list_2" style="width:50%; height:350px; overflow:hidden;"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:125%; height:576px;" /><figcaption>food</figcaption></a></li>')
+	     //  			}else{
+						// $('.list-breaktime').append('<li class="list_1" style="width:50%; height:175px; overflow:hidden;"><a href="#"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" style="width:125%; height:576px;" /><figcaption>food</figcaption></a></li>')
+	     //  			}
+	     //  		}
+	     //  	}
+        /*App과 같이 */ 
+            
+        
+        /* 현재 pc 화면 */   	
+        if(i % 2 == 0){
+        	chg_no = data.no;
+        	if(data.contents[i].IMAGE_TYPE == 'type2'){
+				$('.left').append('<div class="conDiv" style="height:237px; background-color: white; border-style: solid; border-color: #e3e3e3; border-bottom-width:7px; position:relative;">'+
+									'<div style="position:absolute; top:20%; left:5%; color:white">'+data.contents[i].TITLE+'</div>'+
+									'<div class="cImage">'+
+										'<a href="/m_contents?contentsId='+data.contents[i].CONTENTS_ID+'"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" alt="" style="height:237px;" /></a>'+
+									'</div>'+
+								  '</div>');
+        	 }else{
+			    $('.left').append('<div class="conDiv" style="padding-top:5px; height:232px; background-color: white; border-style: solid; border-color: #e3e3e3; border-bottom-width:7px;">'+	'<div class="cTitle" style="height:20%;">'+
+										'<p class="category_p">'+firstCategory[i]+'</p>'+
+										'<p class="title_p">'+data.contents[i].TITLE+'</p>'+
+									'</div>'+
+									'<div class="cImage" style="height:50%;">'+
+										'<a href="/m_contents?contentsId='+data.contents[i].CONTENTS_ID+'"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" alt="" /></a>'+
+									'</div>'+
+									'<div class="cContents" style="height:28%;">'+
+										'<div class="thumb_title_div">'+data.contents[i].THUMBNAIL_CONTENTS+'</div>'+
+									'</div>'+
+								  '</div>');
+        	 }
+        }else{
+        	chg_no = data.no;
+        	if(data.contents[i].IMAGE_TYPE == 'type2'){
+				$('.right').append('<div class="conDiv" style="height:237px; background-color: white; border-style: solid; border-color: #e3e3e3; border-bottom-width:7px; position:relative;">'+
+									'<div style="position:absolute; top:20%; left:5%; color:white">'+data.contents[i].TITLE+'</div>'+
+									'<div class="cImage">'+
+										'<a href="/m_contents?contentsId='+data.contents[i].CONTENTS_ID+'"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" alt="" style="height:237px;" /></a>'+
+									'</div>'+
+								  '</div>');
+        	 }else{
+			    $('.right').append('<div class="conDiv" style="padding-top:5px; height:232px; background-color: white; border-style: solid; border-color: #e3e3e3; border-bottom-width:7px;">'+	'<div class="cTitle" style="height:20%;">'+
+										'<p class="category_p">'+firstCategory[i]+'</p>'+
+										'<p class="title_p">'+data.contents[i].TITLE+'</p>'+
+									'</div>'+
+									'<div class="cImage" style="height:50%;">'+
+										'<a href="/m_contents?contentsId='+data.contents[i].CONTENTS_ID+'"><img src="/'+data.contents[i].THUMBNAIL_IMAGE_PATH+'" alt="" /></a>'+
+									'</div>'+
+									'<div class="cContents" style="height:28%;">'+
+										'<div class="thumb_title_div">'+data.contents[i].THUMBNAIL_CONTENTS+'</div>'+
+									'</div>'+
+								  '</div>');
+        	 }
+        }
+      /* 현재 pc 화면 */  
+      }//for
+          
+          //계속 변경되는 no값 - 아래에서 hidden으로 no값을 줌
+          $('#chg_no').val(chg_no);
+          console.log('이미지 로딩 success! 다음 chg_no값:::'+ chg_no);
+        }
+      });
+    }
+   
+    
+    //무한 스크롤 구현
+    $(window).scroll(function() {
+      chg_no = $("#chg_no").val();
+      console.log(chg_no);
+
+      //          스크롤의 위치값        윈도우의 크기
+      var scrollHeight = $(window).scrollTop() + $(window).height();
+      //현재페이지(문서)의 높이
+      var documentHeight = $(document).height();
+
+      //alert('scrollHeight:'+scrollHeight+'documentHeight:'+documentHeight);
+      //스크롤 위치값과 현재문서 높이가 같으면 = 스크롤을 끝까지 내리면 
+      if(scrollHeight == documentHeight) {
+      	
+        //이미지 로딩 함수 호출
+        call_image(chg_no);
+        
+        console.log('받는 값 chg_no::::'+chg_no);
+      }//if
+    });
+ 
+</script>
+<style type="text/css">
+	.header_menu{
+		height: 45px;
+	}
+
+
+</style>
+</head>
+<body>
+<div id="menu_nav">
+    <span class="close_bt">
+      <a href="#" class="menu_close" id="closemm">메뉴닫기</a>
+    </span> 
+  </div>
+  
+	<section class="header" style="height: 45px; width: 100%; background-color: #164672;">
+		<div class="header_menu" style="float: left; width: 10%;"><img src="/img/lookbig.png" style="width: 20px; height: 20px; padding-top:11px; padding-left: 14px"></div>	
+		<div class="header_menu"  style="float: left; width: 80%;"></div>	
+		<div class="header_menu"  style="float: left; width: 10%;">
+			<div class="menu"> 
+	          <a href="#" class="menuOpen" id="menutest"> <img src="/img/list.png" style="width: 20px; height: 20px; padding-top:11px; padding-right: 11px"> </a> 
+	        </div>
+		</div>
+		<div id="mask"></div>
+	</section>
+		<div class="flexslider">
+	      <ul class="slides">
+	        <li>
+	          <img src="/img/main_v_img01.jpg" />
+	        </li>
+	        <li>
+	          <img src="/img/main_v_img01.jpg" />
+	        </li>
+	        <li>
+	          <img src="/img/main_v_img01.jpg" />
+	        </li>
+	        <li>
+	          <img src="/img/main_v_img01.jpg" />
+	        </li>
+	      </ul>
+	    </div>
+	    <div style="height: 5px;"></div>
+	    <!-- <div style="max-width: 300px; height: 10px;"></div> -->
+		<section class="breaktime">
+			<ul id="container" class="list-breaktime">
+				<li class="left" style="width: 49%; float: left; background-color: white"></li>
+				<li class="right" style="width: 49%; float: left; padding-left: 2%;"></li>
+			</ul>
+		</section>
+		<!-- class="contents-container" -->
+	<!--  -->
+
+	 
+	 
+
+	 
+
+ 
+
+<input type="hidden" id="jCount"  value="1"/> 
+<input type="hidden" id="chg_no"  value=""/> 
+
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+@CHARSET "UTF-8";
+/* header  */
+	body{
+		margin: 0 auto;
+		min-width: 320px;
+		padding: 0;
+	}
+	.header{
+		background-color: #344169;
+		width: 100%;
+		height:180px;
+		position: relative;
+		margin: 0 auto;
+		padding: 0;
+	}
+	
+	.header .nav_1{
+		width: 100%;
+		position:absolute;
+		height: 50px;
+
+	}
+	.nav_1_menu{
+		float:left;
+		height: 100%;
+	}
+	
+	.header .nav_2{
+		width: 100%;
+		position:absolute;
+		height: 80%;
+		top:50px;
+	}
+	/* header 끝 */
+	.contents{
+		width: 100%;
+		height: auto;
+	}
+	.step_container{
+		width: 100%;
+		height: 120px;
+	}
+	.step{
+		float: left;
+		width: 19%;
+		height: 80%;
+		padding-top: 40px;
+	}
+	.step img{
+		width: 80%;
+	}
+	.step_arrow{
+		float: left;
+		width: 5%;
+		height: 50%;
+		padding-top: 14%;
+	}
+	.step_arrow img{
+		width: 70%;
+		
+	}
+
+	
+	/* contents  시작 */
+	.surveyList{
+		padding-top : 0.5%;
+		margin-left: 8%;
+	}
+	
+	/* contents 끝 */
+	
+	/* footer */
+	.footer{
+		position:fixed;
+		bottom:0;
+		width: 100%;
+		height: auto;
+	}
+	/* 버튼 컨트롤  */
+	.wrap{
+ 		width:100%;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top:0;
+		background-color: #fff;
+		opacity: 0.8;
+	}
+	#btnControl{
+		display: none;
+	}
+	#btnControl + label > img{
+		transform:  rotate(0deg);
+		-webkit-transition: 0.3s ease-in-out;
+	}
+	#btnControl:checked + label > img{
+		transform:  rotate(45deg);
+		-webkit-transition: 0.3s ease-in-out;
+	}
+	/* 플러스버튼 */
+	.survey_category_button{
+		position:fixed;
+		bottom: 8px;
+		right : 8px;
+		z-index: 1000;
+	}
+	
+	/* 우측 사이드 카테고리 컨테이너 */
+	.side_button_container{
+		position: fixed;
+		width: 160px;
+		height: 270px;
+		bottom: 10%;
+		right: -25px;
+		z-index: 33;
+	}
+	
+	.category_button{
+		width: 130px;
+		height: 55px;
+		margin-bottom: 10px;
+		margin-left: 5%;
+		z-index: 33;
+	}
+	
+	.category_button div{
+		font-size: 15px; 
+		width: 68px; 
+		float: left; 
+		margin-top: 8px;
+		text-align: right;
+		display: inline-block;
+	}
+	
+	.category_button img{
+		display: inline-block;
+		padding-left: 5px;
+	
+	}
+	
+	
+	
+	
+	

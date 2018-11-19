@@ -1,0 +1,184 @@
+<!DOCTYPE html> 
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>ido mobile</title> 
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<link rel="stylesheet" href="/css/mobile/main/join/m_join_user.css" />
+
+<!-- <script type="text/javascript" src="js/web/main/common/common.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input').click(function(){//input focus시 bottom 색상 변경
+		if( $('input').is(':focus') == true){
+			console.log('이메일 포커스!');
+			$('input').parent().parent().css('border-bottom', '1px solid #5c5c5c');
+			$(this).parent().parent().css('border-bottom', '1px solid #f9c510');
+		}
+	});
+	
+	$('.human').click(function(){//성별 radio 기능
+		if( $('#male').is(':checked') == true ){
+			$('.male').attr('src', '/img/mobile/main/join/join_man_on.png');
+			$('label[for=male]').css('color', '#fac612');
+			$('.female').attr('src', '/img/mobile/main/join/join_woman_off.png');
+			$('label[for=female]').css('color', '#fff');
+		}else if( $('#female').is(':checked') == true){
+			$('.male').attr('src', '/img/mobile/main/join/join_man_off.png');
+			$('label[for=male]').css('color', '#fff');
+			$('.female').attr('src', '/img/mobile/main/join/join_woman_on.png');
+			$('label[for=female]').css('color', '#fac612');
+		}
+	});
+	
+	var dup = false; //중복체크 여부를 위한 변수
+  	var sex = '';
+  	$('#checkMail').click(function(){
+    	var email1 = $('#email1').val();
+    	//var email2 = $('#email2').val();
+    	//var email = email1 +'@'+ email2;
+    	if(email1 == ''){
+      		alert('메일을 입력해주세요');
+    	}else{
+      		var json = {'email': email1};
+	      	$.ajax({
+	        	url : '/check_id/email',
+	        	data : json,
+	        	success : function(data){
+	          		if(data=='success'){
+			            alert('사용가능한 이메일 입니다.');
+	    		        dup = true;
+	        	  	}else{
+			            alert('사용 불가능한 이메일 입니다.');
+	           			//$('#failMail').css('display', '');
+	          		}
+	        	} 
+	    	}); 
+   		}
+  	});
+
+	//패스워드 일치 일치/불일치 확인
+  	$('input[name="sex"]').click(function(){
+    	sex = $(this).attr('value');
+    	var pw1 = $('#pw1').val();
+    	var pw2 = $('#pw2').val();
+    	if(pw1 != pw2){
+      		$('#discordPw').css('display', '');
+      		$('#join').css('height','auto');
+    	}else{
+      		$('#discordPw').css('display', 'none');
+    	}
+  	});
+
+	//다음으로 Validation check
+  	$('#step2_next').click(function(){
+    	if(dup == false){
+      		alert('중복체크 해주세요');
+    	}else{
+	      	var email1 = $('#email1').val();
+	      	//var email2 = $('#email2').val();
+	      	var pw1 = $('#pw1').val();
+	      	var pw2 = $('#pw2').val();
+	      	//var email = email1 +'@'+ email2;
+	      	
+	      	if(pw1 != pw2){
+	      		$('#discordPw').css('display', '');
+	      		$('#join').css('height','auto');
+	      		return false;
+	    	}else{
+	      		$('#discordPw').css('display', 'none');
+	    	}
+	      	
+	      	if($('#discordPw').attr('style') == ''){
+	        	alert('비밀번호가 일치하지 않습니다.')
+	      	}else{
+	        	if(email1 == '' || pw1 =='' || pw2 =='' || sex ==''){
+	          		alert('필수항목 입력해주세요.');
+	        	}else{
+	          		$('#u_mail').val(email1);
+	          		$('#u_pw').val(pw1);
+	          		$('#u_sex').val(sex);
+	          		var json = {'email': email1, 'pw':pw1, 'sex':sex};
+	          		
+	          		$.ajax({
+	    	        	url : '/m_join/join_step3',
+	    	        	data: json,
+	    	        	success : function(){
+			          		//location.href = '/m_join/join_step3';
+	    	        	} 
+	    	    	}); 
+	        	}//if
+	      	}//if
+    	}//if
+  	});
+});
+</script>
+</head>
+<body>
+	<section id="join" style="height:100%;">
+	    <div class="title-sub"> 참여형 설문조사 서비스 아이두에 오신것을 환영합니다.</div>
+    	<div class="logo_div"><img class="join_logo" src="/img/mobile/main/join/login_logo.png" alt="로고" alt="" /></div>
+    	<div class="jointitleTX"> 회원가입 </div> 
+
+    	<ul class="step">
+      		<li> <span class="stepNm">STEP 01</span><img src="/img/mobile/main/join/next_icon.png" alt="다음으로" /><br><span class="stepTx">약관동의</span></li>          
+      		<li> <span class="stepNm On">STEP 02</span><img src="/img/mobile/main/join/next_icon.png" alt="다음으로" /><br><span class="stepTx">정보입력</span></li>
+      		<li> <span class="stepNm">STEP 03</span><img src="/img/mobile/main/join/next_icon.png" alt="다음으로" /><br><span class="stepTx">프로필입력</span></li>
+      		<li> <span class="stepNm">가입완료 </span></li> 
+    	</ul> 
+		<!-- info --> 
+    	<article class="info"> 
+      		<div class="infowrap02"> 
+        		<div class="leftTitle"><img src="/img/mobile/main/join/mail_icon.png" alt="이메일"/></div> 
+        		<div class="rightCon">
+          			<input type="text" id="email1" name="email" placeholder="이메일을 입력해주세요"><button id="checkMail">중복확인</button>
+
+        		</div>  
+      		</div>
+        	<!-- 유효성검사 메세지 --> 
+      		<div class="msgWrap" style="display:none" id="failMail">사용불가능한 이메일 입니다. </div>
+        	<!-- //유효성검사 메세지 --> 
+  			<!-- //infowrap02 -->  
+
+      		<div class="infowrap02"> 
+		    	<div class="leftTitle"><img src="/img/mobile/main/join/pass_icon.png" alt="비밀번호"/></div> 
+          		<div class="rightCon">
+          			<input type="password" id="pw1" name="pw" placeholder="비밀번호를 입력해주세요">
+          		</div>  
+			</div>
+   			<!-- 유효성검사 메세지 --> 
+   			<div class="msgWrap" style="display:none;">사용불가능한 비밀번호입니다. </div>
+   			<!-- //유효성검사 메세지 --> 
+      		<!-- //infowrap02 --> 
+
+      		<div class="infowrap02"> 
+      			<div class="leftTitle"><img src="/img/mobile/main/join/pass_con_icon.png" alt="비밀번호확인"/></div> 
+      			<div class="rightCon"><input type="password" id="pw2" name="pw" placeholder="비밀번호 확인">
+      			</div> 
+      		</div>
+   			<div class="msg-block">
+     			<span class="msg-error" id="discordPw" style="display:none;">패스워드가 일치하지 않습니다.</span>
+   			</div>
+      		<!-- //infowrap --> 
+
+  			<div class="infowrap02"> 
+    			<!-- <p class="leftTitle"><img src="img/join_arrow.png" alt=""/> 성별</p>  -->
+    			<div class="sex_div">
+    				<input type="radio" class="human" id="male" name="sex" value="male"><img class="select_img male" src="/img/mobile/main/join/join_man_off.png"><label for="male">남자</label>
+    				<input type="radio" class="human" id="female" name="sex" value="female"><img class="select_img female" src="/img/mobile/main/join/join_woman_off.png"><label for="female">여자</label>
+    			</div>
+  			</div>
+  			<!-- //infowrap -->
+    	</article> 
+  		<!-- //info --> 
+
+		<nav>  
+    		<button class="cancle padding-fix" id="step2_prev" onclick="location.href='/m_join/join_step1'">이전</button>    
+    		<button class="next padding-fix" id="step2_next">다음</button> 
+  		</nav> 
+	</section> 
+</body>
+</html>

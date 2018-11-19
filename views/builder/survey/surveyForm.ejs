@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>설문조사</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+<!-- 공통 css -->
+<link rel="stylesheet" type="text/css" href="../css/common.css" />
+<!-- 부트스트랩 라이브러리 -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">  
+<link rel="stylesheet" href="../css/bootstrap-theme.min.css">  
+<link rel="stylesheet" href="../js/bootstrap.min.js">
+<!-- 텍스트/이미지 타입 탭 css -->
+<link rel="stylesheet" type="text/css" href="../css/tabs.css" />
+<!-- 설문조사 css -->
+<link rel="stylesheet" type="text/css" href="../css/survey.css" />
+<!-- 대질문 js 선언 -->
+<script type="text/javascript" src="../js/web/builder/survey/surveyTitleForm.js"></script>  
+<!-- 중질문 js 선언 -->
+<script type="text/javascript" src="../js/web/builder/survey/surveySecondTitleForm.js"></script>  
+<!-- 팝업 기능 -->  
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="../css/jquery-ui.css">  
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+		var dialog, form;
+		
+	    //대질문 등록 팝업 
+  		dialog = $( "#dialog-surveyTitle" ).dialog({
+	      	autoOpen: false,
+	      	height: 800,
+	      	width: 980,
+	      	modal: true,
+	      	buttons: {
+	        	"등록": insertTitle,
+	        	"닫기": function() {
+	        		$( "#dialog-surveyTitle" ).dialog( "close" );
+	       		}
+	    	},
+	    	close: function() {
+	        	//form[ 0 ].reset();
+	        	//allFields.removeClass( "ui-state-error" );
+	      	}
+	   });
+	 
+	   //설문조사 추가 버튼
+	   $( "#add-survey" ).button().on( "click", function() {
+	       dialog.dialog( "open" );
+	   });
+  	});
+</script>
+</head>
+<body>
+	<button id="add-survey">설문조사 추가</button>
+	
+	<div id="dialog-surveyTitle" title="IDO RESEARCH MAKE">
+  		<!-- <p class="validateTips">대질문 등록</p> -->
+		<span id="IDO-dialog-title"><h1>설문만들기</h1></span> 
+		<form>
+			<fieldset>
+				<!-- <div id="wrap"> 
+					<div id="testwrap">  -->
+						<div id="makeq" class="padding-fix">  
+							<!-- <span class="top">IDO RESEARCH MAKE </span> -->
+							 <section> 
+          						<img src="../img/make_top_pic.png" alt="" /> 
+					          	<h2>질문입력하기</h2>
+					          	<!-- <p class="surveyTitle"> <span class="explain"> 질문을 입력해주세요.</span> </p>  -->
+								<input type="hidden" id="surveyId_title" value="">
+								<div id="titleDiv"></div>
+							</section>
+						</div> 
+						<!-- // makeq --> 
+					<!-- </div> 
+					//testwrap 
+				</div>
+				wrap --> 
+			</fieldset>
+		</form>
+	</div>
+	 
+	<div id="dialog-listSurvey" title="IDO RESEARCH MAKE" style="display:none;">
+  		<!-- <p class="validateTips">설문조사 리스트</p> -->
+  		<span id="IDO-dialog-title"><h1>설문만들기</h1></span> 
+		<form>
+	    	<fieldset>
+	    		<div id="makeq" class="padding-fix">  
+	    			 <input type="text" id="titleDone" name="titleDone" disabled>  
+	    			 <section class="category"> 
+			         	<div class="leftPic"><img src="../img/category_title_pic.png" width="130px" height="44px"alt="카테고리분류를 선택하세요"></div> 
+			           	<div class="rightSelect">
+			                <select class="category">
+			                <option>항목</option>
+			                <option>항목</option>
+			                </select>
+			           	</div><!-- //rightSelect --> 
+			        </section><!-- //카테고리 선택 끝 --> 
+					<section class="choiceType">
+			    		<input type="hidden" id="surveyId">
+						<h1> 유형선택 </h1> <span class="addtion">설문의 유형을 선택해주세요. </span> 
+						<ul> 
+							<li><a href="#" class="crown" id="btn1" onclick="button1()"><span class="offTx">순위형</span></a></li> 
+							<li><a href="#" class="star" id="btn2" onclick="button2()"><span class="offTx">별점형</span></a></li>
+							<li><a href="#" class="choice" id="btn3" onclick="button3()"><span class="offTx">이중택일형</span></a></li> 
+							<li><a href="#" class="number" id="btn4" onclick="button4()"><span class="offTx">선택형</span></a></li> 
+							<li><a href="#" class="text" id="btn5" onclick="button5()"><span class="offTx">텍스트</span></a></li>  
+						</ul>
+					</section><!-- //choiceType -->   
+			  		<div id="surveyDiv"><!-- 전체 div -->
+			  			<!-- 설문조사 insert div -->
+			  			<div id="listDiv"></div><!-- 설문조사 list div -->
+			  		</div>
+			  	</div>
+	    	</fieldset>
+	  	</form>
+	</div> 
+</body>
+</html>

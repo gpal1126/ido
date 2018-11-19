@@ -1,0 +1,456 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body{
+	margin: 0;
+	padding:0;
+	font-family: "Nanum Gothic", sans-serif;
+}
+#header{
+	width: 100%;
+	height: 50px;
+	background-color: #164672;
+}
+.wrap{
+	width:96%;
+	height:auto;
+	padding-left: 2%;
+}
+.t_logo img{
+	width: 39px;
+    height: 20px;
+    padding-top: 17px;
+    padding-left: 45%;
+}
+.menu{
+	float:left;
+	width: 80px;
+	height: auto;
+	padding-left: 4px;
+}
+.menu_container{
+	height: 40px;
+}
+.menu img{
+	width: 100%;
+}
+
+.checks{
+	padding-top: 20px;
+}
+
+.app_btn div{
+	margin:0 auto;
+	width: 51px; 
+	height: 22px; 
+	color:white; 
+	padding-top: 8px; 
+	text-align: center;
+}
+
+
+.box{  /* 실제 체크박스는 화면에서 숨김 */
+   width: 1px;
+   height: 1px;
+   padding: 0;
+   margin: -1px;
+   overflow: hidden;
+   clip:rect(0,0,0,0);
+   border: 0
+}
+input[type="checkbox"] + label {
+display: inline-block;
+ position: relative;
+  /* 글자와 체크박스 사이의 간격을 변경 */
+ 
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+}
+input[type="checkbox"] + label:before {  /* 가짜 체크박스 */
+	content: ' ';
+  display: inline-block;
+  width: 15px;  /* 체크박스의 너비를 지정 */
+  height: 15px;  /* 체크박스의 높이를 지정 */
+  line-height: 10px; /* 세로정렬을 위해 높이값과 일치 */
+  margin: -2px 8px 0 0;
+  text-align: center; 
+  vertical-align: middle;
+  background: #fafafa;
+  border: 1px solid #cacece; 
+}
+
+input[type="checkbox"] + label:active:before,
+input[type="checkbox"]:checked + label:active:before {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="checkbox"]:checked + label:before {  /* 체크박스를 체크했을때 */ 
+  content: '\2714';  /* 체크표시 유니코드 사용 */
+  color: #99a1a7;
+  text-shadow: 1px 1px #fff;
+  background: #e9ecee;
+  border-color: #adb8c0;
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+
+
+section .contents_list{
+	width:100%;
+	height:30px;
+}
+
+.menuB{
+	width: 100%;
+	height: 22px;
+	background-color: #f5f5f5;
+	padding-top:10px;
+}
+
+.menuB div{
+	float: left;
+	font-size: 8pt;
+	text-align: center;
+	font-weight: bold;
+}
+.section_menu{
+	height: 53px;
+	float: left;
+	border-bottom: solid 1px #dbdbdb;
+	font-size: 8pt;
+}
+
+.del_bt {width:70px; height:40px;background:#696868;line-height:40px;color:#ffffff; font-size: 0.9em; display:inline-block; text-align: center; cursor: pointer; margin-top:20px;}
+.add_bt {width:70px; height:40px;background:#2f8fd2;line-height:40px;color:#ffffff; font-size: 0.9em; display:inline-block; text-align: center; cursor: pointer;}
+
+
+
+
+.surveyFooter{
+  	margin: 0 0 2% 5% ;
+  	width: 90%;
+  	height: 8%;
+  }
+  
+  .next_bt {
+  	background-color:#174773;
+    width: 100%;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+  }
+  /* .revise_bt {
+  	background-color:#174773;
+    width: 49%;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 5px;
+  } */
+  
+  
+  
+  
+  
+/***** 리스트 css *****/
+.wrap_header{
+	width: 100%;
+	height: 20%;
+}
+
+.list_wrap .close_btn{
+	position: absolute;
+    top: 3%;
+    left: 46.8%;
+    width: 30px;
+    height: 5%;
+    z-index: 101;
+}
+
+.list_wrap .list_eng_banner{
+	position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 25px;
+    font-size: 6pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+}
+
+.list_wrap .list_kor_banner{
+	position: absolute;
+    top: 14%;
+    width: 100%;
+    height: 25px;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+.list_wrap #listDiv{ 
+	height: 70%; 
+	overflow: scroll;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	-webkit-overflow-scrolling: touch; 
+}
+
+.list_wrap #listDiv .survey_conts_div{ height: 100px;}
+
+/* 중질문 이미지 */
+#listDiv .secSvyTitleImg{
+	width:300px; 
+	height:260px;
+	cursor:pointer;
+	boder:0px;
+	margin:10px 0 0 25px;
+}  
+#listDiv .conts_img_div{
+	width: 55%;
+    height: 100px;
+    float: left;
+}
+
+#listDiv .conts_txt_div{
+	width: 45%;
+	height:100px;
+	float: right;
+}
+
+#listDiv .conts_txt_div .survey_type_div{
+	margin-top: 19px;
+	clear: both;
+}
+
+#listDiv .conts_txt_div .survey_type_div .survey_type_btn{
+	background-color: #1F4E77;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.8em;
+    width: 35%;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-weight: 500;
+    float: left;
+}
+
+#listDiv .conts_txt_div .survey_type_div .survey_type_txt{
+	font-size: 0.8em;
+	margin-left: 5%;
+}
+
+#listDiv .conts_txt_div .survey_title_div{
+	margin-top: 18px;
+}
+
+#listDiv .conts_txt_div .survey_title_div .survey_title_btn{
+	background-color: #1F4E77;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.8em;
+    width: 35%;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-weight: 500;
+    float: left;
+}
+
+#listDiv .conts_txt_div .survey_title_div .survey_title{
+	font-size: 0.8em;
+	margin-left: 5%;
+}
+
+/* 중질문 list 답변 이미지  */
+#listDiv div[id*=contsDiv] .list_img{
+	width:200px; 
+	height:160px;
+	cursor:pointer;
+	background:url('/images/common/builder/survey/img_add.png') no-repeat;
+	boder:0px;
+	margin: 8px 0 0 35%;
+}  
+
+#listDiv .img_div{
+	width: 20%;
+    height: 40px;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+/* 설문리스트 구분선 */
+#listDiv .hr_line{
+	width: 95%; 
+	border: 0.5px solid #efefef;
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
+.list_wrap .footer{ height: 10%; }
+
+.list_wrap .footer .list_conts{ width:40%; height:50%; float:left; background-color:#0a66cd; color:#fff; text-align:center; }
+.list_wrap .footer .add_survey{ width:70%; height:80%; background-color:#0a66cd; color:#fff; text-align:center; line-height:3; margin:0 auto;}
+
+/***** //리스트 css *****/
+
+/*** 설문 미리보기 wrap ***/
+.surveyWrap{
+	width:100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top:0%;
+	z-index: 10;
+	background-color: #000000;
+	opacity: 0.95;
+	/* overflow: scroll; */
+}
+.surveyContainer {
+    /* position: relative; */
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+/* 미리보기 헤더 */
+.surveyHeader {
+    /* position: absolute; */
+    top: 0;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+
+.closeButton {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 25px;
+    height: 25px;
+    z-index: 1000;
+}
+.surveyHeader img {
+	width: 100%;
+}
+
+.categoryButton {
+    position: absolute;
+    top: 25px;
+    width: 100%;
+    height: 25px;
+    color: white;
+    font-size: 12pt;
+    text-align: center;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+.n_bt {
+    position: absolute;
+    top: 20px;
+    right: 7%;
+    width: 16px;
+    height: 28px;
+    z-index: 1000;
+}
+
+.revise_bt {
+    position: absolute;
+    top: 20px;
+    left: 7%;
+    width: 16px;
+    height: 28px;
+    z-index: 1000;
+}
+/* 미리보기 헤더 */
+
+/* 미리보기 컨텐츠 */
+.surveyContents {
+    /* position: absolute; */
+    width: 100%;
+    height: 90%;
+    top: 97px;
+    /* text-align: center; */
+}
+form[id*=surveyForm] {
+    height: 100%;
+}
+div[id*=surveyDiv] {
+    height: 100%;
+    position: relative;
+}
+.surveySecondTitleDiv {
+    width: 100%;
+    text-align: center;
+    height: 8%;
+    position: absolute;
+    top: 3%;
+}
+.titleSpan {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+    font-size: 16pt;
+}
+.conts_div {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 8%;
+    overflow-y: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+}
+.conts_div img{
+	-webkit-border-radius: 100%;
+}
+.contsTxtDiv {
+    text-align: center;
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 5%;
+}
+/* 미리보기 컨텐츠 */
+
+/* 미리보기 푸터 */
+.surveyFooter {
+    position: absolute;
+    bottom: 0;
+    margin: 0 0 2% 5%;
+    width: 90%;
+    height: 8%;
+}
+.login_bt {
+    background-color: #164672;
+    width: 69%;
+    margin-right: 2px;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+}
+.show_chart {
+    background-color: #164672;
+    width: 30%;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+}
+/* 미리보기 푸터 */
+
+
+/*** 설문 미리보기 wrap ***/  
+
+
+

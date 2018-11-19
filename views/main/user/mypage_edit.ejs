@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+
+
+<title>아이두</title>
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="IDO" />
+<meta name="description" content="IDO" />
+<meta name="author" content="IDO.COM" />
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel='stylesheet' type='text/css'> 
+<!-- http://ionicons.com/ --> 
+<link rel="stylesheet" type="text/css" href="/css/web/main/common1.css" />
+<link rel="stylesheet" href="/css/layout1024.css" media="screen and (max-width:1024px)">
+<link rel="stylesheet" href="/css/mobile.css" media="screen and (max-width:600px)">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/js/getUrlParameter.js"></script>
+<script type="text/javascript" src="/js/web/main/common/common.js"></script> 
+<script type="text/javascript" src="/js/web/main/common/jquery.blockUI.js"></script> 
+<script type="text/javascript">
+/*수정완료 버튼 클릭시*/
+  function mypageEdit(){
+     confirm('수정하시겠습니까')
+    if(confirm){
+      var newPw = $('.newPw').val();
+      var newPw_check = $('.newPw_check').val();
+      var newNick =$('.newNick').val();
+      var userId = getUrlParameter('userId');
+      var file = $('#file_input_hidden').prop("files")[0];
+      var fd = new FormData();
+      if(newPw != newPw_check){
+        alert('패스워드를 다시 확인해주십시오');
+      }else{
+        fd.append('newPw',newPw);
+        fd.append('newNick',newNick);
+        fd.append('userId',userId);
+        fd.append('image', file);
+        // var json = {"newPw":newPw, "newNick":newNick, "userId":userId}
+        $.ajax({
+          url:'/user/updateMyProfile',
+          data :fd,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success:function(){
+            location.reload();
+          }
+        })
+      }
+    }else{
+
+    } 
+    /* 동영상 */
+    // var fd = new FormData();
+    // var file = $('#rec').prop("files")[0];
+    // fd.append('file',file);
+    // $.ajax({
+    //     url:'/user/test',
+    //     data :fd,
+    //     type:'POST',
+    //     processData: false,
+    //     contentType: false,
+    //     success:function(){
+    //       location.reload();
+    //     }
+    //   })
+    /* 동영상 */
+  }
+
+  function change_image(){ //이미지 변경 function
+    file = $('#file_input_hidden').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+    $('.profilephoto img').attr('src', blobURL);
+  }
+</script>
+<script type="text/javascript">
+  $('.editPf').click(function(){
+
+  })
+</script>
+</head>
+<body>
+
+
+     
+
+
+
+<div id="wrap"> 
+
+          <!-- 레이어 위에 내용 --> 
+           
+             
+                   
+          
+
+                   <div id="joinContain"><a href="#" class="joinClose" id="joinoff">창닫기</a></div> 
+ 
+
+
+
+                   <div class="contentpop_wrap"> 
+
+                    Loding ... 
+                   
+                    <a href="#" class="close" id="contentClose">닫기</a> 
+                    
+
+                   </div> 
+                   <!-- contentpop_wrap --> 
+
+
+
+ 
+             <!-- //contentpop_bg --> 
+
+           <!-- //레이어 위에 내용 --> 
+
+
+
+
+
+       <!-- skip start --> 
+        <div class="skipNavi">
+            <ul>
+                <li><a href="#container">본문 바로가기</a></li>
+                <li><a href="#header">주메뉴 바로가기</a></li>
+                 
+            </ul>
+        </div>
+       <!-- //skip  --> 
+       
+
+          <!-- menu --> 
+          <div id="menu_nav">
+             
+
+           <span class="close_bt"><a href="#" class="menu_close" id="closemm">메뉴닫기</a></span> 
+
+         
+         <!-- 로그인 상태일때 
+         <p class="userTx"><img src="img/logo.png" alt="logo" /></p> 
+         <div class="user"> <img src="img/test_user.png" alt="" /></div> 
+           <p class="name">박보검</p> 
+           <p class="name_en">IDhere</p>  
+          --> 
+
+
+          <!-- 비로그인 --> 
+
+          <p class="userTx"><img src="/img/logo.png" alt="logo" /></p>  
+          <p class="titleTx">로그인</p> 
+
+          <input placeholder="id">
+               <div style="width:100%;height:30px;"> 이메일이 틀렸습니다. </div>  
+          <input placeholder="pass">
+
+          <!-- //비로그인 --> 
+             
+          <a href="#" class="facebook_log padding-fix">페이스북 로그인</a>  
+          <a href="#" class="kakao_log padding-fix">카카오톡 로그인</a>  
+
+          <ul class="login">
+           <li> <a href="#">로그인</a> </li> 
+           <li class="padding-fix"> <a href="#" id="joinOpen">IDO 계정만들기</a> </li> 
+
+          </ul>
+
+
+          <p class="findpw"><img src="/img/main_findpw_icon.png" alt=""/> <a href="#">아이디/비밀번호 찾기</a> </p> 
+          
+          <p class="askadmin"> <a href="#" class="asklink"> 제휴문의</a> <br /><a href="#" class="asklink">Q_A</a> </p> 
+          </div>
+          <!-- //menu_nav -->    
+
+
+
+
+          
+
+
+
+
+   <!-- header --> 
+   <!-- header --> 
+  <section id="header"> 
+    <nav style="height: 75px"> 
+      <a href="/"><h1 style="color: white; font-size: 50px; padding-top: 10px; font-weight: bold;">i DO</h1></a> 
+      <!-- 돋보기_검색바(util_search) -->
+      <div class="util_search">
+        <div class="search_btLeft"><a href="#" class="searchOpen" id="openSearch">검색열기 </a></div>  
+        <div class="search_div"><input placeholder="검색어를 입력하세요"></div> 
+      </div> 
+      <!-- //util_search --> 
+
+      <!-- 실시간 인기순위(util_menu) -->
+     
+
+
+
+
+      <div class="util_menu"> 
+      <!-- 여기부터 -->
+      <div class="rank"> 
+       <div id="r_content">
+        <dl id="rank-list">
+        <dt>실시간 급상승 검색어</dt>
+        <dd>
+        <ol>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">보관함에 담아두어야 취업사이트</a></li>
+        <li><a href="#">5 순위</a></li>
+        <li><a href="#">6 순위</a></li>
+        <li><a href="#">7 순위</a></li>
+        <li><a href="#">8 순위</a></li>
+        <li><a href="#">9 순위</a></li>
+        <li><a href="#">10 순위</a></li>
+        </ol>
+        </dd>
+        </dl>
+        </div>
+        <
+      <!-- //menu --> 
+      </div> 
+      </div>
+      <!-- 여기 부분 까지 -->
+      <!-- 실시간 인기순위(util_menu) -->
+    </nav> 
+    <div id="mask"></div> 
+  </section> 
+  <!-- //header --> 
+   <!-- //header --> 
+ 
+
+
+
+       <section id="myeditWrap"> 
+
+          <nav><a href="mypage.html">마이페이지로 돌아가기</a></nav> 
+
+                <h1>MYPAGE</h1> 
+                <p> 프로필 편집 </p> 
+
+                <div class="profileWrap">
+
+                  <div class="profilephoto"><img src="<%= user.PROFILE_PICTURE_PATH.split('resources')[1] %>" alt="테스트이미지" /> </div> 
+                   <div class="file_div" id="input_div"><a href="#" class="editPf" onclick="document.all.file_input_hidden.click();">프로필사진수정</a><input type="file" name="file_input_hidden" style="display:none" id="file_input_hidden" class="file_input_hidden" onchange="change_image()"></div> 
+                  
+
+                </div> 
+                <!-- //profileWrap --> 
+
+ 
+       </section> 
+        <!-- //myeditWrap --> 
+ 
+
+         <section id="editconWrap">
+
+      
+                <div class="editcontent"> 
+            
+                  
+                  <div class="boxTXnone">
+                    
+                    <ul>
+                      <li>계정</li> 
+                      <li id="email"><%= email%></li> 
+                    </ul> 
+
+                  </div>  
+                  <!-- //boxTXnone --> 
+
+
+                  
+                  <!-- //boxTXnone -->                         
+ 
+
+
+
+                  <div class="boxTXedit div_myedit_pw">
+                    <ul class="ul_myedit_pw">
+                      <li class="myedit_pw">패스워드</li> 
+                      <li class="myedit_pw"><p name="myedit_pw" id="myedit_pw">********</p></li> 
+                    </ul> 
+
+                  </div>  
+                  <!-- //boxTXedit -->   
+
+
+                  <div class="boxTXedit div_myedit_nickName">
+                    <ul class="ul_myedit_nickName">
+                      <li class="myedit_nickName">닉네임</li> 
+                      <li  class="myedit_nickName_i"><p name="myedit_nickName" id="myedit_nickName" style="margin-top: 4px;"><%= user.NIKNAME %></p></li> 
+                    </ul> 
+
+                  </div>  
+                  <!-- //boxTXedit -->   
+
+
+                  <button class="editdone" onclick="mypageEdit()">수정완료</button> 
+
+                  <!-- <p class="editBts"><a href="#"><img src="/img/myedit_delet_bt.png" width="18px" height="22px" align="middle" alt="">계정삭제</a></p> -->  
+
+
+
+
+
+                </div> 
+                <!-- //editcontent --> 
+
+
+
+
+            </section> 
+            <!-- //editconWrap --> 
+
+
+
+
+
+ </div> 
+ <!-- wrap --> 
+<style type="text/css">
+  body {
+font-size: 12px;
+background: #FFF;
+color: #164672;
+margin: 0;
+}
+
+#r_content {
+width: 70%;
+position: absolute;
+top: 14px;
+left: 90px;
+background: #4e92bf;
+}
+
+#rank-list a {
+color: #FFF;
+text-decoration: none;
+}
+
+#rank-list a:hover {
+text-decoration: underline;
+}
+
+#rank-list {
+overflow: hidden;
+width: 160px;
+height: 20px;
+margin: 0;
+}
+
+#rank-list dt {
+display: none;
+}
+
+#rank-list dd {
+position: relative;
+margin: 0;
+}
+
+#rank-list ol {
+position: absolute;
+top: 0;
+left: 0;
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+#rank-list li {
+height: 20px;
+line-height: 20px;
+}
+</style>
+<script type="text/javascript">
+$(function() {
+var count = $('#rank-list li').length;
+var height = $('#rank-list li').height();
+
+function step(index) {
+$('#rank-list ol').delay(1500).animate({
+top: -height * index,
+}, 500, function() {
+step((index + 1) % count);
+});
+}
+
+step(1);
+});
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    var userId = getUrlParameter('userId');
+    /*패스워드 수정 부분*/
+    $('#myedit_pw').click(function(){
+        if(confirm){
+          var pw = prompt("기존 패스워드를 입력해주세요.");
+          var json = {"pw":pw, "userId":userId}
+          if(pw != null){
+            $.ajax({
+              url:'/user/checkPw',
+              data:json,
+              type:'POST',
+              success:function(data){
+                if(data =='success'){
+                  $('.ul_myedit_pw').remove();
+                  $('.div_myedit_pw').css('height',100);
+                  $('.ul_myedit_pw').css('padding-top',0);
+                  $('.div_myedit_pw').append('<ul class="ul_myedit_pw"><li class="myedit_pw">새로운 패스워드</li>&nbsp&nbsp<input type="password" class="newPw"></ul>');
+                  $('.div_myedit_pw').append('<ul class="ul_myedit_pw" style="float:left"><li class="myedit_pw">새로운 패스워드 확인</li>&nbsp&nbsp<input type="password" class="newPw_check"></ul>');
+                }else{
+                  alert('패스워드를 다시 확인해주십시오');
+                }
+              }
+            })
+        }else{
+
+        }
+      }
+    }); /*패스워드 수정 끝*/
+
+  $('#myedit_nickName').click(function(){
+        confirm("닉네임을 변경하시겠습니까?");
+        if(confirm){
+            $('#myedit_nickName').remove();
+            $('.myedit_nickName_i').append('&nbsp&nbsp<input type="text" class="newNick">');
+        }else{
+
+        }
+    });
+
+  
+
+  })
+</script>
+ </body> 

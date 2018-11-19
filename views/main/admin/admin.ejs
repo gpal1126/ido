@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- 컨텐츠 관리 -> 등록 css / js -->
+<script type="text/javascript" src="js/web/builder/list/reg_list.js"></script>
+<!-- 등록부분 css / js -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.ajax({
+      url : '/user/inqure_app_user',
+      success:function(data){
+        var userCode ='';
+        for(i in data){
+          console.log(data[i]);
+          if(data[i].USER_CODE == '1'){
+              userCode = '<a href="#">일반유저</a>';
+          }else if(data[i].USER_CODE == '2'){
+              userCode = '<a href="#">신청중</a>';
+          }
+          $('thead').append('<tr><td><input type="checkbox"></td>'
+                                      +'<td>'+data[i].USER_ID+'</td>'
+                                      +'<td>'+data[i].USER_EMAIL+'</td>'
+                                      +'<td>'+userCode+'</td>'
+                                      +'<td>'+data[i].USER_ID+'</td></tr>')
+
+
+        }
+      }
+    })
+  })
+</script>
+<style type="text/css">
+#header {height:80px;background:red; width:100%;}
+#slider {float:left;height:1200px;width:12%;background:green;}
+#contents {height:1200px; float:left; background:#ffffff; width:88%;}
+#footer {height:80px;background:#0099ff; clear:both}
+</style>
+
+
+<style type="text/css">
+  ul.tabs {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    height: 32px;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
+    width: 100%;
+    font-family:"dotum";
+    font-size:12px;
+}
+/* 상단바 */
+ul.tabs li {
+    float: left;
+    text-align:center;
+    cursor: pointer;
+    width:100px;
+    height: 31px;
+    line-height: 31px;
+    border: 1px solid #eee;
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+ul.tabs li.active {
+    background: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+.tab_container {
+    border: 1px solid #eee;
+    border-top: none;
+    clear: both;
+    float: left;
+    width: 1000px;
+    background: #FFFFFF;
+}
+.tab_content {
+    padding: 5px;
+    font-size: 12px;
+    display: none;
+}
+.tab_container .tab_content ul {
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+.tab_container .tab_content ul li {
+    padding:5px;
+    list-style:none
+}
+
+.table_tr > th, td{
+  text-align: center;
+}
+
+</style>
+</head>
+<body ng-app="mainApp">
+<div id="header"> header </div>
+  <div id="slider"> 
+  <ul>
+    <li>
+      <a href="#" id="manage_contents">파트너 유저 신청현황</a>
+    </li>
+    <li>
+      <a href="#" id="manage_coupon">컨텐츠 관리</a>
+    </li>
+    <li>
+      <a href="#" id="manage_advertisement">3</a>
+    </li>
+    <li>
+      <a href="#" id="manage_survey">4</a>
+    </li>
+  </ul>
+  </div>
+  <div id="contents">
+  <div id="container">
+      <ul class="tabs">
+          <li class="active" rel="tab1">조회</li>
+         <!--  <li rel="tab2">등록</li> -->
+      </ul>
+      <div class="tab_container">
+        <!-- #tab1(조회) -->
+        <div id="tab1" class="tab_content">
+        <table border="1" style="width:80%; " id="contents_table">
+          <thead>
+            <tr class="table_tr">
+            <th width="5%">
+                    <input type="checkbox" id="checkAll">
+                </th>
+            <th width="20%">유저ID</th>
+            <th width="38%">구비서류 현황</th>
+            <th width="20%">상태</th>
+            <th>신청일</th>
+          </tr>
+          </thead>
+          <tr class="table_tr" id="partnerContents"><!-- contents_id와 partner id를 같이 넘겨주자. -->
+          </tr>
+        </table>
+        <button id="delete_contents">삭제</button>
+        <button id="new_contents">등록</button> 
+          </div>
+      <!-- #tab2(등록) -->
+          <div id="tab2" class="tab_content">
+        
+          </div>
+      </div>
+      <!-- .tab_container -->
+
+  </div>
+  </div>
+
+  <div id="footer"> footer </div>
+<a href="/upload/builder_thumbnail?contents_id=new">New</a>
+
+</body>
+</html>
+
+

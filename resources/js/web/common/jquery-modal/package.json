@@ -1,0 +1,54 @@
+{
+  "name": "jquery-modal",
+  "version": "0.7.0",
+  "main": "jquery.modal.js",
+  "style": "jquery.modal.css",
+  "description": "The simplest possible modal for jQuery",
+  "homepage": "https://github.com/kylefox/jquery-modal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylefox/jquery-modal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kylefox/jquery-modal/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Kyle Fox",
+    "email": "kylefox@gmail.com",
+    "url": "http://kylefox.ca/"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-conventional-changelog": "^0.7.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1"
+  },
+  "gitHead": "7279b21561ba56d9d39bbb15b01116a37f49334c",
+  "_id": "jquery-modal@0.7.0",
+  "scripts": {},
+  "_shasum": "ea3eebb7d171d8ad1a692355b96435af61bd90f2",
+  "_from": "jquery-modal@latest",
+  "_npmVersion": "3.7.3",
+  "_nodeVersion": "5.9.0",
+  "_npmUser": {
+    "name": "kylefox",
+    "email": "kylefox@gmail.com"
+  },
+  "dist": {
+    "shasum": "ea3eebb7d171d8ad1a692355b96435af61bd90f2",
+    "tarball": "https://registry.npmjs.org/jquery-modal/-/jquery-modal-0.7.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "kylefox",
+      "email": "kylefox@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-13-west.internal.npmjs.com",
+    "tmp": "tmp/jquery-modal-0.7.0.tgz_1458259201374_0.4263419029302895"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/jquery-modal/-/jquery-modal-0.7.0.tgz"
+}

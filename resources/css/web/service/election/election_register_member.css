@@ -1,0 +1,241 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 19%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 14%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+.election_input{
+	width: 90%;
+	height: 20px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #f7f7f7;
+}
+
+/* 투표형태 radio */
+.election_type .elelction_type_input{
+	visibility: hidden;
+	position: absolute;
+}
+
+/* radio chk img */
+.election_type .election_img{
+	background: url(/img/service/election/check_box_off.png) no-repeat;
+	width: 26px;
+	height: 26px;
+	float: left;
+	padding-right: 3px;
+}
+
+/* radio label text */
+.election_type label{
+	float: left;
+	line-height: 26px;
+	padding-right: 10px;
+}
+
+/* .election_type label[for*="electionType"]{
+	padding-right: 10px;
+} */
+
+/* 사조직임원선거 radio btn img */
+.election_type #electionImg3{
+	clear: both;
+}
+
+/* 체크된 radio btn img */
+.election_type > input:checked + .election_img{
+	background: url(/img/service/election/check_box_on.png) no-repeat;
+	width: 26px;
+	height: 26px;
+	float: left;
+}
+
+/* 투표형태 val chk */
+#chkElecType {
+	clear: both;
+	margin: 8% 0 0 0;
+}
+
+/* 실시기간 div */
+.enforcement_period {
+	/* margin: 8% 0 0 0; */
+}
+
+/* 실시기간 input */
+.enforcement_period .date_input{
+	width: 40%;
+}
+
+/* 실시기간 달력 img */
+/* .enforcement_period .ui-datepicker-trigger{
+	margin-left: 1%;
+	vertical-align: middle;
+} */
+
+/* 주관기관 */
+.company_name{
+	clear: both;
+}
+
+/* 우편주소 input */
+.company_addr .zipcode_input{
+	width: 30%;
+	height: 20px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #E7E4E4;
+	float: left;
+}
+
+/* addr 주소 */
+.company_addr .addr_input{
+	background-color: #E7E4E4;
+}
+
+/* 주소 input */
+.company_addr .election_input{
+	margin-top: 1%;
+}
+
+/* 주소 검색 btn */
+.company_addr #postcodify_search_button{
+	width: 40px;
+	height: 25px;
+    background-color: #06468E;
+    float: left;
+    margin: 1.5% 0 0 1%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10pt;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 3px;
+}
+
+/* 전화번호 input */
+.company_tel .election_input{
+	width: 25%;
+	height: 20px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #f7f7f7;
+}
+
+/* validation chk div */
+.msgWrap {
+	margin: 1% 0 0 0;
+	font-family: 맑은고딕; 
+	font-size: 11pt; 
+	color: #CC1C1C;
+}
+
+h4{
+	margin: 5px;
+	font: 13pt '나눔바른고딕';
+	color: #706F6F;
+	font-weight: bold;
+	line-height: 23px;
+}
+/* contents */
+
+/* footer */
+.footer{
+	width: 100%;
+	height: auto;
+}
+
+.modify{
+	width: 43%;
+	margin-left: 7%;
+}
+.modify img{
+	width: 90%;
+}
+
+.register{
+	width: 43%;
+	margin-right: 7%;
+}
+.register img{
+	width: 90%;
+}
+	
+.contents .election_container{	
+	height: auto;
+	padding-left: 5%;
+}	
+
+.contents .election_container .title_icon{
+	background: url(/img/service/election/title_icon.png) no-repeat;;
+	width: 21px;
+	height: 21px;
+	float: left;
+	margin: 0 1% 0 0;
+}
+
+.contents .election_container .election_title .title_icon h4{
+	
+}

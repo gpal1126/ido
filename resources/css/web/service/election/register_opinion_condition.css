@@ -1,0 +1,1069 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 15%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 13%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+
+.select_container{
+	float: left;
+	width: 70%;
+	padding-top : 7%;
+	padding-left : 10%;
+}
+
+.select_container div{
+	float: left;
+	width: 30%;
+	padding-left: 3%;
+}
+.select_img, .select_txt{
+  clear: both;
+}
+.select_txt{
+  margin-left: 20%;
+  margin-top: -10%;
+}
+
+.no_select_txt{
+  clear: both;
+  margin-left: 10%;
+  margin-top: -10%;
+}
+
+
+input[type=radio] {
+    display:none;
+  }
+
+/* 성별 */  
+
+#man + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_man_ico_off.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+ 
+#man:checked + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_man_ico_on.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#woman + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_woman_ico_off.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#woman:checked + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_woman_ico_on.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#sex_no_type + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_no_type.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#sex_no_type:checked + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/gen_no_type_on.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+/* 성별 */
+
+
+/* 연령대 */
+.age_select_container{
+  float: left;
+  width: 75%;
+  padding-top : 3%;
+  padding-left : 5%;
+}
+
+.age_select_container div{
+  float: left;
+  width: 10%;
+  padding-left: 2%;
+}
+
+.age_select_img, .age_select_txt{
+  clear: both;
+}
+.age_select_txt{
+  margin-left: 10%;
+  margin-top: -40%;
+}
+
+#age_10 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_10_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_10:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_10_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_20 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_20_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_20:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_20_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_30 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_30_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_30:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_30_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_40 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_40_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_40:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_40_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_50 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_50_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_50:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_50_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_60 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_60_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_60:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_60_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_70 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_70_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_70:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_70_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#age_80 + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_80_off.png");
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#age_80:checked + label
+{
+  background-size : 25px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/age/age_80_on.png");
+  width: 25px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+/* 연령 끝 */
+
+/* 직업 시작 */
+.job_select_container select{
+  margin-top: 10%;
+   border-color: #cacaca;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #fff;
+    width: 70%;
+    height: 30px;
+    font-size: 11pt;
+    color: #706F6F;
+}
+/* 직업 끝 */
+
+
+/* 학력 시작 */
+.academic_select_container{
+  width: 70%;
+  float: left;
+  padding-top : 4%;
+}
+.academic_select_container div{
+  float: left;
+  width: 14%;
+  padding-left: 6%;
+}
+
+.academic_select_img, .academic_select_txt{
+  clear: both;
+}
+.academic_select_txt{
+  margin-top: -30%;
+}
+
+#middle + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_01_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#middle:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_01_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#high + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_02_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#high:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_02_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#univ + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_03_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#univ:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_03_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#grade + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_04_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#grade:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_04_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#no_type2 + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_no_type2.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#no_type2:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/academy_ability/academic_no_type2_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+/* 학력 끝 */
+
+/* 결혼여부 시작 */
+.marry_select_container{
+  float: left;
+  width: 70%;
+  padding-top : 7%;
+  padding-left : 10%;
+}
+
+.marry_select_container div{
+  float: left;
+  width: 30%;
+  padding-left: 3%;
+}
+.marry_select_img, .marry_select_txt{
+  clear: both;
+}
+.marry_select_txt{
+  margin-left: 20%;
+  margin-top: -20%;
+}
+
+.marry_no_select_txt{
+  clear: both;
+  margin-left: 10%;
+  margin-top: -10%;
+}
+
+
+#no_marry + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_man_ico_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#no_marry:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_man_ico_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#marry + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_woman_ico_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#marry:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_woman_ico_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#marry_no_type + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_no_type.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#marry_no_type:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/family/fam_no_type_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+/* 결혼여부 끝*/
+
+/* 거주지 시작*/
+.region_select_container select{
+  margin-top: 10%;
+   border-color: #cacaca;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    background-color: #fff;
+    width: 60%;
+    height: 30px;
+    font-size: 11pt;
+    color: #706F6F;
+}
+/* 거주지 끝*/
+
+
+/* 추정 연수입 시작 */
+.asset_select_container div{
+  padding-top: 9px;
+  margin-left: 25%;
+}
+
+.asset_select_container div label{
+  padding-left: 25px;
+  font-size: 11pt;
+  color: #706F6F;
+}
+
+#a1000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/1000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a1000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/1000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a2000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/2000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a2000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/2000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a3000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/3000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a3000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/3000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a4000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/4000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a4000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/4000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a5000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/5000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a5000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/5000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a6000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/6000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a6000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/6000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a7000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/7000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a7000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/7000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a8000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/8000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a8000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/8000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a9000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/9000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a9000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/9000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#a10000 +label{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/10000_off.png");
+  background-repeat: no-repeat;
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+#a10000:checked + label
+{
+  background-size : 85px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/asset/10000_on.png");
+  width: 85px;
+  height: 25px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+/* 추정 연수입 끝 */
+
+
+/* 거주형태 시작 */
+.house_select_container{
+  width: 70%;
+  float: left;
+  padding-top : 4%;
+}
+.house_select_container div{
+  float: left;
+  width: 14%;
+  padding-left: 6%;
+}
+
+.house_select_img, .house_select_txt{
+  clear: both;
+}
+.house_select_txt{
+  margin-top: -30%;
+}
+
+#single + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_01_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#single:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_01_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#apt + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_02_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#apt:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_02_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#mention + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_03_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#mention:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_03_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#op + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_04_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#op:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_ico_04_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#house_no_type + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_no_type_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#house_no_type:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/house/house_no_type_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+/* 거주형태 끝 */
+
+/* 종교 시작 */
+.religion_select_container{
+  width: 70%;
+  float: left;
+  padding-top : 4%;
+}
+.religion_select_container div{
+  float: left;
+  width: 14%;
+  padding-left: 6%;
+}
+
+.religion_select_img, .religion_select_txt{
+  clear: both;
+}
+.religion_select_txt{
+  margin-top: -30%;
+}
+
+#christianity + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_01_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#christianity:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_01_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#buddhism + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_02_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#buddhism:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_02_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#catholic + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_03_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#catholic:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ico_03_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#etc + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ect_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#etc:checked + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ect_on.png");
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+
+#religion_no_type + label
+{
+  background-size : 45px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ect_notype_off.png");
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+#religion_no_type:checked + label
+{
+  background-size : 50px auto;
+  background-image:url("/img/service/survey/step4_opinion_leader/religion/religion_ect_notype_on.png");
+  width: 50px;
+  height: 60px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+/* 종교 끝 */
+
+
+
+
+
+
+input[name=no_type] + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/no_type.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}
+   
+input[name=no_type] + label
+{
+  background-size : 50px 50px;
+  background-image:url("/img/service/survey/step4_opinion_leader/sex/no_type.png");
+  height: 50px;
+  width: 50px;
+  display:inline-block;
+  padding: 0 0 0 0px;
+}

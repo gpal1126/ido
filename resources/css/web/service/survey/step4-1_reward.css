@@ -1,0 +1,17 @@
+.select_answer_container{
+	width : 80%;
+	height:auto;
+	padding-left: 15%;
+}
+
+#select_text img{
+	width : 170px;
+}
+
+#opinion_leader img{
+	width : 200px;
+}
+
+#manager_address_book img{
+	width : 200px;
+}

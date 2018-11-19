@@ -1,0 +1,268 @@
+
+/** 설문 참여 css **/
+
+.conts_div {
+  	/* padding-left: 120px; */
+    /* 
+	position:absolute; 
+	width:100%; 
+	height:80%; 
+	overflow:scroll; 
+	top: 16%;
+	 */
+}
+  
+.conts_div::-webkit-scrollbar {
+	width: 2px;
+}
+
+.conts_div::-webkit-scrollbar-thumb {
+    background: #a9a9a9;
+}
+  
+.choose_img{
+    position: relative;
+  	top: -200px;
+    left: 0px;
+    font-size: 2em;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 50%;
+  	/* content: url(/images/common/builder/survey/sub_chose_icon1.png);
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: -110px;
+    left: 40px;
+    -webkit-border-radius: 50%; */
+}
+  
+.choose {
+  	content: url(/images/common/builder/survey/sub_chose_icon1.png);
+  	width: 110px;
+  	/* height: 45%; */
+  	/* margin-top: 45px; */ 
+  	margin-top: 25%;  
+  	/* margin-left: 27%; */
+}
+  
+.rank_img{
+  	position: relative;
+  	top: -200px;
+    left: 0px;
+    font-size: 2em;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 50%;
+    /* width: 70px;
+    height: 70px;
+    position: relative;
+    top: -135px;
+    left: 40px;
+    -webkit-border-radius: 50%; */
+}
+  
+  /* .rank {
+  	width: 45%;
+  	height: 45%;
+  	margin-top: 27%;
+  	margin-left: 27%;
+  }
+   */
+   
+.zoom_btn {
+  	position: relative;
+  	top: -200px;
+    left: 0px;
+    font-size: 2em;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 50%;
+    cursor: pointer;
+}
+  
+.magnifying{
+  	content: url(/images/common/builder/survey/sub_chose_icon2.png);
+  	width: 110px;
+  	/* height: 45%; */
+  	margin-top: 25%;
+  	/* margin-left: 27%; */
+}
+  
+.contsTxtDiv{
+  	text-align: center;
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 5%;
+}
+  
+.surveyFooter{
+  	width: 40%;
+  	height: 11%; 
+  	position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.next_bt {
+  	background-color:#164672;
+    width: 100%;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+  }
+.revise_bt {
+	position: absolute;
+  	top: 30px;
+  	left: 10%;
+  	width: 16px;
+  	height: 28px;
+  	z-index: 1000;
+  	cursor: pointer;
+}
+
+.n_bt {
+	position: absolute;
+  	top: 30px;
+  	right: 10%;
+  	width: 16px;
+  	height: 28px;
+  	z-index: 1000;
+  	cursor: pointer;
+}
+  
+.login_bt {
+  	background-color: #164672;
+  	width: 69%;
+  	margin-right: 2px;
+  	height: 50px;
+  	color: white;
+  	font-size: 12pt;
+  	font-family: "Nanum Gothic", sans-serif;
+  	text-align: center;
+  	line-height: 50px;
+}
+
+.success_bt {
+    background-color: #164672;
+    width: 69%;
+    margin-right: 2px;
+    height: 50px;
+    color: white;
+    font-size: 12pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.show_chart {
+	background-color: #164672;
+	width: 30%;
+	height: 50px;
+	color: white;
+	font-size: 12pt;
+	font-family: "Nanum Gothic", sans-serif;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+}
+  
+.img{
+	-webkit-border-radius:100%;
+	-moz-border-radius:100%;
+
+}
+
+.result_chart_Wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: white;
+    z-index: 1001;
+    overflow: scroll;
+}
+
+.result_chart_footer div{
+	width: 33%;
+	height:100%;
+	float: left;
+	color: white;
+	line-height: 67px;
+	text-align: center;
+}
+
+#result_chart_contents {
+	width: 80%;
+	height: 500px;
+	font-size: 11px;
+}
+
+.highcharts-button{
+	display: none;
+}
+#result_chart_contents tspan{
+	margin-right: 30%;
+}
+
+
+.conDiv div{
+	-webkit-border-radius: 20px;
+}
+
+
+/** 별점 참여 **/
+form[id*=surveyForm] .star_img_div { 
+	width: 200px; 
+	height: 200px;
+	margin: 5% auto 5% auto;
+}
+
+form[id*=surveyForm] .star_img_div .star_img { 
+	width:100%; 
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+form[id*=surveyForm] .star_title {
+	text-align: center;
+	color: #fff;
+	font-weight: bold;	
+	font-size: 1.1em;
+} 
+
+form[id*=surveyForm] .star img {
+	width: 10%;
+	margin-right: -1%;
+}
+
+form[id*=surveyForm] .star_conts {
+	position : relative;
+	top: 0;
+	width: 50%;
+	height: 36%;
+	margin: 0 auto;
+}
+
+form[id*=surveyForm] .star_conts .contsDiv {
+	width: 50%;
+	height: 80px;
+}
+
+form[id*=surveyForm] .star_conts .contsTxtDiv {
+	/* text-align:left; */
+	font-size: 1em;
+}
+
+
+
+/** 별점 참여 **/

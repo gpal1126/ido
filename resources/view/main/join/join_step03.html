@@ -1,0 +1,100 @@
+<script type="text/javascript" src="js/web/main/common/common.js"></script>
+<script>
+$(document).ready(function(){
+  console.log($('#u_mail').val());
+  var dup = false; //중보체크 여부를 위한 변수
+  $('#checkNickname').click(function(){
+    var nickName = $('#nickName').val();
+    if(nickName == ''){
+      alert('닉네임을 입력해주세요.')
+    }else{
+      var json = {'nickName': nickName};
+      $.ajax({
+        url : '/check_id/nickName',
+        data : json,
+        success : function(data){
+          if(data=='success'){
+            alert('사용가능한 닉네임 입니다.');
+            dup = true;
+            $('#u_nickName').val(nickName);
+          }else{
+            alert('사용 불가능한 닉네임 입니다.');
+            $('#nickName').val('');
+          }
+        } 
+      }) 
+    }
+  });
+  //프로필 사진
+  $('#image').on('change', function() {
+      var file = $('#image').prop("files")[0];
+      blobURL = window.URL.createObjectURL(file);
+      $('.photowrap img').attr('src', blobURL);
+      $('.photowrap').slideDown(); 
+  });
+  //다음스텝 이동
+  $('#step3_next').click(function(){
+    if(dup == false){
+      alert('중복체크 해주세요');
+    }else{
+      console.log('ff');
+      var mail = $('#u_mail').val();
+      var pw = $('#u_pw').val();
+      var sex = $('#u_sex').val();
+      var nickName = $('#u_nickName').val();
+      var profile_image = $('#image').prop("files")[0];
+      var fd = new FormData();
+      fd.append('email', mail);
+      fd.append('password', pw);
+      fd.append('sex', sex);
+      fd.append('nickName',nickName);
+      fd.append('file',profile_image);
+      // fd.append('file', profile_image);
+      $.ajax({
+        url : '/sign_in',
+        data : fd,
+        processData: false,
+        contentType: false,
+        type : 'POST',
+        success:function(){
+          menuClick('view/main/join/join_step04.html');   
+        }
+      })
+    }
+  })
+});  
+</script>
+<section id="join">
+  <a href="#" class="joinClose" name="joinoff">창닫기</a>
+  <img src="img/logo.png" alt="로고" alt="" />
+  <p class="jointitleTX"> 회원가입 <span class="title-sub"> 참여형 설문조사 서비스 아이두에 오신것을 환영합니다.</span></p> 
+
+  <ul class="step">
+    <li> <span class="stepNm">STEP 01</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">약관동의</span></li>  
+    <li> <span class="stepNm">STEP 02</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">정보입력</span></li>
+    <li> <span class="stepNm On">STEP 03</span><img src="img/main_join_next.png" alt="다음으로" /><br><span class="stepTx">프로필입력</span></li>               
+    <li> <span class="stepNm">가입완료 </span></li> 
+  </ul>
+  <article class="profile">
+    <div class="photo">
+      <div class="photowrap"> 
+        <img src="/images/common/main/noprofile.png" alt="" /> 
+      </div> 
+      <p><input type="file" class="photoin" id="image"></p>  
+      <!-- //photowrap -->
+    </div>
+    <!-- //photo --> 
+    <div class="procon">
+        <div class="nickwrap"> 
+          <p class="nicktitle"><img src="img/join_arrow.png" alt=""/>닉네임</p> 
+          <p class="nickpro"><input type="text" id="nickName"> <button id="checkNickname">중복확인</button></p><br> 
+        </div> 
+    </div>
+    <!-- //procon --> 
+  </article>
+  <!-- //profile --> 
+  <nav>  
+    <button class="cancle padding-fix" onclick="menuClick('view/main/join/join_step02.html');">이전으로</button>    
+    <button class="next padding-fix" id="step3_next">가입하기</button> 
+  </nav> 
+</section> 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" >
+  <meta name="description" content="A basic demo of Cropper.">
+  <meta name="keywords" content="HTML, CSS, JS, JavaScript, image cropping, cropper, cropperjs, cropper.js, front-end, web development">
+  <meta name="author" content="Fengyuan Chen">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <title>아이두</title>
+  <link rel="stylesheet" href="/css/web/mobile/survey/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/web/mobile/survey/assets/css/tether.min.css">
+  <link rel="stylesheet" href="/css/web/mobile/survey/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/web/mobile/survey/dist/cropper.css">
+  <link rel="stylesheet" href="/css/web/mobile/survey/css/main.css">
+  <script type="text/javascript" src="/js/getUrlParameter.js"></script>
+  <style type="text/css">
+    .wrap{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      top:0;
+      background-color: #363636;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Content -->
+  <div id="click">+</div>
+        <input type="file" accept="image/*;capture=camera"id="inputImage" name="file" style="display: none;"/>
+   <br>
+   <div class="300"></div>
+   <button id="submit">전송</button>
+     <!-- <span>파일 선택</span> -->
+<div class="wrap" style="display: none;">    
+   <div class="img-container" style="display: none;">
+      <img src="" alt="">
+    </div>
+  
+<div class="img-preview preview-lg"></div><br><br><br><br><br><br><br><br><br>
+<a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg" style="display: none;">Download</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <!-- <h3 class="page-header">Demo:</h3> -->
+        
+      </div>
+    </div>
+    <div class="row" id="actions">
+      <div class="col-md-9 docs-buttons">
+        <!-- <h3 class="page-header">Toolbar:</h3> -->
+        
+        
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" data-method="getCroppedCanvas">
+            <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas()">
+              확인
+            </span>
+          </button>
+
+           <button type="button" class="btn btn-primary" id="cancel">
+            <span class="docs-tooltip" data-toggle="tooltip">
+              취소
+            </span>
+          </button>
+          
+        </div>
+        <div class="btn-group btn-group-crop">
+          
+        </div>
+        
+        <!-- <div class="preview_200" style="width: 200px; height: 200px; background-color: gray"></div> -->
+        <!-- Show the cropped image in modal -->
+        <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="getCroppedCanvasTitle">Cropped</h4>
+              </div>
+              <div class="modal-body"></div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+        </div><!-- /.modal -->
+
+        
+
+      </div><!-- /.docs-buttons -->
+
+      <div class="col-md-3 docs-toggles">
+       
+      </div><!-- /.docs-toggles -->
+    </div>
+  </div>
+
+
+  <img src="" id="cropImage" style="width: 150px; height: 150px; display: none;">
+  <input type="hidden" id="answer_id_value" value="0">
+  <div class="survey_container">
+    
+  </div>
+</div>
+  <style type="text/css">
+  .survey_container{
+    width: 90%;
+    height: auto;
+    padding-left: 8%;
+  }
+  .survey_answer_container{
+    width: 100%;
+    height: auto;
+    padding-bottom: 10px;
+    float: left;
+  }
+  .survey_answer_container img{
+    width: 50%;
+    height: auto;
+    float: left;
+  }
+  .survey_answer_container input{
+    width: 50%;
+    height: auto;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+  
+  </style>
+  <!-- Scripts -->
+  
+  <script src="/js/web/mobile/survey/assets/js/tether.min.js"></script>
+  <script src="/js/web/mobile/survey/assets/js/bootstrap.min.js"></script>
+  <script src="/js/web/mobile/survey/dist/cropper.js"></script>
+  <script src="/js/web/mobile/survey/js/main.js"></script>
+  <input type="hidden" value="0" id="val">
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var i = $('#clickCount').val();
+    var surveyId = getUrlParameter('surveyId');
+    $('#cancel').click(function(){
+      $('.wrap').css('display','none')
+    })
+    // 플러스 버튼 클릭시
+    $("#click").on('click', function(){
+      i++;
+      $('#clickCount').val(i);
+      console.log('ff')
+      $('.300').append('<div class="survey_answer_container"><div class="survey_image_container" id="thumbnail_preview1" style="width: 410px; height: 224px; float: left; margin-left: 15px; background-color: white" onclick="document.all.inputImage'+i+'.click();">'+
+          '<img src="" id="answer_preview_'+i+'" style="width:150px; height:150px;">'+
+          '<input type="file" accept="image/*;capture=camera" id="inputImage'+i+'" name="file" style="display: none;"/>'+
+          '</div>'+'<input type="text" class="answer_text" id="answer_S'+surveyId+'_A'+i+'">'+
+              '<input type="text" class="url_link"></div>')
+    })
+
+
+   
+   //전송버튼 클릭시
+   var fd = new FormData();
+   var array = new Array();
+    $('#submit').click(function(){
+      
+      console.log('ff')
+      var ContsCnt = $('.survey_answer_container').size();
+      var Ct = $('.survey_answer_container input').size();
+      
+      for(var i=0; i<ContsCnt; i++){
+          var image = $('#answer_preview_'+(i+1)+'').attr('src').replace(/^data:image\/(png|jpeg);base64,/, "");
+          array.push(image);
+          array.push('p'+i)
+          fd.append('image'+(i+1), array);
+      }
+      console.log(array);
+      $.ajax({
+        url : '/survey/p_test',
+        type:'POST',
+        data : fd,
+        processData: false,
+        contentType: false,
+        success:function(data){
+          console.log('success');
+        }
+      })
+    })
+  })
+  </script>
+  <input type="hidden" id="clickCount" value="0">
+
+</body>
+</html>

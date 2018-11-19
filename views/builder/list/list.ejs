@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>아이두</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link type="text/css" rel="stylesheet" href="js/web/builder/popup/popModal.css">
+<!-- 컨텐츠 관리 -> 등록 css / js -->
+<script type="text/javascript" src="js/web/builder/list/reg_list.js"></script>
+<link type="text/css" rel="stylesheet" href="css/web/builder/list/list_partner.css">
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.app_btn').click(function(){
+			console.log($(this).attr('id'));
+			var result = confirm('컨텐츠 승인 신청을 하시겠습니까?');
+			var contenstId = $(this).attr('id').split('_')[1];
+			console.log(contenstId)
+			if(result){
+				$.ajax({
+					url:'/upload/request_contents_confirm?contentsId='+contenstId,
+					type: 'GET',
+					success:function(){
+						console.log('갔다옴');
+						 window.location.reload();
+					}
+				})
+			}else{
+			}
+		})
+	})
+</script>
+</head>
+<body>
+<!-- <div id="header"> header </div> -->
+<header id="header">
+<!-- 
+	<div id="gnb">
+		<div class="l_text">HOME <span style="font-size:10px;width:11px;line-height:11px;">|</span> LOGOUT</div>
+		<div class="r_text">ㆍAdmin > 관리자메인 : admin님</div>
+	</div>
+ -->	
+ 	<div id="t_logo"><a href="/"><span class="logo">lDOLOGO<span></a></div>
+</header>
+
+
+
+<input type="hidden" id="partnerId" value="<%= partnerId %>">
+<section class="left_menu">
+ <div>
+	<ul class="left_menu_ul">
+		<li class="on"><a href="#" id="manage_contents"><span>ㆍ컨텐츠 관리</span></a></li>
+		<li><a href="#" id="manage_coupon"><span>ㆍ쿠폰발급 관리</span></a></li>
+		<li><a href="#" id="manage_advertisement"><span>ㆍ광고 관리</span></a></li>
+		<li><a href="#" id="manage_survey"><span>ㆍ설문 관리</span></a></li>
+	</ul>
+</div>
+</section>
+<section>
+<div id="right_cont">
+	<div class="box">
+		<h1>컨텐츠 관리</h1>	
+	</div>
+	
+	<div class="adm_tbbox">
+		<table class="adm_tb">
+			<col width="8%">
+			<col width="12%">
+			<col width="40%">
+			<col width="18%">
+			<col width="12%">
+			<col width="8%">
+			<tr>
+				<th><input type="checkbox" id="checkAll"></th>
+				<th>컨텐츠 번호</th>
+				<th>설문 제목</th>
+				<th>컨텐츠 등록일</th>
+				<th>컨텐츠 현황</th>
+				<th>수정</th>
+			</tr>
+			<tr>
+			<% for (var i = 0; i < list.length; i++) { %>
+				<td><input type="checkbox" name="box" id="check_<%=list[i].CONTENTS_ID %>"></td>
+				<td><%if(list != null){ %><%= list[i].CONTENTS_ID %></a><% } %></td>
+				<td>
+				    <%if(list[i].SURVEY_TITLE != null){ %>
+				    	<%= list[i].SURVEY_TITLE %>
+				    <%}else {%>
+				    	설문을 작성해주세요.
+				    <%} %>
+				</td>
+				<td><%if(list != null){ %><%= list[i].REG_DATE %></a><% } %></td>
+				<td>
+				<%if(list[i].CONTENTS_TYPE == '1'){ %>
+					<div class="app_btn" id="contents_<%=list[i].CONTENTS_ID %>">신청하기</div>
+				<% } else if(list[i].CONTENTS_TYPE == '2') {%>
+					<div class="app_ing" id="contents_<%=list[i].CONTENTS_ID %>">신청중</div>
+				<% } else if(list[i].CONTENTS_TYPE == '3') {%>
+					<div class="comp_app" id="contents_<%=list[i].CONTENTS_ID %>">승인완료</div>
+				<% } %>
+				</td>
+				<td>
+					<div class="btn btn-fb view_conts" id="update_<%=list[i].CONTENTS_ID %>">보기</div>
+				</td>
+			</tr>
+			<% } %>		
+		</table>
+	</div>
+	<br /><br />
+	<div class="adm_bt">
+		<ul>
+			<li id="delete_contents" class="del_bt">삭제</li>
+			<li id="new_contents" class="add_bt">등록</li> 
+		</ul>			
+	</div>
+</div>	  
+</section>	
+<div class="footer"> footer </div>
+</body>
+</html>
+
+

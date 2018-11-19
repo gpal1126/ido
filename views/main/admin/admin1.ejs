@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSS</title>
+	<meta charset="UTF-8">
+	<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/web/common/base64.js"></script>
+	<!-- 컨텐츠 관리 -> 등록 css / js -->
+	
+
+	<!-- 등록부분 css / js -->
+	
+	<!--초기화-->
+	<style>
+		*{margin:0; padding:0;}
+		body{font-family:'Quicksand', '돋움';}
+		li{list-style:none;}
+		a{text-decoration:none;}
+		img{border:0;}
+	</style>
+	<!--헤더-->
+	<style>
+		#main_header {width:100%; height:70px; background:#37475e;}
+		#main_header>h1 {line-height:70px; text-align:center; font-size:32px; color:white;}
+	</style>
+	<!--메인콘텐츠-->
+	<style>
+		#content {overflow:hidden;}
+		#content>#main_content {width:85%; height:980px; background:white; float:right;}
+		
+		#main_content>#table>table {margin:30px; }
+		#main_content>#table>th, td {height:22.5px; line-height:22.5px; text-align: center; vertical-align:center;}
+		#main_content>#table>table, th, td {border-color:#4f4f50; border-style:solid; border-collapse:collapse; border-width:2px;}
+	</style>
+	<!--사이드-->
+	<style>
+		#content>#main_aside {width:15%; height:980px; background:#cea18a; float:left;}
+		#content>#main_aside>h1 {line-height:980px; text-align:center; font-size:32px; color:white; }
+	</style>
+	<!--푸터-->
+	<style>
+		#main_footer {width:100%; height:210px; background:#37475e;}
+		#main_footer>h1 {line-height:210px; text-align:center; font-size:32px; color:white;}
+	</style>
+	<style type="text/css">
+	  ul.tabs {
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    list-style: none;
+	    height: 32px;
+	    border-bottom: 1px solid #eee;
+	    border-left: 1px solid #eee;
+	    width: 100%;
+	    font-family:"dotum";
+	    font-size:12px;
+		}
+		/* 상단바 */
+		ul.tabs li {
+		    float: left;
+		    text-align:center;
+		    cursor: pointer;
+		    width:100px;
+		    height: 31px;
+		    line-height: 31px;
+		    border: 1px solid #eee;
+		    border-left: none;
+		    font-weight: bold;
+		    background: #fafafa;
+		    overflow: hidden;
+		    position: relative;
+		}
+		ul.tabs li.active {
+		    background: #FFFFFF;
+		    border-bottom: 1px solid #FFFFFF;
+		}
+		.tab_container {
+		    border: 1px solid #eee;
+		    border-top: none;
+		    clear: both;
+		    float: left;
+		    width: 1000px;
+		    background: #FFFFFF;
+		}
+		.tab_content {
+		    padding: 5px;
+		    font-size: 12px;
+		    display: none;
+		}
+		.tab_container .tab_content ul {
+		    width:100%;
+		    margin:0px;
+		    padding:0px;
+		}
+		.tab_container .tab_content ul li {
+		    padding:5px;
+		    list-style:none
+		}
+
+		.table_tr > th, td{
+		  text-align: center;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<div id="main_header">
+		<h1></h1>
+	</div>
+</header>
+	<div id="content">
+		<section id="main_content">
+			<div id="table">
+			<table border="1" style="width:80%; " id="contents_table">
+	          <thead>
+	            <tr class="table_tr">
+	            <th width="5%">
+	                    <input type="checkbox" id="checkAll">
+	                </th>
+	            <th width="10%">파트너 ID</th>
+	            <th width="20%">유저 이메일</th>
+	            <th width="35%">구비서류 현황</th>
+	            <th width="15%">상태</th>
+	            <th>신청일</th>
+	          </tr>
+	          </thead>
+	          <tr class="table_tr" id="partnerContents"><!-- contents_id와 partner id를 같이 넘겨주자. -->
+	          </tr>
+	        </table>
+			</div>
+		</section>
+		<aside id="main_aside">
+			<ul>
+			  	<li>
+			  		<a href="#" id="admin_menu_1">파트너 신청현황</a>
+			  	</li>
+			  	<li>
+			  		<a href="#" id="admin_menu_2">파트너관리</a>
+			  	</li>
+			 </ul>
+		</aside>
+	</div>
+	<footer id="main_footer">
+		<h1>FOOTER</h1>	
+	</footer>
+<script type="text/javascript">
+	  $(document).ready(function(){
+
+	    $.ajax({
+	      url : '/user/inqure_app_user',
+	      success:function(data){
+	        var userCode ='';
+	        var paper = {};
+	        for(i in data){
+	          if(data[i].USER_CODE == '1'){
+	              userCode = '<a href="#">일반유저</a>';
+	          }else if(data[i].USER_CODE == '2'){
+	              userCode = '<button id="apply_'+i+'">신청중</button>';
+	          }
+
+	          paper.a = data[i].DOCUMENT.split('_')[0];
+	          paper.b = data[i].DOCUMENT.split('_')[1];
+	          paper.c = data[i].DOCUMENT.split('_')[2];
+	          
+	          if(paper.a == 'n'){
+	          	business_license = '<input type="checkbox" id="business_license'+i+'">사업자 등록증'
+	          }else{
+	          	business_license = '<input type="checkbox" id="business_license'+i+'" checked>사업자 등록증'
+	          }
+	          if(paper.b == 'n'){
+	          	seal_certification = '<input type="checkbox" id="seal_certification'+i+'">인감증명서'
+	          }else{
+	          	seal_certification = '<input type="checkbox" id="seal_certification'+i+'" checked>인감증명서'
+	          }
+	          if(paper.c == 'n'){
+	          	internet_business_license = '<input type="checkbox" id=internet_business_license'+i+'>통신판매업'
+	          }else{
+	          	internet_business_license = '<input type="checkbox" id=internet_business_license'+i+' checked>통신판매업'
+	          }
+	          $('thead').append('<tr><td><input type="checkbox" id="partner'+i+'"></td>'
+	          							  +'<td id="partnerId'+data[i].PARTNER_ID+'">'+data[i].PARTNER_ID+'</td>'
+	                                      +'<td>'+Base64.decode(data[i].USER_EMAIL)+'</td>'
+	                                      +'<td name="document">'+business_license+'    '+seal_certification+'    '+internet_business_license+'    '+'</td>'
+	                                      +'<td>'+userCode+'</td>'
+	                                      +'<td>'+data[i].REG_DATE+'</td></tr>');
+
+	        }
+	        $("input[id*=partner]").change(function () {
+				$(this).parent().parent().children().children().prop('checked', $(this).prop("checked"));
+			});
+
+			$('button[id*=apply_]').on('click',function(){
+				var checkboxs = $(this).parent().parent().children('td[name="document"]').children();
+				var partnerId = $(this).parent().parent().children('td[id*="partnerId"]').attr('id');
+				var json = {partnerId:partnerId.split('partnerId')[1]}; //파트너 아이디 보냄.
+				console.log(json);
+
+				var count = 0;
+				checkboxs.each(function(){
+					if($(this).is(':checked') == true){
+						count ++;
+					}				})
+				if(count == 3){
+					if(confirm("신청완료처리 하시겠습니까?")){
+						$.ajax({
+							url:'/user/success_application',
+							data : json,
+							success:function(){
+							}
+						})
+					}else{
+
+					}
+				}else{
+					alert('서류를 확인해주세요.');
+				}
+			})
+	      }
+
+	    })
+
+		//체크박스 전체 체크 function
+		$("#checkAll").change(function () {
+		    $("input:checkbox").prop('checked', $(this).prop("checked"));
+		});
+
+
+		$('a[id*=admin_menu]').click(function(){
+			
+			var menu = $(this).attr('id').split('admin_menu_')[1]; //슬라이드바에 있는 id값들 뽑아오는 부분.
+			console.log(menu)
+			switch(manage_id){
+				case '1':
+					$('#contents_table').css('display', '')
+					break;
+				case '2':
+					console.log('쿠폰');
+					break;
+				case '3':
+					console.log('광고');
+					break;
+				case '4':
+					console.log('서베이');
+					break;	
+			}
+		});
+	})
+	</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+@CHARSET "UTF-8";
+/* header  */
+body{
+	margin: 0 auto;
+	min-width: 320px;
+	padding: 0;
+}
+.header{
+	background-color: #07478e;
+	width: 100%;
+	height:240px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.header .nav_1{
+	width: 100%;
+	position:absolute;
+	height: 20%;
+}
+.nav_1_menu{
+	float:left;
+	height: 100%;
+}
+
+.header .nav_2{
+	width: 100%;
+	position:absolute;
+	top:20%;
+	height: 80%;
+
+}
+/* header  */
+.contents{
+	width: 100%;
+	height: auto;
+}
+.step_container{
+	width: 100%;
+	height: 120px;
+}
+.step{
+	float: left;
+	width: 15%;
+	height: 80%;
+	padding-top: 40px;
+}
+.step img{
+	width: 80%;
+}
+.step_arrow{
+	float: left;
+	width: 5%;
+	height: 50%;
+	padding-top: 13%;
+}
+.step_arrow img{
+	width: 70%;
+	
+}
+
+.election_input{
+	width: 90%;
+	height: 20px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #f7f7f7;
+}
+
+/* 후보 프로필 */
+.candidate_profile {
+	margin-left: 19%;
+}
+
+/* 후보 프로필 img */
+.candidate_profile .profile_img img{
+	width: 203px;
+	height: 203px;
+	-webkit-border-radius: 50%; 
+}
+
+/* 후보 프로필 btn */
+.candidate_profile .profile_btn {
+	margin-left: 5%;
+	background: url(/img/service/election/img_upload.png) no-repeat;
+	width: 159px;
+	height: 54px;
+}
+
+
+/* 성별 title */ 
+.candidate_gender h4{
+	margin:0 0 3% 0;
+}
+
+/* 성별 radio */
+.candidate_gender .elelction_type_input{
+	visibility: hidden;
+	position: absolute;
+}
+
+/* radio man,woman off img */
+.candidate_gender .man{
+	background: url(/img/service/election/man_off.png) no-repeat;
+	width: 25px;
+	height: 30px;
+	float: left;
+	padding-right: 3px;
+}
+.candidate_gender .woman{
+	background: url(/img/service/election/woman_off.png) no-repeat;
+	width: 25px;
+	height: 30px;
+	float: left;
+	padding-right: 3px;
+}
+
+
+/* radio 성별 label text */
+.candidate_gender label{
+	float: left;
+	line-height: 26px;
+	padding-right: 10px;
+}
+
+/* 체크된 radio man,woman on img */
+.candidate_gender > input:checked + .man{
+	background: url(/img/service/election/man_on.png) no-repeat;
+	width: 25px;
+	height: 30px;
+	float: left;
+}
+.candidate_gender > input:checked + .woman{
+	background: url(/img/service/election/woman_on.png) no-repeat;
+	width: 25px;
+	height: 30px;
+	float: left;
+}
+
+/* 성별 val chk */
+#chkCandGender{
+	clear: both;
+	margin: 13% 0 0 0;
+}
+
+/* 나이 */
+.candidate_age {
+	clear: both;
+}
+
+/* 우편주소 input */
+.candidate_addr .zipcode_input{
+	width: 30%;
+	height: 20px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #E7E4E4;
+	float: left;
+}
+
+/* addr 주소 */
+.candidate_addr .addr_input{
+	background-color: #E7E4E4;
+}
+
+/* 주소 input */
+.candidate_addr .election_input{
+	margin-top: 1%;
+}
+
+/* 주소 검색 btn */
+.candidate_addr #postcodify_search_button{
+	width: 40px;
+	height: 25px;
+    background-color: #06468E;
+    float: left;
+    margin: 1.5% 0 0 1%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10pt;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 3px;
+}
+
+/* 경력란 div */
+.candidate_career .career_div{
+	position: relative;
+}
+
+/* 경력 input */
+.candidate_career .career_input{
+	margin: 0 0 1% 0;
+	width: 60%;
+	float: left;
+}
+
+/* 경력 추가 btn*/
+.candidate_career .add_career{
+	background: url(/img/service/election/add_bt.png) no-repeat;;
+	width: 40px;
+	height: 24px;
+	margin: 0.5% 0 0 1%;
+	float: left;
+}
+
+/* 경력 삭제 btn */
+.candidate_career .del_career{
+	background: url(/img/service/election/del_bt.png) no-repeat;;
+	width: 40px;
+	height: 24px;
+	margin: 0.5% 0 0 1%;
+	float: left;
+}
+
+/* 소속정당 div */
+.candidate_party{
+	/* margin: 8% 0 0 0; */
+	clear: both;
+}
+
+/* 정견 textarea */
+.candidate_opinion .opinion_input{
+	width: 90%;
+	height: 80px;
+	border-color: #cacaca;
+	border-width: 1px;
+	border-radius: 5px;
+	border-style: solid;
+	background-color: #f7f7f7;
+}
+
+/* 정견 글자수 chk txt */
+.candidate_opinion .chcount{
+	float: right;
+	margin: 0 10% 0 0 ;
+}
+
+/* title */
+h4{
+	margin: 5px;
+	font: 13pt '나눔바른고딕';
+	color: #706F6F;
+	font-weight: bold;
+	line-height: 23px;
+}
+
+/* validation chk div */
+.msgWrap {
+	margin: 1% 0 0 0;
+	font-family: 맑은고딕; 
+	font-size: 11pt; 
+	color: #CC1C1C;
+}
+
+/* 버튼 컨테이너 */
+.btn_container{
+	margin: 0 0 5% 0;
+}
+
+/* 수정완료 btn */
+.comp_update{
+	width: 40%;
+	height: 60px;
+	background: #06468E;
+	color: #fff;
+	font-weight: bold;	
+	text-align: center;
+	line-height: 60px;
+	margin: 0 auto;
+}
+
+/* contents */
+
+/* footer */
+.footer{
+	width: 100%;
+	height: auto;
+}
+
+.modify{
+	width: 43%;
+	margin-left: 7%;
+}
+.modify img{
+	width: 90%;
+}
+
+.register{
+	width: 43%;
+	margin-right: 7%;
+}
+.register img{
+	width: 90%;
+}
+	
+.contents .election_container{	
+	height: auto;
+	padding-left: 5%;
+}	
+
+.contents .election_container .title_icon{
+	background: url(/img/service/election/title_icon.png) no-repeat;;
+	width: 21px;
+	height: 21px;
+	float: left;
+	margin: 0 1% 0 0;
+}
+
+.contents .election_container .election_title .title_icon h4{
+
+}

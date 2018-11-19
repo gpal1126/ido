@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+
+*{font-family: Malgun Gothic,맑은고딕,돋움,윤고딕,Dotum,verdana,sans-seif;}
+h1{font-size:30px;text-align:left;letter-spacing:-1px;}
+
+#header {width:100%;height:90px;}
+#header #gnb {width:100%;height:30px;background:#696868;}
+#header #t_logo {width:100%;height:60px;background:#4e92c1;}
+#header #t_logo span.logo{font-size:25px;font-weight:bold;line-height:60px;float:left;margin-left:30px;color:#ffffff;}
+#header #gnb .l_text {float:left;color:#ffffff;width:150px;line-height:26px;text-align:left;padding-left:30px;letter-spacing:1px;font-size:11px;}
+#header #gnb .r_text {float:left;color:#ffffff;width:820px;text-align:right;line-height:26px;}
+
+/*left_menu*/
+.left_menu {width:180px;height:1000px;float:left;background:#f3f3f3; margin: -30px 0 0 0;}
+.left_menu div ul {width:100%;margin-top:30px; list-style: none; padding-left: 0;}
+.left_menu div ul li{height:40px;font-size:15px;text-align:left;line-height:35px;color:#7e7e7e;}
+.left_menu div ul li a:hover {background:#4e92c1;width:100%;height:40px;display:block;font-size:15px;color:#ffffff;text-decoration:none;}
+.left_menu div ul li a span{margin-left:30px;display:block;}
+.left_menu div ul li.on{background:#4e92c1;width:100%;height:40px;display:block;color:#ffffff;}
+.left_menu .left_menu_ul .on a{color: #ffffff;}
+.left_menu .left_menu_ul a{text-decoration: none; color: #7E7E7E;}
+
+/*right_contents*/
+#right_cont {width:820px;height:800px;float:left;}
+#right_cont .box {border-bottom:1px solid #c9c9c9;margin:30px;height:45px;border:0px solid #000;line-height:35px;}
+#right_cont .tabbox {width:790px;margin:30px;height:auto;}
+#right_cont .tabbox ul {height:31px;border-bottom:1px solid #939292;}
+#right_cont .tabbox li {float:left;width:90px;height:30px;background:#ffffff;display:inline-block;border:1px solid #dddddd;line-height:27px;margin-right:5px;}
+#right_cont .tabbox li.b_noline{border-bottom:1px solid #939292;}
+#right_cont .tabbox li a{display:block;height:100%;}
+#right_cont .tabbox li.active{background:#939292;color:#fff;}
+
+#right_cont .adm_tbbox {margin-left:30px;}
+#right_cont .adm_tbbox .adm_tb {width:790px;}
+#right_cont .adm_tbbox .adm_tb th{border-top:1px solid #dbdbdb;background:#f9f9fb;height:40px;font-size:13px;border-bottom:2px solid #4e92c1;}
+#right_cont .adm_tbbox .adm_tb td{height:40px;border-bottom:1px solid #dbdbdb;font-size:12px;}
+
+#right_cont .adm_bt ul {float:left;}
+#right_cont .adm_bt ul li.del_bt {width:50px; height:25px;background:#696868;line-height:20px;color:#ffffff; font-size: 0.9em; display:inline-block; text-align: center; cursor: pointer;}
+#right_cont .adm_bt ul li.add_bt {width:50px; height:25px;background:#2f8fd2;line-height:20px;color:#ffffff; font-size: 0.9em; display:inline-block; text-align: center; cursor: pointer;}
+
+/*체크박스 css*/
+.checks input[type="checkbox"] {  /* 실제 체크박스는 화면에서 숨김 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0
+}
+
+.adm_tb > th, td{
+	text-align: center;
+}
+
+/* 컨텐츠 현황 */
+.adm_tb .app_btn { margin: 0 auto; width: 70px; height: 25px; background-color: #164672; color: #fff; font-weight: bold; line-height: 25px; cursor: pointer; }
+.adm_tb .app_ing { font-weight: bold; color: #cd0a0a; }
+.adm_tb .comp_app { font-weight: bold;  color: #2f7fd2; }
+
+/* 보기 btn*/
+.adm_tb .view_conts{ text-decoration: none; margin: 0 auto; width: 50px; height: 25px; background-color: #0a65cd; color: #fff; font-weight: bold; line-height: 25px; cursor: pointer; }
+
+.footer {height:80px;background:#4e92c1; clear:both; width: 100%;}

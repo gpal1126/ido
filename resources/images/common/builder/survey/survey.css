@@ -1,0 +1,195 @@
+/**
+	survey builder css
+**/
+
+form fieldset{
+	margin-top: -50px;
+}
+
+#testwrap {width:100%; background:#363636;}
+#makeq {width:914px; height:auto; margin:20px 0 0 15px; background:#fff; border-radius:25px; padding:20px;}  
+#makeq h1 {font-size:2em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; padding:0 0 30px 0;}
+#makeq .top {font-size:0.8em; color:#afafaf; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:4px;}
+#makeq .explain {font-size:1em; color:#afafaf; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:-10px;}  
+#makeq p.surveyTitle {/*line-height:10%;*/ text-align:left; padding-left: 10px;}
+#makeq section {width:870px; height:600px; margin:0 auto; border:2px solid #e7e7e7; border-radius:25px; box-sizing:border-box; -moz-box-sizing:border:box; padding:20px; text-align:center;} 
+#makeq section.make02wrap {width:920px; height:auto; margin:0 auto; border:2px solid #e7e7e7; border-radius:25px; box-sizing:border-box; -moz-box-sizing:border:box; padding:20px; text-align:center;} 
+#makeq section.type {width:100%; height:100px; background:#fafafa; border:none;}  /* 패딩값 상속받는 중임. */ 
+#makeq section.titlee {float:left; width:183px; height:63px;  background:url('/images/builder/survey/make_category_bg.png') no-repeat fixed center;} 
+#makeq section.choice {float:left; width:183px; height:63px;  background:url('/images/builder/survey/make_category_bg.png') no-repeat fixed center;} 
+#makeq section.category {margin:30px auto; width:910px; height:auto; padding:20px; border-radius:15px;}
+#makeq section.category .leftPic{float:left; width:180px; height:40px; padding-left:10px;} 
+#makeq section.category .rightSelect{float:left; background:#fff; width:600px; height:40px; padding-top:10px;} 
+#makeq section.category:after {content:""; display:block; clear:both; height:0}
+#makeq select.category {width:700px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:30px; font-size:1em; color:#ccd4df; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px; background:#fff;}   
+
+#makeq section.choiceType {width:910px; height:auto; padding:0 0 20px 0; text-align:left; border:none;} 
+#makeq section h1 {display:inline-block; font-size:1.3em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; padding:10px 5px 10px 0;}
+#makeq section.addtion {font-size:0.8em; color:#aaacab; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700;}
+#makeq section.choiceType ul{width:100%; display:inline-block; margin:0 auto;  padding:0; /* For IE, the outcast */ zoom:1; *display: inline;} /* ul center */ 
+#makeq section.choiceType ul li{float:left; width:18.5%; height:150px; margin-left:15px; border:3px solid #8fbeec; border-radius:25px; padding-top:30px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center; color:#fff;}
+#makeq section.choiceType ul li:first-child{margin-left:0;}
+#makeq section.choiceType ul li a{display:block; width:100%; height:150px;} 
+#makeq section.choiceType ul li a.crown{background:url('/images/builder/survey/crown_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.star{background:url('/images/builder/survey/starlist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.choice{background:url('/images/builder/survey/choicelist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.number{background:url('/images/builder/survey/numberlist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.text{background:url('/images/builder/survey/textlist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+
+#makeq section.choiceType ul li.on{background:#8fbeec; color:#fff;} 
+#makeq section.choiceType .onTx {display:inline-block; color:#fff; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:70px;}
+#makeq section.choiceType .offTx {display:inline-block; color:#515151; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:70px;}
+
+#makeq section.mquestion {width:910px; height:auto; padding:0 0 20px 0; text-align:left; border:none;} 
+#makeq section.mquestion .mwrap{width:100%; height:auto; padding:20px; text-align:left; border:2px solid #e7e7e7; border-radius:15px; box-sizing:border-box; -moz-box-sizing:border:box;} 
+#makeq section.mquestion .mwrap .mcon{position:relative; width:100%; height:auto; padding:10px; text-align:left; box-sizing:border-box; -moz-box-sizing:border:box;} 
+#makeq section.mquestion .mwrap .mcon .mcontrol{position:absolute; right:0; width:100px; height:30px;}  
+#makeq section.mquestion .mwrap .mcon .mcontrol ul {}
+#makeq section.mquestion .mwrap .mcon .mcontrol ul li {float:left; margin:0; padding-left:5px;}
+#makeq section.mquestion .mwrap .mcon .mcontrol ul li:first-child {padding-left:0px;}
+#makeq section.mquestion .mwrap .mcon .picwrap {width:100%; height:auto; padding:10px; box-sizing:border-box; -moz-box-sizing:border:box; background:#f9f8f4; margin:10px 0;}  
+
+#makeq section h2 {font-size:1.5em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; margin-top:20px;}
+#makeq section h3 {display:inline-block; font-size:0.9em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-1px;} 
+#makeq section .paddtion {font-size:0.7em; color:#aeb0ad; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:0px;} 
+
+#makeq input[name=surveyTitle] {width:820px; height:50px;font-size:1.5em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; border:1px solid #cbd5df; border-radius:5px; }
+#makeq input[name=titleDone] {width:910px; height:10px; padding:5px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:36px; font-size:0.9em; color:#8a9aaa; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px;}   
+#makeq input[name=secondSurveyTitle] {width:740px; height:30px; border:1px solid #cbd5df; border-radius:5px; background:#fff;}
+#makeq input[name=surveyContents] {width:740px; height:30px; border:1px solid #cbd5df; border-radius:5px; background:#fff;}
+#makeq input[name=picbox] {width:600px; height:30px; border:1px solid #cbd5df; background:#fff; margin-top:3px;}
+
+#makeq select.category {width:600px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:30px; font-size:1em; color:#ccd4df; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px; background:#fff;}   
+#makeq nav {width:100%; height:100px; padding-top:20px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center;} /* nav媛� �긽�냽, ul,li 源뚯� �긽�냽, a瑜� �겢�옒�뒪濡� 遺꾨━ */ 
+#makeq nav ul {display:inline-block; margin:0 auto;  padding:0; /* For IE, the outcast */ zoom:1; *display: inline;} /* ul center */ 
+#makeq nav ul li {float:left; padding-left:20px; list-style-type:none;} 
+#makeq nav ul li:first-child {padding-left:0px;} 
+#makeq nav ul li a.save {display:block; width:68px;height:68px; background:url('/images/builder/survey/make_save_bt.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px} 
+#makeq nav ul li a.cancel {display:block; width:68px;height:68px; background:url('/images/builder/survey/make_cancle_bt.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px} 
+#makeq nav ul li button.preview {width:450px;height:54px; background:#8fbeec; border-radius:10px; text-align:center; line-height:54px; color:#fff; font-size:1em;} 
+#makeq nav ul li button.done {width:450px;height:54px; background:#353535; border-radius:10px; text-align:center; line-height:54px; color:#fff; font-size:1em;}
+
+/* 대질문 */
+#makeq #titleDiv{text-align:center;}
+#makeq div[id*=titleDiv] .thumbnailFileDiv{margin:15px 0 0 5px; text-align:left;}
+
+#makeq div[id*=surveyDiv]{
+	/* border:solid 1px grey;  */
+	width:180px; 
+	height:auto;
+}
+
+#makeq .surveyDiv a[id*=atag]{
+	width:180px; 
+	height:auto;
+	display:block;
+}
+
+#makeq #insertDiv{
+	border:solid 1px grey; 
+	width:900px; 
+	height:auto; 
+	display:inline-block;
+}
+
+#makeq #insertDiv .saveSurvey{
+	display: block;
+    width: 68px;
+    height: 68px;
+    background: url('/images/builder/survey/make_save_bt.png') repeat 0 0;
+    background-size: 100% 100%;
+    text-indent: -9999px;
+}
+ 
+#makeq #insertDiv .cancelSurvey{
+	display: block;
+    width: 68px;
+    height: 68px;
+    background: url('/images/builder/survey/make_cancel_bt.png') repeat 0 0;
+    background-size: 100% 100%;
+    text-indent: -9999px;
+} 
+
+#makeq #insertDiv #txtDiv1{
+	/* border:solid 1px grey; */ 
+	width:880px; 
+	height:auto;
+}
+
+#makeq #insertDiv #txtDiv2{
+	/* border:solid 1px grey; */ 
+	width:880px; 
+	height:auto;
+}
+
+#makeq #insertDiv #txtDiv{
+	/* border:solid 1px grey; */ 
+	width:880px; 
+	height:auto;
+}
+
+#makeq #listDiv {
+	border:solid 1px grey; 
+	width:900px; 
+	height:auto;
+}
+
+#makeq #listDiv .surveyTypeTxt{
+	font-size: 1.2em;
+	font-weight: 800;
+	letter-spacing:5px;
+}
+
+#makeq #listDiv .titleSpan{
+	font-size: 1em;
+	font-weight: 700;
+}
+
+#makeq .mcontrol{
+    right: 0;
+    width: 100px;
+    height: 30px;
+}
+
+div[id*=contsDiv] .img{
+	width:200px; 
+	height:150px;
+	cursor:pointer;
+}
+
+/* 답변 추가 btn 이미지 */
+input[class*=addBtn] {
+	display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('/images/builder/survey/mq_plus_bt.png') no-repeat;
+    border: none;
+    coursor: pointer;
+    /* background-size: 100% 100%; */
+    /* text-indent: -9999px; */
+}
+
+/* 답변 삭제 btn 이미지*/
+input[class*=removeBtn] {
+	display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('/images/builder/survey/mq_delete_bt.png') no-repeat;
+    border: none;
+    coursor: pointer;
+    /* background-size: 100% 100%; */
+    /* text-indent: -9999px; */
+}
+
+/* 답변 이미지 btn 이미지 */
+input[class*=gradeBtn] {
+	display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('/images/builder/survey/mq_pic_bt.png') no-repeat;
+    border: none;
+    coursor: pointer;
+    /* background-size: 100% 100%; */
+    /* text-indent: -9999px; */
+}
+

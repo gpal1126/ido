@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>아이두</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="/js/web/main/common/m_common.js"></script>
+<link rel="stylesheet" href="/css/mobile/main/user/mypage_edit_320.css" media="screen and (min-width:320px) and (max-width:350px)"/>
+<link rel="stylesheet" href="/css/mobile/main/user/mypage_edit.css" media="screen and (min-width:360px) and (max-width:450px)"/>
+<link rel="stylesheet" href="/css/mobile/main/user/mypage_edit_1028.css" media="screen and (min-width:768px) and (max-width:1028px)"> <!-- ipad -->
+
+<script type="text/javascript" src="/js/getUrlParameter.js"></script>
+<script type="text/javascript">
+/*수정완료 버튼 클릭시*/
+  function mypageEdit(){
+     confirm('수정하시겠습니까')
+    if(confirm){
+      var newPw = $('#password').val();
+      var newPw_check = $('#password').val();
+      var newNick =$('.myedit_nickName').text();
+      var userId = getUrlParameter('userId');
+      var file = $('#file_input_hidden').prop("files")[0];
+      var fd = new FormData();
+      console.log(newPw)
+      if(newPw != newPw_check){
+        alert('패스워드를 다시 확인해주십시오');
+      }else{
+        fd.append('newPw',newPw);
+        fd.append('newNick',newNick);
+        fd.append('userId',userId);
+        fd.append('image', file);
+        
+        
+        console.log(newNick)
+        console.log(userId)
+        console.log(file)
+        
+        // var json = {"newPw":newPw, "newNick":newNick, "userId":userId}
+        
+        $.ajax({
+          url:'/user/updateMyProfile',
+          data :fd,
+          type:'POST',
+          processData: false,
+          contentType: false,
+          success:function(){
+            location.reload();
+          }
+        })
+      }
+    }else{
+
+    } 
+    /* 동영상 */
+    // var fd = new FormData();
+    // var file = $('#rec').prop("files")[0];
+    // fd.append('file',file);
+    // $.ajax({
+    //     url:'/user/test',
+    //     data :fd,
+    //     type:'POST',
+    //     processData: false,
+    //     contentType: false,
+    //     success:function(){
+    //       location.reload();
+    //     }
+    //   })
+    /* 동영상 */
+  }
+
+  function change_image(){ //이미지 변경 function
+    file = $('#file_input_hidden').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+    $('.profilephoto img').attr('src', blobURL);
+  }
+</script>
+<script type="text/javascript">
+  $('.editPf').click(function(){
+
+  })
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="mypage_edit_header">
+			<div class="close_bt"><img src="/img/mobile/main/user/mypage/close_bt.png"></div>
+			<div class="mypageText">MYPAGE</div>
+		</div>
+		<div class="mypage_edit_contents">
+			<div class="profile_text">프로필편집</div>
+			<div class="profilephoto"><img src="<%= user.PROFILE_PICTURE_PATH.split('resources')[1] %>" alt="테스트이미지" /> </div> 
+			
+                   <div class="file_div" id="input_div"><a href="#" class="editPf" onclick="document.all.file_input_hidden.click();">프로필사진수정</a><input type="file"  enctype="multipart/form-data" name="file_input_hidden" style="display:none" id="file_input_hidden" class="file_input_hidden" onchange="change_image()"></div>
+			<div class="profile_id"><%= email%></div>
+			<div class="profile_name">
+				<div id="name_text">닉네임</div>
+				<div id="name_text_box" class="myedit_nickName"><%= user.NIKNAME %></div>
+			</div>
+			<img src="/img/mobile/main/survey/con_linebar.png" width="80%;" height="1px;" id="hrLine">
+			<div class="profile_password" id="myedit_pw">
+				<div id="password_text">비밀번호</div>
+				<div id="password_text_box">&nbsp;&nbsp;*********<input type="hidden" id="password" value="<%= user.PASSWORD %>"></div>
+			</div>
+			<img src="/img/mobile/main/survey/con_linebar.png" width="80%;" height="1px;" id="hrLine1">
+			
+		</div>
+		<br>
+		
+		<div class="mypage_edit_footer" style="clear: both;">
+			<div class="success_revise" onclick="mypageEdit()"><img src="/img/mobile/main/survey/modify_ok.png"></div>
+			<br>
+			<div class="logout footer_Btn"><a href="/logout"><img src="/img/mobile/main/user/mypage/myedit_logout_bt.png" width="25px;"></a></div>
+		
+			<div class="delete_user footer_Btn" style="margin-left:20%;"><img src="/img/mobile/main/user/mypage/myedit_delete_bt.png" width="25px;"></div>
+		</div>
+	</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    var userId = getUrlParameter('userId');
+    //계정삭제
+   $('.delete_user').click(function(){
+	   console.log('ff')
+	   var del_user = confirm("계정을 삭제하시겠습니까?");
+	   if(del_user){
+		   console.log('계정 삭제');
+		   $.ajax({
+	    		url : '/user/delete_user?userId='+userId,
+	    		success:function(data){
+	    			if(data =='success'){
+	    				location.href="/m_index"
+	    			}
+	    		}
+	    	})
+	   }else{
+		   
+	   }
+    }) 
+    
+    /*패스워드 수정 부분*/
+    $('#myedit_pw').click(function(){
+        if(confirm){
+          var pw = prompt("기존 패스워드를 입력해주세요.");
+          var json = {"pw":pw, "userId":userId}
+          if(pw != null){
+            $.ajax({
+              url:'/user/checkPw',
+              data:json,
+              type:'POST',
+              success:function(data){
+                if(data =='success'){
+                   var newPw = prompt("변경할 패스워드를 입력해주세요");
+                   if(newPw != null){
+                	   var newPw2 = prompt("변경할 패스워드를 한번 더 입력해주세요");
+                	   if(newPw == newPw2){
+                			$("#password").val(newPw2)
+                			//비밀번호 변경 ajax 추가해야함(이곳)
+                	   }else{
+                			alert('비밀번호가 맞지않습니다')   
+                	   }
+                   }
+                }else{
+                  alert('패스워드를 다시 확인해주십시오');
+                }
+              }
+            })
+        }else{
+
+        }
+      }
+    }); /*패스워드 수정 끝*/
+
+  $('.profile_name').on('click','.myedit_nickName',function(){
+        var nick_confirm = confirm("닉네임을 변경하시겠습니까?");
+        
+        if(nick_confirm){
+        	console.log(confirm);
+            $('.myedit_nickName').remove();
+            var newNick = prompt("새로운 닉네임을 입력해주세요");
+            $('.profile_name').append('&nbsp&nbsp<div class="myedit_nickName">'+newNick+'</div>');
+           	//닉네임 변경 ajax 추가해야함(이곳)
+        }
+    });
+  })
+  
+  //닫기 버튼
+  $('.close_bt').click(function(){
+	  history.back();
+  });
+</script>
+ </body> 
+</html>

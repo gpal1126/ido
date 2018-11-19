@@ -1,0 +1,1370 @@
+/**
+	�꽕臾몄“�궗 css
+**/
+
+form fieldset{
+	margin-top: -50px;
+}
+
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css); /*0426 추가*/
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+#testwrap {width:100%; background:#363636;}
+#makeq {width:100%; height:auto; background:#fff; border-radius:25px;}
+.bubble{
+	background:url('/images/common/builder/m_survey/speech_bubble_ico.png') no-repeat;
+	width: 41px;
+	height: 34px;
+	margin: 0 auto;
+} 
+.eng_top_banner{
+	background:url('/images/common/builder/m_survey/ido_reseach_title.png') no-repeat;
+	width: 100px;
+	height: 10px;
+	margin: 17px auto;
+} 
+.kor_top_banner{
+	background:url('/images/common/builder/m_survey/ido_make_title.png') no-repeat;
+	width: 197px;
+	height: 28px;
+	margin: 3px auto;
+} 
+.choice_type_txt{
+	background:url('/images/common/builder/m_survey/type_choice.png') no-repeat;
+	width: 67px;
+	height: 19px;
+	margin: 50px 0 15px 0;
+}
+#makeq h1 {font-size:2em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; padding:0 0 30px 0;}
+#makeq .top {font-size:0.8em; color:#afafaf; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:4px;}
+#makeq .explain {font-size:1em; color:#afafaf; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:-10px;}  
+#makeq p.surveyTitle {/*line-height:10%;*/ text-align:left; padding-left: 10px;}
+#makeq section {border:2px solid #e7e7e7; border-radius:25px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center;} 
+#makeq section.make02wrap {width:920px; height:auto; margin:0 auto; border:2px solid #e7e7e7; border-radius:25px; box-sizing:border-box; -moz-box-sizing:border:box; padding:20px; text-align:center;} 
+#makeq section.type {width:100%; height:100px; background:#fafafa; border:none;}  /* �뙣�뵫媛� �긽�냽諛쏅뒗 以묒엫. */ 
+#makeq section.titlee {float:left; width:183px; height:63px;  background:url('/images/common/builder/survey/make_category_bg.png') no-repeat fixed center;} 
+#makeq section.choice {float:left; width:183px; height:63px;  background:url('/images/common/builder/survey/make_category_bg.png') no-repeat fixed center;} 
+#makeq section.category {margin:30px auto; width:910px; height:auto; padding:20px; border-radius:15px;}
+#makeq section.category .leftPic{float:left; width:180px; height:40px; padding-left:10px;} 
+#makeq section.category .rightSelect{float:left; background:#fff; width:600px; height:40px; padding-top:10px;} 
+#makeq section.category:after {content:""; display:block; clear:both; height:0}
+#makeq select.category {width:700px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:30px; font-size:1em; color:#ccd4df; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px; background:#fff;}   
+
+#makeq section.choiceType {width:100%; height:auto; padding-left:3%; text-align:left; border:none; margin: 0 auto; } 
+#makeq section h1 {display:inline-block; font-size:1.3em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; padding:10px 5px 10px 0;}
+#makeq section.addtion {font-size:0.8em; color:#aaacab; font-family:'nanumgothic' font-weight:700;}
+#makeq section.choiceType ul{width:100%; display:inline-block; margin:0 auto;  padding:0; /* For IE, the outcast */ zoom:1; *display: inline;} /* ul center */ 
+/* #makeq section.choiceType ul li{float:left; width:18.5%; height:150px; margin-left:15px; border:3px solid #8fbeec; border-radius:25px; padding-top:30px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center; color:#fff;} */
+#makeq section.choiceType ul li{float:left; width:24%; height:90px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center; list-style: none; margin-left:3px;}
+#makeq section.choiceType ul li:first-child{margin-left:0;}
+#makeq section.choiceType ul li a{display:block; width:100%; height:100%;} 
+#makeq section.choiceType ul li a.crown{background:url('/images/common/builder/survey/crown_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.star{background:url('/images/common/builder/survey/starlist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.choice{background:url('/images/common/builder/survey/choicelist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.number{background:url('/images/common/builder/survey/numberlist_bg.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.text{background:url('/images/common/builder/survey/textlist_bg.png') no-repeat; color:#fff; background-position:center top;}
+
+/* 유형선택 off */  
+/* 
+#makeq section.choiceType ul li a.crownOff{background:url('/images/common/builder/m_survey/crown_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+#makeq section.choiceType ul li a.starOff{background:url('/images/common/builder/m_survey/star_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+#makeq section.choiceType ul li a.choiceOff{background:url('/images/common/builder/m_survey/choice_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+#makeq section.choiceType ul li a.numberOff{background:url('/images/common/builder/m_survey/number_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+#makeq section.choiceType ul li a.textOff{background:url('/images/common/builder/m_survey/text_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}
+*/  
+  
+/* 유형선택 on */
+/*
+#makeq section.choiceType ul li a.crownOn{background:url('/images/common/builder/m_survey/crown_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.starOn{background:url('/images/common/builder/m_survey/star_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.choiceOn{background:url('/images/common/builder/m_survey/choice_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.numberOn{background:url('/images/common/builder/m_survey/number_on.png') no-repeat; color:#fff; background-position:center top;}  
+#makeq section.choiceType ul li a.textOn{background:url('/images/common/builder/m_survey/text_on.png') no-repeat; color:#fff; background-position:center top;} 
+*/  
+  
+  
+/* 유형선택 */
+.answer_type_wrap ul{width:100%; display:inline-block; margin:0 auto;  padding:0; /* For IE, the outcast */ zoom:1; *display: inline;} /* ul center */ 
+.answer_type_wrap ul li{float:left; width:24%; height:90px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center; list-style: none; margin-left:3px;}
+.answer_type_wrap ul li:first-child{margin-left:0;}
+.answer_type_wrap ul li a{display:block; width:100%; height:100%;}
+ 
+/* 유형선택 off */  
+.answer_type_wrap ul li a.eitherOff{background:url('/img/mobile/builder/survey/reg_survey/survey_type/either_off.png') no-repeat; background-position:center top; ; width: 85px; height: 85px;}  
+.answer_type_wrap ul li a.singleOff{background:url('/img/mobile/builder/survey/reg_survey/survey_type/single_off.png') no-repeat; background-position:center top; ; width: 85px; height: 85px;}  
+.answer_type_wrap ul li a.choiceOff{background:url('/img/mobile/builder/survey/reg_survey/survey_type/choice_off.png') no-repeat; background-position:center top; ; width: 85px; height: 85px;}   
+.answer_type_wrap ul li a.crownOff{background:url('/img/mobile/builder/survey/reg_survey/survey_type/crown_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+.answer_type_wrap ul li a.starOff{background:url('/img/mobile/builder/survey/reg_survey/survey_type/star_off.png') no-repeat; background-position:center top; width: 85px; height: 85px;}
+                                                                                                                                                                      
+/* 유형선택 on */                                                                                                                                                     
+.answer_type_wrap ul li a.eitherOn{background:url('/img/mobile/builder/survey/reg_survey/survey_type/either_on.png') no-repeat; background-position:center top; width: 85px; height: 85px;}   
+.answer_type_wrap ul li a.singleOn{background:url('/img/mobile/builder/survey/reg_survey/survey_type/single_on.png') no-repeat; background-position:center top; width: 85px; height: 85px;}   
+.answer_type_wrap ul li a.choiceOn{background:url('/img/mobile/builder/survey/reg_survey/survey_type/choice_on.png') no-repeat; background-position:center top; width: 85px; height: 85px;}   
+.answer_type_wrap ul li a.crownOn{background:url('/img/mobile/builder/survey/reg_survey/survey_type/crown_on.png') no-repeat; background-position:center top; width: 85px; height: 85pxop;}  
+.answer_type_wrap ul li a.starOn{background:url('/img/mobile/builder/survey/reg_survey/survey_type/star_on.png') no-repeat; background-position:center top; width: 85px; height: 85px;}  
+
+#makeq section.choiceType ul li.on{background:#8fbeec; color:#fff;} 
+#makeq section.choiceType .onTx {display:inline-block; color:#fff; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:70px;}
+#makeq section.choiceType .offTx {display:inline-block; color:#515151; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; margin-top:70px;}
+  
+#makeq section.mquestion {width:100%; height:auto; padding:0 0 20px 0; text-align:left; border:none;} 
+#makeq section.mquestion .mwrap{width:100%; height:auto; padding:20px; text-align:left; border:2px solid #e7e7e7; border-radius:15px; box-sizing:border-box; -moz-box-sizing:border:box;} 
+#makeq section.mquestion .mwrap .mcon{position:relative; width:100%; height:auto; padding:10px; text-align:left; box-sizing:border-box; -moz-box-sizing:border:box;} 
+#makeq section.mquestion .mwrap .mcon .mcontrol{position:absolute; right:0; width:100px; height:30px;}  
+#makeq section.mquestion .mwrap .mcon .mcontrol ul {}
+#makeq section.mquestion .mwrap .mcon .mcontrol ul li {float:left; margin:0; padding-left:5px;}
+#makeq section.mquestion .mwrap .mcon .mcontrol ul li:first-child {padding-left:0px;}
+#makeq section.mquestion .mwrap .mcon .picwrap {width:100%; height:auto; padding:10px; box-sizing:border-box; -moz-box-sizing:border:box; background:#f9f8f4; margin:10px 0;}  
+
+#makeq section h2 {font-size:1.5em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; margin-top:20px;}
+#makeq section h3 {display:inline-block; font-size:0.9em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-1px;} 
+#makeq section .paddtion {font-size:0.7em; color:#aeb0ad; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:0px;} 
+
+#makeq input[name=surveyTitle] {width:820px; height:40px;font-size:1.5em; color:#505050; font-family:'Nanum Barun Gothic',sans-serif; font-weight:700; letter-spacing:-2px; border:1px solid #cbd5df; border-radius:5px; }
+#makeq input[name=titleDone] {width:910px; height:10px; padding:5px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:36px; font-size:0.9em; color:#8a9aaa; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px;}   
+#makeq input[name=secondSurveyTitle] {width:68%; height:30px; border:1px solid #cbd5df; border-radius:5px; background:#fff; margin-left:2%;}
+#makeq input[name=surveyContents] {width:58%; height:33px; border:1px solid #cbd5df; border-radius:5px; background:#fff; margin-top:26px; margin-left:2%;}
+#makeq input[name=surveyOrigin] {width:58%; height:33px; border:1px solid #cbd5df; border-radius:5px; background:#fff; margin-top:13px; margin-left:2%;}
+#makeq input[name=surveyLinkAddr] {width:58%; height:33px; border:1px solid #cbd5df; border-radius:5px; background:#fff; margin-top:13px; margin-left:2%;}
+#makeq input[name=picbox] {width:600px; height:30px; border:1px solid #cbd5df; background:#fff; margin-top:3px;margin-left:10px;}
+ 
+#makeq select.category {width:600px; border:1px solid #cad4de; border-radius:5px; text-align:left; height:30px; font-size:1em; color:#ccd4df; font-family:'Nanum Gothic Bold',sans-serif; font-weight:700; letter-spacing:-2px; background:#fff;}   
+#makeq .rank_select_type nav {width:100%; height:100px; padding-top:20px; box-sizing:border-box; -moz-box-sizing:border:box; text-align:center; background-color: #efefef; margin-bottom: 3%;} 
+#makeq nav ul {display:inline-block; margin:0 auto;  padding:0; /* For IE, the outcast */ zoom:1; *display: inline;} /* ul center */ 
+#makeq nav ul li {float:left; padding-left:35px; list-style-type:none;} 
+#makeq nav ul li:first-child {padding-left:0px;} 
+#makeq nav ul li a.save {display:block; width:68px;height:68px; background:url('/images/common/builder/survey/make_save_bt.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px} 
+#makeq nav ul li a.cancel {display:block; width:68px;height:68px; background:url('/images/common/builder/survey/make_cancle_bt.png') repeat 0 0; background-size:100% 100%; text-indent:-9999px} 
+#makeq nav ul li button.preview {width:450px;height:54px; background:#8fbeec; border-radius:10px; text-align:center; line-height:54px; color:#fff; font-size:1em;} 
+#makeq nav ul li button.done {width:450px;height:54px; background:#353535; border-radius:10px; text-align:center; line-height:54px; color:#fff; font-size:1em;}
+
+/* ��吏덈Ц */
+#makeq #titleDiv{text-align:center;}
+#makeq div[id*=titleDiv] .thumbnailFileDiv{margin:15px 0 0 5px; text-align:left;}
+
+.make_answer {
+	color:#fff; 
+	font-weight: bold; 
+	background-color:#285586; 
+	width:90%; 
+	height:45px; 
+	text-align:center; 
+	line-height: 40px; 
+	margin:0 auto; 
+	margin-top:5%; 
+	border-radius:10px;
+}
+
+#makeq div[id*=surveyDiv]{
+	border:solid 1px #DDD; 
+	width:100%; 
+	height:120px;
+	margin-bottom: 10px;
+	background-color: #F9F9F9;
+	
+}
+
+#makeq .surveyDiv{
+	width: 100%;
+}
+
+#makeq .surveyDiv a[id*=atag]{
+	width:880px; 
+	height:auto;
+	display:block;
+}
+
+#makeq #insertDiv{
+	/*border:solid 1px grey;*/ 
+	width:100%; 
+	height:auto; 
+	display:inline-block;
+	/* padding-left: 3% */
+}/*컨텐츠 큰 박스*/
+
+#makeq #insertDiv .second_title{
+	background:url('/images/common/builder/m_survey/category_title.png') no-repeat;
+	width: 84px;
+	height: 19px;
+	margin: 50px 0 0 2%;
+}
+
+
+#makeq #insertDiv .saveSurvey{
+	display: block;
+    width: 58px;
+    height: 58px;
+    background: url('/images/common/builder/m_survey/ido_make_save_bt.png') repeat 0 0;
+    background-size: 100% 100%;
+    text-indent: -9999px;
+    
+}
+ 
+#makeq #insertDiv .cancelSurvey{
+	display: block;
+    width: 58px;
+    height: 58px;
+    background: url('/images/common/builder/m_survey/ido_make_cancel_bt.png') repeat 0 0;
+    background-size: 100% 100%;
+    text-indent: -9999px;
+} 
+
+#makeq #insertDiv #txtDiv1{
+	/* border:solid 1px grey; */ 
+	width:100%; 
+	height:auto;
+	margin-top:15px;
+	background-color: #efefef;
+}/*인풋박스 감싸고 있는 박스*/
+
+
+#makeq #insertDiv #txtDiv2{
+	/* border:solid 1px grey; */ 
+	width:100%; 
+	height:90px;
+	margin-top:20px;
+	padding-top:10px;
+	background-color: #efefef;
+}
+
+/* #makeq #insertDiv #txtDiv{
+	border:solid 1px grey; 
+	width:100%; 
+	height:auto;
+}
+ */
+ 
+/* 중질문 등록시 이미지등록하기 */
+#makeq #insertDiv .secSvyTitleImg{
+	width:100px; 
+	height:165px;
+	cursor:pointer;
+	background:url('/images/common/builder/m_survey/img_box.png') no-repeat;
+	boder:0px;
+	margin:0 0 5px 10px;
+}  
+
+/* 별점형 css */
+#makeq #insertDiv .star_type .secSvyTitleImg {
+	width: 100px;
+    height: 165px;
+    cursor: pointer;
+    background: url('/images/common/builder/m_survey/img_box.png') no-repeat;
+    boder: 0px;
+    margin: 5% 0 0 35%;
+}
+
+
+#makeq .star_type input[name=secondSurveyTitle] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 5%;
+}
+
+#makeq .star_type input[name=surveyOrigin] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin: 1% 0 0 2%;
+}
+
+#makeq .star_type input[name=surveyLinkAddr] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin: 1% 0 0 2%;
+}
+
+#makeq .star_type input[name=surveyContents] {
+    width: 76%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 7%;
+}
+
+#makeq .star_type + .insertBtn nav{
+	clear: both;
+	width: 100%;
+    height: 100px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    -moz-box-sizing: border:box;
+    text-align: center;
+    background-color: #efefef;
+    margin-bottom: 3%;
+}
+
+
+/* 이중택일형 css */
+#makeq .choice_type .line_bar {
+	width: 100%;
+	height: 1px;	
+	background: #efefef;
+	margin-top: 30px;
+}
+
+#makeq .choice_type #choiceDiv {
+	height: 44px;
+}
+
+#makeq .choice_type #choiceDiv .choice_type_txt{
+	background:url('/images/common/builder/m_survey/type_s_title.png') no-repeat;
+	width:66px; 
+	height:19px;
+	margin: 0 0 0 3%;
+	margin-top: 12px;
+	float: left;
+}
+
+#makeq .choice_type .choice_radio{
+	width: 47%;
+	position: absolute;
+	right: 5%;
+	margin-top: 12px;
+}
+
+/* 타입 radio */
+.choice_type .count_type{
+	visibility: hidden;
+	position: absolute;
+}
+
+/* radio off img */
+.choice_type .chk_img{
+	background: url('/images/common/builder/m_survey/check_bt_off.png') no-repeat;
+	width: 20px;
+	height: 20px;
+	float: left;
+	margin-right: 2%; 
+}
+
+/* radio 개수타입 label text */
+.choice_radio label{
+	float: left;
+	line-height: 20px;
+	padding-right: 10px;
+	/* font-weight: bold; */
+	font-size: 0.9em;
+	
+}
+
+/* 체크된 radio 개수타입 on img */
+.choice_type .choice_radio > input:checked + .chk_img{
+	background: url('/images/common/builder/m_survey/check_bt_on.png') no-repeat;
+	width: 20px;
+	height: 20px;
+	float: left;
+}
+
+#insertDiv .choice_type #txtDiv {
+	clear: both;
+}
+
+.choice_type #txtDiv{
+	width: 100%;
+	height: auto;
+	background-color: #efefef;
+}
+
+.choice_type #txtDiv input[name=secondSurveyTitle]{
+	width: 95%;
+	margin: 32px 0 0 2%;
+}
+
+#insertDiv .choice_type .contsDiv{
+	background-color: #efefef;
+	width: 50%;
+	height: auto;
+	float: left;
+}
+
+#insertDiv .choice_type div[id*=contsDiv] .img {
+	width: 100px;
+    height: 165px;
+    cursor: pointer;
+    background: url('/images/common/builder/m_survey/img_box.png') no-repeat;
+    margin: 32px 0 0 25%;
+}
+
+#insertDiv .choice_type input[name=surveyContents] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 18px;
+    margin-left: 3%;
+}
+
+#insertDiv .choice_type input[name=surveyOrigin] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 5px;
+    margin-left: 3%;
+}
+
+#insertDiv .choice_type input[name=surveyLinkAddr] {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-top: 5px;
+    margin-left: 3%;
+}
+
+#insertDiv .choice_type + .insertBtn nav{
+	clear: both;
+	width: 100%;
+    height: 100px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    -moz-box-sizing: border:box;
+    text-align: center;
+    background-color: #efefef;
+    margin-bottom: 8%;
+}
+
+/* 이중택일형 css */
+
+
+/* 중질문 등록시 이미지 valChk */
+#insertDiv #secSvyTitleImgChkSpan{
+	font-weight:bold;
+	padding:0 0 0 35%;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+/* 중질문 등록시 valChk */
+#titleValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+#insertDiv #originValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+#insertDiv #linkAddrValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+
+/* 중질문 등록시 답변내용 valchk */
+#insertDiv .contsValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} /*0427 id값 추가*/
+
+#insertDiv .originValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} /*0427 id값 추가*/
+
+#insertDiv .linkAddrValChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} /*0427 id값 추가*/
+
+
+#makeq #insertDiv .rank_select_type div[id*=contsDiv]  .img_div{
+	float: left;
+	margin-right: 3%;
+}
+
+/* 중질문 등록시 이미지등록하기 */
+#makeq #insertDiv .rank_select_type div[id*=contsDiv] .img{
+	width:130px; 
+	height:130px;
+	cursor:pointer;
+	background-image:url('/images/common/builder/m_survey/img_box.png') no-repeat;
+	margin:26px 0 0 5%;
+	-webkit-border-radius: 100%;
+	object-fit: cover;
+	/* float: left; */
+}  
+
+/* 중질문 등록시 이미지 valchk */
+#insertDiv .imgChkSpan{
+	/* border:solid 1px grey; */ 
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	color:#096093;	
+} /*0427 id값 추가*/
+
+/* 중질문 이미지 답변 삭제 div */
+#makeq #insertDiv .delSurContsDiv{
+	/* text-align: right; */
+	position: absolute; 	
+	right: 10px;
+	/* margin: -4px 0 0 69%; */ 
+}
+
+#insertDiv .rank_select_type .contsDiv{
+	/* padding-top: 25px; */
+	background-color: #efefef;
+	clear: both;
+	height: 180px;
+}
+
+#txtDiv1 #txtContsDiv1{
+	border:0px solid #000;
+	margin-top:10px;
+}/*0427 id값 추가*/
+
+
+.insertBtn {
+	clear: both;
+}
+
+
+
+/* 설문조사 중질문 리스트 */
+#makeq #listDiv {
+	/* border-top:1px solid #cad5df; 
+	border-bottom:1px solid #cad5df; */ 
+	width:100%; 
+	height:auto;
+	margin-top:20px;
+	position:relative;
+	z-index:1;
+}
+
+/* 중질문 삭제 div */
+#makeq #listDiv .delSurTypeDiv{
+	text-align: right;
+	position: absolute; 	
+	margin-top: 10px; 
+	left: 850px; 
+}
+
+/* survey 유형선택 div */
+#makeq #listDiv .surveyTypeDiv{
+	border-top: 1px solid #cad5df;
+	border-bottom: 1px solid #cad5df;
+	height: 45px;
+	padding-top: 4px;
+}
+
+/* survey 유형선택  */
+#makeq #listDiv .surveyTypeTxt{	
+	width:100%;height:45px;font-weight:bold;padding:0;font-size:22px;padding-left:20px;font-family:'nanumgothic',sans-serif;color:#fff;
+}
+
+/* survey list 중질문 title div */
+#makeq #listDiv .surveyTitleDiv{
+	border-bottom: 1px solid #cad5df;
+	height: auto;
+	padding: 15px 0;
+}
+
+/* survey list 중질문 title  */
+ #makeq #listDiv .titleSpan{
+	font-size:16px;padding-left:10px;font-family:'Nanum Gothic','Malgun Gothic','맑은 고딕','NanumGothicWeb',sans-serif;letter-spacing:0px;font-weight:bold;line-height:16px;color:#fff;
+}
+ 
+/* 중질문 이미지 답변 삭제 div */
+#makeq #listDiv .delSurContsDiv{
+	text-align: right;
+	position: absolute; 	
+	margin: 5px 0 0 225px; 
+}
+
+/* survey 답변 */
+#makeq #listDiv .contsTxtSpan{
+	padding-left:10px;
+	font-size:9pt;
+}
+
+/* 중질문 수정시 타이틀 valChk */
+#makeq #listDiv #titleValChkSpan{
+	font-weight:bold;
+	padding:0 0 0 10px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+/* 중질문 수정시 이미지 valChk */
+#makeq #listDiv .imgChkSpan{
+	font-weight:bold;
+	padding:0 0 0 25px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+}
+ 
+/* 중질문 수정시 답변내용 valChk */ 
+#makeq #listDiv .contsValChkSpan{
+	font-weight:bold;
+	padding:0 0 0 25px;
+	font-size:8pt;
+	line-height:30px;
+	color:#096093;	
+} 
+
+#makeq .mcontrol{
+    right: 0;
+    width: 100px;
+    height: 30px;
+}
+
+
+/*0426 테이블 추가 삭제?? */
+.survey_tb01 table{width:100%;}
+.survey_tb01 table tr th{width:100%;height:45px;font-weight:bold;padding:0;font-size:22px;padding-left:20px;font-family:'nanumgothic',sans-serif;border-bottom:1px solid #cad5df;color:#5994cf;}
+.survey_tb01 table tr td{padding:20px;border-bottom:1px solid #cad5df;}
+.survey_tb01 table tr td.subtit{font-size:16px;padding-left:20px;font-family:'Nanum Gothic','Malgun Gothic','맑은 고딕','NanumGothicWeb',sans-serif;letter-spacing:0px;font-weight:bold;line-height:16px;}
+.survey_tb01 table tr td.bline{border-bottom:1px solid #ffffff;}
+.survey_tb01 ul{width:100%;border:0px solid #000;margin:0;padding:0;}
+.survey_tb01 ul li{height:40px;color:#888888;}
+
+#makeq .list_wrap .close_btn{
+	position: absolute;
+    top: 3%;
+    left: 46.8%;
+    width: 30px;
+    height: 5%;
+    z-index: 101;
+}
+
+#makeq .list_wrap .list_eng_banner{
+	position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 25px;
+    font-size: 6pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+}
+
+#makeq .list_wrap .list_kor_banner{
+	position: absolute;
+    top: 14%;
+    width: 100%;
+    height: 25px;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+/* 중질문 이미지 */
+#makeq #listDiv .secSvyTitleImg{
+	width:300px; 
+	height:260px;
+	cursor:pointer;
+	boder:0px;
+	margin:10px 0 0 25px;
+}  
+#makeq #listDiv .conts_img_div{
+	width: 50%;
+    height: 120px;
+    float: left;
+}
+
+#makeq #listDiv .conts_txt_div{
+	width: 50%;
+	height:120px;
+	float: right;
+}
+
+#makeq #listDiv .conts_txt_div .survey_type_div{
+	margin-top: 25px;
+	clear: both;
+}
+
+#makeq #listDiv .conts_txt_div .survey_type_div .survey_type_btn{
+	background-color: #1F4E77;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.8em;
+    width: 35%;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    float: left;
+}
+
+#makeq #listDiv .conts_txt_div .survey_type_div .survey_type_txt{
+	font-size: 0.8em;
+	margin-left: 5%;
+}
+
+#makeq #listDiv .conts_txt_div .survey_title_div{
+	margin-top: 20px;
+}
+
+#makeq #listDiv .conts_txt_div .survey_title_div .survey_title_btn{
+	background-color: #1F4E77;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 0.8em;
+    width: 35%;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    float: left;
+}
+
+#makeq #listDiv .conts_txt_div .survey_title_div .survey_title{
+	font-size: 0.8em;
+	margin-left: 5%;
+}
+
+/* 중질문 list 답변 이미지  */
+#makeq #listDiv div[id*=contsDiv] .img{
+	width:200px; 
+	height:160px;
+	cursor:pointer;
+	background:url('/images/common/builder/survey/img_add.png') no-repeat;
+	boder:0px;
+	margin:20px 0 0 15px;
+}  
+
+#makeq #listDiv .img_div{
+	width: 20%;
+    height: 40px;
+    margin-right: 10px;
+    float: left;
+}
+
+/* 텍스트탭 답변 추가 버튼 */
+img[class*=add_btn] {
+	width: 8%;
+	margin: 0 2%;
+}
+
+/* 텍스트탭 답변 삭제 버튼*/
+img[class*=remove_btn] {
+	width: 8%;
+}
+
+/* 텍스트탭 별점 버튼 */
+input[class*=gradeBtn] {
+	display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: url('/images/common/builder/survey/mq_star_bt.png') no-repeat;
+    border: none;
+    coursor: pointer;
+    vertical-align: middle; /*0427 이미지 가운데 정렬*/ 
+    margin: 2px 2px;
+}
+
+/* 이미지탭 답변추가 버튼 */
+div[class*="addConts"]{
+	color:#377CC7; 
+	font-weight:bold;  
+	width:90%; 
+	height:45px; 
+	text-align:center; 
+	line-height:40px; 
+	margin:0 auto; 
+	margin-top:5%; 
+	margin-bottom:5%; 
+	border-radius:10px; 
+	border:3px solid #377CC7; 
+	background-color:#fff;
+	/* display: inline-block;
+    background: url('/images/common/builder/m_survey/answer_add_bt.png') no-repeat; 
+    content: url('/images/common/builder/m_survey/answer_add_bt.png');
+    width: 28%;
+    height: 30px;
+    border: none;
+    coursor: pointer;
+    vertical-align: middle; 0427 이미지 가운데 정렬 
+    padding: 9px 0 25px 2%; */
+}
+
+img.add_conts_img{
+	width: 100%;
+}
+
+/* 이미지탭 임시저장 버튼 */
+input[class*="tempStore"]{
+	display: inline-block;
+    background: url('/images/common/builder/survey/survey_savebt.png') no-repeat;
+    width: 80px;
+    height: 30px;
+    border: none;
+    coursor: pointer;
+    vertical-align: middle; /*0427 이미지 가운데 정렬*/ 
+    margin: 40px 60px 0 0;
+}
+
+/*0426 추가*/
+
+.thumbnailDiv{margin-top:20px;}
+
+/*이중택일형 추가*/
+
+/* .list_btn{
+	width: 40%;
+	height: auto;
+	margin: 0 auto;
+    margin-top: 5%;
+} */
+
+.list_btn .list_btn_img{
+    width: 100%;
+    height: auto;
+}
+
+.footer{
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+	margin: 5% 0 0 2%;
+} 
+
+.footer .preview_btn{
+	background: url('/images/common/builder/m_survey/ido_make_preview_bt.png') no-repeat;
+    width: 175px;
+    height: 40px;
+    border: none;
+    coursor: pointer;
+    vertical-align: middle; /*0427 이미지 가운데 정렬*/ 
+    /* margin: 40px 60px 0 0; */
+    float: left;
+}
+.footer .finish_btn{
+	background: url('/images/common/builder/m_survey/ido_make_completion_bt.png') no-repeat;
+    width: 175px;
+    height: 40px;
+    border: none;
+    coursor: pointer;
+    vertical-align: middle; /*0427 이미지 가운데 정렬*/ 
+    /* margin: 40px 60px 0 0; */
+    float: left;
+    margin-left: 2%;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+   color: white;
+}	
+
+.sample_wrap{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top:0;
+	background-color: #000000;
+	opacity:1;
+	overflow:scroll;
+	z-index: 100;
+}
+.wrap_header{
+	width: 100%;
+	height: 25%;
+}
+.closeButton{
+	position: absolute;
+	top: 3%;
+	left: 46.8%;
+	width: 30px;
+	height: 5%;
+	z-index: 101;
+}
+.closeButton img{
+	width: 30px;
+	height: 30px;
+}
+
+.cate_bullet{
+    left: 41%;
+    width: 5px;
+    height: 5px;
+}
+
+.category_btn{
+	position: absolute;
+    top: 5%;
+    width: 100%;
+    height: 15px;
+    color: white;
+    font-size: 9pt;
+    font-family: "Nanum Gothic", sans-serif;
+    text-align: center;
+}
+.surveyTitle{
+	position: absolute;
+    top: 10%;
+    width: 100%;
+    height: auto;
+    color: white;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: bold;
+    font-size: 16pt;
+    text-align: center;
+}
+
+
+.surveyTitle_input input{
+	background: #5b5b5b;
+    -webkit-text-fill-color: white;
+    text-align: center;
+}
+
+/* 질문 유형 select box */
+.select_title_type{
+	width:81%;
+	height:150px;
+	background-color:white;
+	position:fixed;
+	top:29%;	
+	margin-left: 9.5%;
+}
+
+.select_title_type div{
+	width:100%;
+	height:33%;
+	font-size:12pt;
+	text-align:center;
+	border-style: solid;
+	border-bottom-color: black;
+	border-width: 1px;
+	color: black;
+	line-height: 50px;
+}
+/* 질문 유형 select box */
+
+/* 응답 수 select box */
+.select_answer_number_container{
+	width: 100%;
+	height: 18%;
+	color: white;
+	padding-top: 9%;
+}
+.select_answer_number_container div{
+	float: left;
+	width: 14%;
+	height: 30px;
+	text-align: center;
+}
+/* 응답 수 select box */
+
+.sample_answer_view_container{
+	width: 100%;
+	height: 50%;
+	overflow: scroll;
+	padding-bottom: 10%;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* 응답 이미지 */
+.answer_n{
+	width: 120px;
+	height: 120x;
+	margin: 0 0 0 0;
+	-webkit-border-radius: 100%;
+	background-color: white;
+	position: relative;
+}
+.answer_n img[id*=img]{
+	object-fit:cover; 
+	width:122px; 
+	height:122px; 
+	border-radius: 100%;
+}
+
+/* crop 부분 */
+.wrap .container{
+	position: fixed; 
+	width: 40%; 
+	top:80%; 
+	right:0;
+}
+/* crop 부분 */
+
+.sample_wrap .sample_footer{
+	width: 100%;
+	height: 7%;
+}
+
+.sample_footer .modify_btn{
+	width: 49%; background-color:#174773; color: white; text-align: center; font-size: 15pt; line-height:45px; float:left;
+}
+
+.sample_footer .list_btn{
+	width: 49%; background-color:#174773; color: white; text-align: center; font-size: 15pt; line-height:45px; float:left;
+}
+
+.sample_footer .finish_btn{
+	width: 49%; background-color:#174773; color: white; text-align: center; font-size: 15pt; line-height:45px; margin-left:2%; float:left;"
+}
+
+.insert_info_div{
+	height: 100%;
+}
+
+.insert_info_div .info_banner{
+	padding-top:5%;
+	font-size: 15pt; 
+	color:#fff; 
+	text-align:center; 
+}
+
+.insert_info_div .info_img_div{
+	width:100%; 
+	height:41%; 
+	padding-top:5%;
+	text-align: center; 
+}
+
+.insert_info_div .info_img{
+	object-fit:cover; 
+	width:200px; 
+	height:200px; 
+	border-radius:100%;
+}
+
+.info_input_btn{
+	height: 70px;
+	top: 73%;
+	position: absolute;
+}
+
+.info_input_btn img{
+	width: 100%;
+	padding-left: 35%;
+	padding-top: 30%;
+}
+
+.modify_input_btn{
+	height: 70px;
+	top: 80%;
+	position: absolute;
+}
+
+.modify_input_btn img{
+	width: 100%;
+	padding-left: 35%;
+	padding-top: 30%;
+}
+
+.wrap_footer{
+	width: 100%;
+	height: 7%;
+	/* background-color:#1F4E77; */
+}
+
+.insert_info_wrap .info_input_div input{
+	width:90%; 
+	height:40px; 
+	border:1px solid #cbd5df; 
+	border-radius:5px; 
+	background:#fff;
+	margin-bottom: 5%;
+	-webkit-text-fill-color: #A9A9A9;
+}
+
+.insert_info_wrap  .info_input_div{
+	width:100%; 
+	height:40%; 
+	background-color:#000;  
+	text-align:center;
+	padding-top: 5%;
+}
+
+.insert_info_wrap .info_footer{
+	width:100%; 
+	height:10%; 
+	background-color:#174773; 
+	color:#fff; 
+	line-height:65px;
+	text-align: center;
+    font-weight: bold;
+    font-size: 15pt;
+}
+
+/* 유형선택 */
+.answer_type_wrap_header{
+	height: 12%;
+}
+.answer_type_wrap_contents{
+	height: 78%;
+	font-size:18pt;
+	color:white;
+	text-align:center;
+}
+.answer_type_wrap_contents ul{
+	width: 80%;
+	height: 80%;
+}
+
+.answer_type_wrap_contents ul li{
+	width: 40%;
+	padding-left: 15%;
+	margin-top: 20px;
+}
+
+.answer_type_wrap_footer{
+	height: 10%;
+	margin-top:4%;
+}
+
+.answer_type_wrap_footer .modify_btn{
+	width: 49%; background-color:#174773; color: white; text-align: center; font-size: 15pt; line-height:45px; float:left;
+}
+
+.answer_type_wrap_footer .finish_btn{
+	width: 49%; background-color:#174773; color: white; text-align: center; font-size: 15pt; line-height:45px; margin-left:2%; float:left;
+}
+/* 유형선택 */
+
+/* 별점형 에디터 */
+.additional_wrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #363636;
+    opacity: 1;
+    z-index: 5000;
+}
+.additional_header {
+    width: 100%;
+    height: 15%;
+}
+
+.additional_header .sample_view{
+	display: none;
+	float: right;
+    margin-top: 2%;
+    margin-right: 2%;
+    width: 20%;
+}
+
+.additional_header .sample_view_img{
+	width: 100%;	
+}
+
+.additional_header .survey_title{
+	color: #fff;
+    text-align: center;
+    padding-top: 13%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.additional_container {
+    width: 100%;
+    height: 77%;
+}
+
+/** 별점형 에디터 **/
+.additional_container .star_img_div{
+	width:100%;
+	height: 68%;
+	overflow: auto;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	-webkit-overflow-scrolling: touch;
+}
+
+.additional_container .star_item_div{
+	width:100%;
+	height: 32%;
+}
+
+.additional_container .star_item_div .star_item_title{
+	color:#fff;
+	font-size: 0.8em;
+	margin-left: 10%;
+	margin-top: 5%;
+	margin-bottom: 1%;
+	height: 12%;
+}
+
+.additional_container .star_item_div .star_item_title img{
+	margin-top: -1%;
+	margin-right: 1%;
+}
+
+.additional_container .star_input_div{
+	overflow: auto;
+    padding-bottom: 5%;
+    height: 80%;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+	-webkit-overflow-scrolling: touch;
+}
+
+.additional_container .star_item{
+	margin-left: 10%;
+}
+
+.star_item input[id*=evaluationItem]{
+	width: 62%;
+	height: 30px;
+    border: 1px solid #cbd5df;
+    border-radius: 5px;
+    background: #fff;
+    margin-bottom: 1%;
+    -webkit-text-fill-color: #A9A9A9;
+    font-size: 12px;
+}
+/** 별점형 에디터 **/
+
+/** 복수형 에디터 **/
+.additional_header .select_title{ 
+	color: #fff;
+	text-align: center;
+	padding-top: 30%;
+	font-size: 1.5em;
+}
+
+.select_type_answer_title{
+	width :78%;
+	height:12%;
+	background-color:white;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	line-height: 40px;
+	margin: 0 auto;
+    position: relative; 
+	border-width: 1px;
+    border-style: solid;
+    border-color: #ec971f;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a9a9a9;
+}
+
+.anwer_num_div {
+	overflow: auto;
+	width: 78%;
+	height: 46%;
+	margin: 0 auto;
+}
+
+.select_type_answer_title .arrow_icon img{
+	width: 3.5%;
+    position: absolute;
+    right: 8%;
+    top: 40%;
+}
+
+.select_type_answer_number{
+	width :100%;
+	height:40px;
+	background-color:white;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	line-height: 40px;
+    position: relative; 
+	border-style: solid;
+    border-color: #fff;
+}
+
+/** 복수형 에디터 **/
+
+.additional_footer{
+	/* display: none; */
+    width: 100%;
+    height: 8%;
+}
+
+.additional_footer .modify_btn{
+	width: 49%; 
+	background-color:#174773; 
+	color: white; 
+	text-align: center; 
+	font-size: 15pt; 
+	line-height:45px; 
+	float:left;
+}
+
+.additional_footer .finish_btn{
+	width: 100%; 
+	background-color:#174773; 
+	color: white; 
+	text-align: center; 
+	font-size: 15pt; 
+	line-height:45px; 
+	/* margin-left:2%; */ 
+	/* float:left; */
+}
+
+/* 설문완료 후 신청하기/추가하기 선택화면 */
+.success_survey_wrap{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top:0;
+	background-color: #000000;
+	opacity:1;
+	overflow:scroll;
+	z-index: 300;
+}
+
+.success_survey_header{
+	width: 100%;
+	height: 35%;
+	background: #000000;
+	
+}
+.success_survey_contents{
+	width: 100%;
+	height: 60%;
+}
+.success_survey_footer{
+	width: 100%;
+	height: 5%;
+	background: #000000;
+}
+/* 설문완료 후 신청하기/추가하기 선택화면 */

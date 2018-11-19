@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>아이두</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 탑메뉴 css -->
+<link rel="stylesheet" type="text/css" href="/css/web/main/common1.css" />
+<link rel="stylesheet" href="/css/web/builder/user/partner/login_partner.css">
+</head>
+
+<body>
+<div id="wrap">
+	<!-- header --> 
+	<section id="header"> 
+	  <nav style="height: 75px"> 
+	    <a href="/"><h1 style="color: white; font-size: 50px; font-weight: bold;">i DO</h1></a> 
+	
+	    <!-- 실시간 인기순위(util_menu) -->
+	    <div class="util_menu"> 
+	       <!-- //rank --> 
+	    <!--// menu -->  
+	    <!-- 
+	      <div class="menu"> 
+	        <a href="#" class="menuOpen" id="menutest"> 메뉴열기 </a> 
+	      </div>
+	     -->   
+	    <!-- //menu --> 
+	    </div> 
+	    <!-- 실시간 인기순위(util_menu) -->
+	  </nav> 
+	  <div id="mask"></div> 
+	</section> 
+	<!-- //header --> 
+	<section class="container"> 
+		<div class="container_div">	
+		    <form action="/login" method="post"> 
+				<div id="login_wrap">
+					<div class="title_box1"><img src="/images/common/main/user/partner/login_title.png"></div>
+					<div class="title_box2">로그인 에러 페이지.</div>
+					<div class="conbox">	
+						<div class="leftbox">
+							<ul>
+								<li><img src="/images/common/main/user/partner/monitor_img.png"></li>
+								<li class="mt20"><img src="/images/common/main/user/partner/ldo_partner_login_title.png"></li>
+							</ul>
+						</div>
+						<div class="rightbox">
+							<ul>
+								<li><input type="text" id="userid" name="userid" placeholder="아이디를 입력해주세요" onfocus="this.style.color='#ff4884';" style="background:url('/images/common/main/user/partner/name_ico.png') no-repeat;"></input></li>
+								<li class="mt7"><input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" onfocus="this.style.color='#ff4884';" class="deco_box"></input></li>
+							</ul>
+							<div class="mt30">
+								<p><img src="/images/common/main/user/partner/or_line.png"></p>
+							</div>
+							<div class="login_2bt">
+								<ul>
+									<li><button class="facebook_bt" ></button></li>
+									<li class="mt15"><button type="submit" class="login_bt" ></button></li>
+									<li class="txtrt">회원가입 | 아이디/비밀번호 찾기</li>
+								</ul>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</form>	
+		</div>	
+	</section>	
+</div>
+</body>
